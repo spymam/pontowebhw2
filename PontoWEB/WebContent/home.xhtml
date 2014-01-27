@@ -1,0 +1,115 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich">
+    
+<html>
+<head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <title>PontoWEB</title>
+      <link rel="shortcut icon" href="#{request.contextPath}/favicon.ico"/>
+      <a:loadStyle src="/stylesheet/theme.xcss"/>
+      <a:loadStyle src="/stylesheet/theme.css"/>
+      <ui:insert name="head"/>
+   </head>
+   
+    
+<style type="text/css">
+  .rich-noBorder
+  {
+    border: none;
+  }
+  </style>
+  <div class="body">
+         <h:messages id="messages" globalOnly="true" styleClass="message"
+            errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"
+            rendered="#{showGlobalMessages != 'false'}"/>
+         <ui:insert name="body"/>
+      </div>
+  <body>
+        <!-- <h1>Bem Vindo ao Ponto WEB</h1>-->
+        <rich:panel styleClass="rich-noBorder">
+        <div align="center">
+            <h:panelGrid columns="2" >
+            <h:column >
+                <h:graphicImage value="/img/logopw.png" alt="Seam logo" height="200"/>
+                
+                <s:div styleClass="info" align="center">
+                
+                
+                    <h:form id="loginForm" styleClass="edit">
+<div align="center">
+        <rich:panel>
+            <f:facet name="header">Acesso ao Sistema</f:facet>
+
+            <p>Por favor, entre com seu usuário</p>
+
+            <div class="dialog">
+            
+            
+                <h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+
+
+  <h:outputLabel for="username">Usuário</h:outputLabel> 
+                    <h:inputText id="username"
+                              value="#{credentials.username}"
+                              styleClass=""
+                               required="true" 
+                               requiredMessage="Digite seu usuário"/>
+                    
+                    <h:outputLabel for="password">Senha</h:outputLabel>
+                    <h:inputSecret id="password"
+                                value="#{credentials.password}" required="true" requiredMessage="Digite sua Senha"/>
+                    <h:outputLabel for="rememberMe">Lembrar</h:outputLabel>
+                    <h:selectBooleanCheckbox id="rememberMe"
+                                          value="#{rememberMe.enabled}"/>
+                                          
+                                          <div class="actionButtons">
+            <h:commandButton id="submit" value="Entrar" action="#{identity.login}"/>
+            
+        </div>
+        <h:messages styleClass="errors"/>
+                          
+  
+  
+   </h:panelGrid>
+            </div>
+
+            
+
+        </rich:panel>
+      
+</div>
+        
+
+    </h:form>
+    
+                   <!-- <p><strong>Your seam-gen project is deployed!</strong> Here are some of the features this project provides:</p>
+                     <ul class="bullets">
+                        <li>Ant build script</li>
+                        <li>Deployment to JBoss AS (EAR or WAR)</li>
+                        <li>Development and production profiles</li>
+                        <li>Integration testing using TestNG and Embedded JBoss</li>
+                        <li>JavaBean or EJB 3.0 Seam components</li>
+                        <li>JPA entity classes</li>
+                        <li>A configurable DataSource and JPA EntityManager</li>
+                        <li>Templated Facelets views</li>
+                        <li>RichFaces panels and tables</li>
+                        <li>Default CSS stylesheet</li>
+                        <li>Internationalization support</li>
+                    </ul>-->
+                </s:div>
+                </h:column>
+            </h:panelGrid>
+           </div>
+        </rich:panel>
+
+   </body>
+    </html>
+</ui:composition>
+

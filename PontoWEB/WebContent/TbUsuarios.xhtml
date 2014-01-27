@@ -1,0 +1,104 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Tb usuarios Details</f:facet>
+
+
+        <s:decorate id="login" template="layout/display.xhtml">
+            <ui:define name="label">Login</ui:define>
+            <h:outputText value="#{tbUsuariosHome.instance.login}"/>
+        </s:decorate>
+
+        <s:decorate id="nome" template="layout/display.xhtml">
+            <ui:define name="label">Nome</ui:define>
+            <h:outputText value="#{tbUsuariosHome.instance.nome}"/>
+        </s:decorate>
+
+        <s:decorate id="senha" template="layout/display.xhtml">
+            <ui:define name="label">Senha</ui:define>
+            <h:outputText value="#{tbUsuariosHome.instance.senha}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/TbUsuariosEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty tbUsuariosFrom ? 'TbUsuariosList' : tbUsuariosFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tb analista</h:panelGroup>
+        </f:facet>
+    <div class="association" id="tbAnalistaParent">
+
+        <h:outputText value="There is no tbAnalista associated with this tbUsuarios."
+                   rendered="#{tbUsuariosHome.instance.tbAnalista == null}"/>
+
+        <rich:dataTable var="_tbAnalista"
+                   value="#{tbUsuariosHome.instance.tbAnalista}"
+                rendered="#{tbUsuariosHome.instance.tbAnalista != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="tbAnalistaTable">
+            <h:column>
+                <f:facet name="header">Id tb analista</f:facet>
+                <h:outputText value="#{_tbAnalista.idTbAnalista}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Cliente</f:facet>
+                <h:outputText value="#{_tbAnalista.cliente}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                <h:outputText value="#{_tbAnalista.email}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Funcao</f:facet>
+                <h:outputText value="#{_tbAnalista.funcao}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{_tbAnalista.nome}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Telefone</f:facet>
+                <h:outputText value="#{_tbAnalista.telefone}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewtbAnalista"
+                     value="View"
+                      view="/TbAnalista.xhtml">
+                    <f:param name="tbAnalistaIdTbAnalista"
+                           value="#{_tbAnalista.idTbAnalista}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,63 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+    <ui:define name="body">
+<style type="text/css">
+  .rich-noBorder
+  {
+    border: none;
+  }
+  </style>
+        <!-- <h1>Bem Vindo ao Ponto WEB</h1>-->
+        <rich:panel styleClass="rich-noBorder">
+        <div align="center">
+        <h:panelGrid columns="10" width="80%">
+        
+        <div align="center">
+        <h:column>
+           <s:link view="/TbHorasColabEdit.xhtml" styleClass="html">   
+                   
+         <h:graphicImage value="/img/icone_ponto.png"  /><br/>
+         </s:link>
+                <h:outputText value="REGISTRAR PONTO" />
+                
+                
+                     </h:column> 
+             </div> 
+              
+             <div align="center">
+        <h:column>
+        <h:graphicImage value="/img/lupa.png" /><br/>
+       		<h:outputText value=" PESQUISAR"/>
+       </h:column>
+       </div>
+       
+       <div align="center">
+       <h:column>
+        <h:graphicImage value="/img/calendario.png" /><br/>
+       		<h:outputText value="CALENDÁRIO"/>
+        </h:column>        
+        </div>
+        
+        <div align="center">
+        <h:column>
+        <h:graphicImage value="/img/pessoas.png" /><br/>
+       		<h:outputText value="CADASTROS"/>
+       </h:column>
+       </div>
+       
+        
+        </h:panelGrid>
+        </div>
+        
+        </rich:panel>
+
+    </ui:define>
+</ui:composition>

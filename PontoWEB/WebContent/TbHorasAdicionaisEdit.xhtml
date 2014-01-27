@@ -1,0 +1,90 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbHorasAdicionais" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tbHorasAdicionaisHome.managed ? 'Edit' : 'Add'} Tb horas adicionais</f:facet>
+
+
+
+            <s:decorate id="idTbAnalistaField" template="layout/edit.xhtml">
+                <ui:define name="label">Id tb analista</ui:define>
+                <h:inputText id="idTbAnalista"
+                          value="#{tbHorasAdicionaisHome.instance.idTbAnalista}">
+                    <a:support event="onblur" reRender="idTbAnalistaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="idTbProjetoField" template="layout/edit.xhtml">
+                <ui:define name="label">Id tb projeto</ui:define>
+                <h:inputText id="idTbProjeto"
+                          value="#{tbHorasAdicionaisHome.instance.idTbProjeto}">
+                    <a:support event="onblur" reRender="idTbProjetoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="totalHorasField" template="layout/edit.xhtml">
+                <ui:define name="label">Total horas</ui:define>
+                <h:inputText id="totalHoras"
+                          value="#{tbHorasAdicionaisHome.instance.totalHoras}">
+                    <a:support event="onblur" reRender="totalHorasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tbHorasAdicionaisHome.persist}"
+                       disabled="#{!tbHorasAdicionaisHome.wired}"
+                       rendered="#{!tbHorasAdicionaisHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tbHorasAdicionaisHome.update}"
+                       rendered="#{tbHorasAdicionaisHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tbHorasAdicionaisHome.remove}"
+                      immediate="true"
+                       rendered="#{tbHorasAdicionaisHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/TbHorasAdicionais.xhtml"
+                rendered="#{tbHorasAdicionaisHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tbHorasAdicionaisFrom ? 'TbHorasAdicionaisList' : tbHorasAdicionaisFrom}.xhtml"
+                rendered="#{!tbHorasAdicionaisHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
