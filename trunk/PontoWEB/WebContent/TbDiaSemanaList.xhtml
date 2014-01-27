@@ -1,0 +1,140 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbDiaSemanaSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="TbDiaSemana Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Descricao</ui:define>
+                <h:inputText id="descricao" value="#{tbDiaSemanaList.tbDiaSemana.descricao}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{tbDiaSemanaList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/TbDiaSemanaList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">TbDiaSemana Search Results (#{empty tbDiaSemanaList.resultList ? 0 : (tbDiaSemanaList.paginated ? tbDiaSemanaList.resultCount : tbDiaSemanaList.resultList.size)})</f:facet>
+    <div class="results" id="tbDiaSemanaList">
+
+    <h:outputText value="The tbDiaSemana search returned no results."
+               rendered="#{empty tbDiaSemanaList.resultList}"/>
+
+    <rich:dataTable id="tbDiaSemanaList"
+                var="_tbDiaSemana"
+              value="#{tbDiaSemanaList.resultList}"
+           rendered="#{not empty tbDiaSemanaList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbDiaSemanaList}"/>
+                    <ui:param name="propertyLabel" value="Id"/>
+                    <ui:param name="propertyPath" value="tbDiaSemana.id"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbDiaSemana.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbDiaSemanaList}"/>
+                    <ui:param name="propertyLabel" value="Descricao"/>
+                    <ui:param name="propertyPath" value="tbDiaSemana.descricao"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbDiaSemana.descricao}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'TbDiaSemana' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="tbDiaSemanaViewId">
+                <f:param name="tbDiaSemanaId"
+                        value="#{_tbDiaSemana.id}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/TbDiaSemanaEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="tbDiaSemanaEdit"
+                rendered="#{empty from}">
+                <f:param name="tbDiaSemanaId"
+                        value="#{_tbDiaSemana.id}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/TbDiaSemanaList.xhtml"
+            rendered="#{tbDiaSemanaList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/TbDiaSemanaList.xhtml"
+            rendered="#{tbDiaSemanaList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{tbDiaSemanaList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TbDiaSemanaList.xhtml"
+            rendered="#{tbDiaSemanaList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{tbDiaSemanaList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TbDiaSemanaList.xhtml"
+            rendered="#{tbDiaSemanaList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{tbDiaSemanaList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/TbDiaSemanaEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create tbDiaSemana">
+            <f:param name="tbDiaSemanaId"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

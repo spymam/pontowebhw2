@@ -1,0 +1,167 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Tb projeto Details</f:facet>
+
+
+        <s:decorate id="nome" template="layout/display.xhtml">
+            <ui:define name="label">Nome</ui:define>
+            <h:outputText value="#{tbProjetoHome.instance.nome}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/TbProjetoEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty tbProjetoFrom ? 'TbProjetoList' : tbProjetoFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tb clientes</h:panelGroup>
+        </f:facet>
+    <div class="association" id="tbClientesParent">
+
+        <h:outputText value="There is no tbClientes associated with this tbProjeto."
+                   rendered="#{tbProjetoHome.instance.tbClientes == null}"/>
+
+        <rich:dataTable var="_tbClientes"
+                   value="#{tbProjetoHome.instance.tbClientes}"
+                rendered="#{tbProjetoHome.instance.tbClientes != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="tbClientesTable">
+            <h:column>
+                <f:facet name="header">Id tb clientes</f:facet>
+                <h:outputText value="#{_tbClientes.idTbClientes}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Nome</f:facet>
+                <h:outputText value="#{_tbClientes.nome}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewtbClientes"
+                     value="View"
+                      view="/TbClientes.xhtml">
+                    <f:param name="tbClientesIdTbClientes"
+                           value="#{_tbClientes.idTbClientes}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Tb horas colabs</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="tbHorasColabsChildren">
+
+        <h:outputText value="There are no tbHorasColabs associated with this tbProjeto."
+                   rendered="#{empty tbProjetoHome.tbHorasColabs}"/>
+
+        <rich:dataTable value="#{tbProjetoHome.tbHorasColabs}"
+                       var="_tbHorasColab"
+                  rendered="#{not empty tbProjetoHome.tbHorasColabs}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="tbHorasColabsTable">
+            <rich:column sortBy="#{_tbHorasColab.idTbHorasColab}">
+                <f:facet name="header">Id tb horas colab</f:facet>
+                <h:outputText value="#{_tbHorasColab.idTbHorasColab}"/>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.data}">
+                <f:facet name="header">Data</f:facet>
+                <h:outputText value="#{_tbHorasColab.data}">
+                    <s:convertDateTime type="date" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.descAtividade}">
+                <f:facet name="header">Desc atividade</f:facet>
+                <h:outputText value="#{_tbHorasColab.descAtividade}"/>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.diaSemana}">
+                <f:facet name="header">Dia semana</f:facet>
+                <h:outputText value="#{_tbHorasColab.diaSemana}"/>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.entrada}">
+                <f:facet name="header">Entrada</f:facet>
+                <h:outputText value="#{_tbHorasColab.entrada}">
+                    <s:convertDateTime type="time"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.horasAdicionais}">
+                <f:facet name="header">Horas adicionais</f:facet>
+                <h:outputText value="#{_tbHorasColab.horasAdicionais}"/>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.retornoAlmoco}">
+                <f:facet name="header">Retorno almoco</f:facet>
+                <h:outputText value="#{_tbHorasColab.retornoAlmoco}">
+                    <s:convertDateTime type="time"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.saida}">
+                <f:facet name="header">Saida</f:facet>
+                <h:outputText value="#{_tbHorasColab.saida}">
+                    <s:convertDateTime type="time"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.saidaAlmoco}">
+                <f:facet name="header">Saida almoco</f:facet>
+                <h:outputText value="#{_tbHorasColab.saidaAlmoco}">
+                    <s:convertDateTime type="time"/>
+                </h:outputText>
+            </rich:column>
+            <rich:column sortBy="#{_tbHorasColab.totalHoras}">
+                <f:facet name="header">Total horas</f:facet>
+                <h:outputText value="#{_tbHorasColab.totalHoras}"/>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selecttbHorasColab"
+                     value="Select"
+                      view="/TbHorasColab.xhtml">
+                    <f:param name="tbHorasColabIdTbHorasColab"
+                            value="#{_tbHorasColab.idTbHorasColab}"/>
+                    <f:param name="tbHorasColabFrom" value="TbProjeto"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add tbHorasColab"
+                view="/TbHorasColabEdit.xhtml">
+            <f:param name="tbProjetoIdTbProjeto"
+                    value="#{tbProjetoHome.instance.idTbProjeto}"/>
+            <f:param name="tbHorasColabFrom" value="TbProjeto"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

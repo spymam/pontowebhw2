@@ -1,0 +1,192 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbClientes" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tbClientesHome.managed ? 'Edit' : 'Add'} Tb clientes</f:facet>
+
+
+
+            <s:decorate id="nomeField" template="layout/edit.xhtml">
+                <ui:define name="label">Nome</ui:define>
+                <h:inputTextarea id="nome"
+                               cols="80"
+                               rows="3"
+                              value="#{tbClientesHome.instance.nome}"/>
+            </s:decorate>
+
+
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tbClientesHome.persist}"
+                       disabled="#{!tbClientesHome.wired}"
+                       rendered="#{!tbClientesHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tbClientesHome.update}"
+                       rendered="#{tbClientesHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tbClientesHome.remove}"
+                      immediate="true"
+                       rendered="#{tbClientesHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/TbClientes.xhtml"
+                rendered="#{tbClientesHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tbClientesFrom ? 'TbClientesList' : tbClientesFrom}.xhtml"
+                rendered="#{!tbClientesHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Tb projetos">
+        <h:form styleClass="association" id="tbProjetosChildren">
+
+            <h:outputText value="There are no tbProjetos associated with this tbClientes."
+                       rendered="#{empty tbClientesHome.tbProjetos}"/>
+
+            <rich:dataTable value="#{tbClientesHome.tbProjetos}"
+                           var="_tbProjeto"
+                      rendered="#{not empty tbClientesHome.tbProjetos}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="tbProjetosTable">
+                <rich:column sortBy="#{_tbProjeto.idTbProjeto}">
+                    <f:facet name="header">Id tb projeto</f:facet>
+                    <h:outputText value="#{_tbProjeto.idTbProjeto}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbProjeto.nome}">
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{_tbProjeto.nome}"/>
+                </rich:column>
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{tbClientesHome.managed}" id="tbProjetos">
+        <div class="actionButtons">
+            <s:button id="addtbProjeto"
+                   value="Add tbProjeto"
+                    view="/TbProjetoEdit.xhtml"
+             propagation="none">
+                 <f:param name="tbClientesIdTbClientes"
+                         value="#{tbClientesHome.instance.idTbClientes}"/>
+                 <f:param name="tbProjetoFrom" value="TbClientes"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+
+    <rich:tab label="Tb horas colabs">
+        <h:form styleClass="association" id="tbHorasColabsChildren">
+
+            <h:outputText value="There are no tbHorasColabs associated with this tbClientes."
+                       rendered="#{empty tbClientesHome.tbHorasColabs}"/>
+
+            <rich:dataTable value="#{tbClientesHome.tbHorasColabs}"
+                           var="_tbHorasColab"
+                      rendered="#{not empty tbClientesHome.tbHorasColabs}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="tbHorasColabsTable">
+                <rich:column sortBy="#{_tbHorasColab.idTbHorasColab}">
+                    <f:facet name="header">Id tb horas colab</f:facet>
+                    <h:outputText value="#{_tbHorasColab.idTbHorasColab}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.data}">
+                    <f:facet name="header">Data</f:facet>
+                    <h:outputText value="#{_tbHorasColab.data}">
+                        <s:convertDateTime type="date" dateStyle="short"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.descAtividade}">
+                    <f:facet name="header">Desc atividade</f:facet>
+                    <h:outputText value="#{_tbHorasColab.descAtividade}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.diaSemana}">
+                    <f:facet name="header">Dia semana</f:facet>
+                    <h:outputText value="#{_tbHorasColab.diaSemana}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.entrada}">
+                    <f:facet name="header">Entrada</f:facet>
+                    <h:outputText value="#{_tbHorasColab.entrada}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.horasAdicionais}">
+                    <f:facet name="header">Horas adicionais</f:facet>
+                    <h:outputText value="#{_tbHorasColab.horasAdicionais}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.retornoAlmoco}">
+                    <f:facet name="header">Retorno almoco</f:facet>
+                    <h:outputText value="#{_tbHorasColab.retornoAlmoco}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.saida}">
+                    <f:facet name="header">Saida</f:facet>
+                    <h:outputText value="#{_tbHorasColab.saida}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.saidaAlmoco}">
+                    <f:facet name="header">Saida almoco</f:facet>
+                    <h:outputText value="#{_tbHorasColab.saidaAlmoco}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.totalHoras}">
+                    <f:facet name="header">Total horas</f:facet>
+                    <h:outputText value="#{_tbHorasColab.totalHoras}"/>
+                </rich:column>
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{tbClientesHome.managed}" id="tbHorasColabs">
+        <div class="actionButtons">
+            <s:button id="addtbHorasColab"
+                   value="Add tbHorasColab"
+                    view="/TbHorasColabEdit.xhtml"
+             propagation="none">
+                 <f:param name="tbClientesIdTbClientes"
+                         value="#{tbClientesHome.instance.idTbClientes}"/>
+                 <f:param name="tbHorasColabFrom" value="TbClientes"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

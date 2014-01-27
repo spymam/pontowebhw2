@@ -1,0 +1,265 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbHorasColabSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="TbHorasColab Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Desc atividade</ui:define>
+                <h:inputText id="descAtividade" value="#{tbHorasColabList.tbHorasColab.descAtividade}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Dia semana</ui:define>
+                <h:inputText id="diaSemana" value="#{tbHorasColabList.tbHorasColab.diaSemana}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{tbHorasColabList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/TbHorasColabList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">TbHorasColab Search Results (#{empty tbHorasColabList.resultList ? 0 : (tbHorasColabList.paginated ? tbHorasColabList.resultCount : tbHorasColabList.resultList.size)})</f:facet>
+    <div class="results" id="tbHorasColabList">
+
+    <h:outputText value="The tbHorasColab search returned no results."
+               rendered="#{empty tbHorasColabList.resultList}"/>
+
+    <rich:dataTable id="tbHorasColabList"
+                var="_tbHorasColab"
+              value="#{tbHorasColabList.resultList}"
+           rendered="#{not empty tbHorasColabList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Id tb horas colab"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.idTbHorasColab"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.idTbHorasColab}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Tb analista id tb analista"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.tbAnalista.idTbAnalista"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.tbAnalista.idTbAnalista}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Tb clientes id tb clientes"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.tbClientes.idTbClientes"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.tbClientes.idTbClientes}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Tb projeto id tb projeto"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.tbProjeto.idTbProjeto"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.tbProjeto.idTbProjeto}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Data"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.data"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.data}">
+                <s:convertDateTime type="date" dateStyle="short"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Desc atividade"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.descAtividade"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.descAtividade}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Dia semana"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.diaSemana"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.diaSemana}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Entrada"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.entrada"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.entrada}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Horas adicionais"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.horasAdicionais"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.horasAdicionais}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Retorno almoco"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.retornoAlmoco"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.retornoAlmoco}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Saida"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.saida"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.saida}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Saida almoco"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.saidaAlmoco"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.saidaAlmoco}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Total horas"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.totalHoras"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.totalHoras}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'TbHorasColab' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="tbHorasColabViewId">
+                <f:param name="tbHorasColabIdTbHorasColab"
+                        value="#{_tbHorasColab.idTbHorasColab}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/TbHorasColabEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="tbHorasColabEdit"
+                rendered="#{empty from}">
+                <f:param name="tbHorasColabIdTbHorasColab"
+                        value="#{_tbHorasColab.idTbHorasColab}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/TbHorasColabList.xhtml"
+            rendered="#{tbHorasColabList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/TbHorasColabList.xhtml"
+            rendered="#{tbHorasColabList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{tbHorasColabList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TbHorasColabList.xhtml"
+            rendered="#{tbHorasColabList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{tbHorasColabList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TbHorasColabList.xhtml"
+            rendered="#{tbHorasColabList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{tbHorasColabList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/TbHorasColabEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create tbHorasColab">
+            <f:param name="tbHorasColabIdTbHorasColab"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

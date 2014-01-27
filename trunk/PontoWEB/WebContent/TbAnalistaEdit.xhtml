@@ -1,0 +1,236 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbAnalista" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tbAnalistaHome.managed ? 'Edit' : 'Add'} Tb analista</f:facet>
+
+
+
+            <s:decorate id="clienteField" template="layout/edit.xhtml">
+                <ui:define name="label">Cliente</ui:define>
+                <h:inputTextarea id="cliente"
+                               cols="80"
+                               rows="3"
+                              value="#{tbAnalistaHome.instance.cliente}"/>
+            </s:decorate>
+
+
+            <s:decorate id="emailField" template="layout/edit.xhtml">
+                <ui:define name="label">Email</ui:define>
+                <h:inputTextarea id="email"
+                               cols="80"
+                               rows="3"
+                              value="#{tbAnalistaHome.instance.email}"/>
+            </s:decorate>
+
+
+            <s:decorate id="funcaoField" template="layout/edit.xhtml">
+                <ui:define name="label">Funcao</ui:define>
+                <h:inputTextarea id="funcao"
+                               cols="80"
+                               rows="3"
+                              value="#{tbAnalistaHome.instance.funcao}"/>
+            </s:decorate>
+
+
+            <s:decorate id="nomeField" template="layout/edit.xhtml">
+                <ui:define name="label">Nome</ui:define>
+                <h:inputTextarea id="nome"
+                               cols="80"
+                               rows="3"
+                              value="#{tbAnalistaHome.instance.nome}"/>
+            </s:decorate>
+
+
+            <s:decorate id="telefoneField" template="layout/edit.xhtml">
+                <ui:define name="label">Telefone</ui:define>
+                <h:inputTextarea id="telefone"
+                               cols="80"
+                               rows="3"
+                              value="#{tbAnalistaHome.instance.telefone}"/>
+            </s:decorate>
+
+
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tbAnalistaHome.persist}"
+                       disabled="#{!tbAnalistaHome.wired}"
+                       rendered="#{!tbAnalistaHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tbAnalistaHome.update}"
+                       rendered="#{tbAnalistaHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tbAnalistaHome.remove}"
+                      immediate="true"
+                       rendered="#{tbAnalistaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/TbAnalista.xhtml"
+                rendered="#{tbAnalistaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tbAnalistaFrom ? 'TbAnalistaList' : tbAnalistaFrom}.xhtml"
+                rendered="#{!tbAnalistaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Tb usuarioses">
+        <h:form styleClass="association" id="tbUsuariosesChildren">
+
+            <h:outputText value="There are no tbUsuarioses associated with this tbAnalista."
+                       rendered="#{empty tbAnalistaHome.tbUsuarioses}"/>
+
+            <rich:dataTable value="#{tbAnalistaHome.tbUsuarioses}"
+                           var="_tbUsuarios"
+                      rendered="#{not empty tbAnalistaHome.tbUsuarioses}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="tbUsuariosesTable">
+                <rich:column sortBy="#{_tbUsuarios.idTbUsuario}">
+                    <f:facet name="header">Id tb usuario</f:facet>
+                    <h:outputText value="#{_tbUsuarios.idTbUsuario}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbUsuarios.login}">
+                    <f:facet name="header">Login</f:facet>
+                    <h:outputText value="#{_tbUsuarios.login}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbUsuarios.nome}">
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{_tbUsuarios.nome}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbUsuarios.senha}">
+                    <f:facet name="header">Senha</f:facet>
+                    <h:outputText value="#{_tbUsuarios.senha}"/>
+                </rich:column>
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{tbAnalistaHome.managed}" id="tbUsuarioses">
+        <div class="actionButtons">
+            <s:button id="addtbUsuarios"
+                   value="Add tbUsuarios"
+                    view="/TbUsuariosEdit.xhtml"
+             propagation="none">
+                 <f:param name="tbAnalistaIdTbAnalista"
+                         value="#{tbAnalistaHome.instance.idTbAnalista}"/>
+                 <f:param name="tbUsuariosFrom" value="TbAnalista"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+
+    <rich:tab label="Tb horas colabs">
+        <h:form styleClass="association" id="tbHorasColabsChildren">
+
+            <h:outputText value="There are no tbHorasColabs associated with this tbAnalista."
+                       rendered="#{empty tbAnalistaHome.tbHorasColabs}"/>
+
+            <rich:dataTable value="#{tbAnalistaHome.tbHorasColabs}"
+                           var="_tbHorasColab"
+                      rendered="#{not empty tbAnalistaHome.tbHorasColabs}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="tbHorasColabsTable">
+                <rich:column sortBy="#{_tbHorasColab.idTbHorasColab}">
+                    <f:facet name="header">Id tb horas colab</f:facet>
+                    <h:outputText value="#{_tbHorasColab.idTbHorasColab}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.data}">
+                    <f:facet name="header">Data</f:facet>
+                    <h:outputText value="#{_tbHorasColab.data}">
+                        <s:convertDateTime type="date" dateStyle="short"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.descAtividade}">
+                    <f:facet name="header">Desc atividade</f:facet>
+                    <h:outputText value="#{_tbHorasColab.descAtividade}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.diaSemana}">
+                    <f:facet name="header">Dia semana</f:facet>
+                    <h:outputText value="#{_tbHorasColab.diaSemana}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.entrada}">
+                    <f:facet name="header">Entrada</f:facet>
+                    <h:outputText value="#{_tbHorasColab.entrada}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.horasAdicionais}">
+                    <f:facet name="header">Horas adicionais</f:facet>
+                    <h:outputText value="#{_tbHorasColab.horasAdicionais}"/>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.retornoAlmoco}">
+                    <f:facet name="header">Retorno almoco</f:facet>
+                    <h:outputText value="#{_tbHorasColab.retornoAlmoco}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.saida}">
+                    <f:facet name="header">Saida</f:facet>
+                    <h:outputText value="#{_tbHorasColab.saida}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.saidaAlmoco}">
+                    <f:facet name="header">Saida almoco</f:facet>
+                    <h:outputText value="#{_tbHorasColab.saidaAlmoco}">
+                        <s:convertDateTime type="time"/>
+                    </h:outputText>
+                </rich:column>
+                <rich:column sortBy="#{_tbHorasColab.totalHoras}">
+                    <f:facet name="header">Total horas</f:facet>
+                    <h:outputText value="#{_tbHorasColab.totalHoras}"/>
+                </rich:column>
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{tbAnalistaHome.managed}" id="tbHorasColabs">
+        <div class="actionButtons">
+            <s:button id="addtbHorasColab"
+                   value="Add tbHorasColab"
+                    view="/TbHorasColabEdit.xhtml"
+             propagation="none">
+                 <f:param name="tbAnalistaIdTbAnalista"
+                         value="#{tbAnalistaHome.instance.idTbAnalista}"/>
+                 <f:param name="tbHorasColabFrom" value="TbAnalista"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

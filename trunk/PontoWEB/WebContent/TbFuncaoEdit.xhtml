@@ -1,0 +1,72 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbFuncao" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tbFuncaoHome.managed ? 'Edit' : 'Add'} Tb funcao</f:facet>
+
+
+
+            <s:decorate id="descricaoField" template="layout/edit.xhtml">
+                <ui:define name="label">Descricao</ui:define>
+                <h:inputTextarea id="descricao"
+                               cols="80"
+                               rows="3"
+                              value="#{tbFuncaoHome.instance.descricao}"/>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tbFuncaoHome.persist}"
+                       disabled="#{!tbFuncaoHome.wired}"
+                       rendered="#{!tbFuncaoHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tbFuncaoHome.update}"
+                       rendered="#{tbFuncaoHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tbFuncaoHome.remove}"
+                      immediate="true"
+                       rendered="#{tbFuncaoHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/TbFuncao.xhtml"
+                rendered="#{tbFuncaoHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tbFuncaoFrom ? 'TbFuncaoList' : tbFuncaoFrom}.xhtml"
+                rendered="#{!tbFuncaoHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>
