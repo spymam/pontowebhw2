@@ -48,18 +48,42 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		tbUser = (TbUsuarios) Contexts.getSessionContext().get("usuario");
 		
 		List<TbAnalista> result = getEntityManager().createQuery(
-		"SELECT e FROM TbAnalista e WHERE e.idTbAnalista=:idAnalista")
+		"SELECT e FROM TbAnalista e WHERE e.nome=:idAnalista")
 		.setParameter(
 				"idAnalista",
 				tbUser.getNome()).getResultList();
 		
+		tbHorasColab.setDiaSemana(diaSemana);
 		tbHorasColab.setTbAnalista(result.get(0));
-		tbHorasColab.setTbClientes(getTbProjeto().getTbClientes());		
-		TbHorasColab tbHoras = getInstance();		
+		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
+			
+		setInstance(tbHorasColab);
+		
 		
 		super.persist();
 			
 	}
+	
+	
+	public void calculaTotalHoras(){
+		
+		
+		String entrada = tbHorasColab.getEntrada().replace(":", "");
+		String saida = tbHorasColab.getSaida().replace(":", "");
+		String saidaAlmoco = tbHorasColab.getSaidaAlmoco().replace(":", "");
+		String retornoAlmoco = tbHorasColab.getRetornoAlmoco().replace(":", "");
+		
+		int totalGeral = Integer.parseInt(saida)-Integer.parseInt(entrada);
+		int almoco = Integer.parseInt(retornoAlmoco)-Integer.parseInt(saidaAlmoco);
+		
+		int calculaTotaldeHoras = totalGeral-almoco;
+		
+		int total = (calculaTotaldeHoras);
+		
+		tbHorasColab.setTotalHoras(total);
+		
+	}
+	
 	
 	
 	
@@ -103,6 +127,18 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		List resultList = getEntityManager()
 				.createQuery(
 						"SELECT e FROM TbProjeto e").getResultList();
+				
+		
+		return resultList;
+		
+						
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TbClientes> getListaTbCLientes() {
+		List resultList = getEntityManager()
+				.createQuery(
+						"SELECT e FROM TbClientes e").getResultList();
 				
 		
 		return resultList;
@@ -171,9 +207,9 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	public boolean isWired() {
 //		if (getInstance().getTbAnalista() == null)
 //			return false;
-		if (getInstance().getTbClientes() == null)
+		if (tbHorasColab.getTbClientes() == null)
 			return false;
-		if (getInstance().getTbProjeto() == null)
+		if (tbHorasColab.getTbProjeto() == null)
 			return false;
 		return true;
 	}
