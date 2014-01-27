@@ -40,7 +40,32 @@
                 <ui:define name="label">Dia semana</ui:define>
                 
                               
-                              <h:outputText id="outputDiaSemana" value="#{tbHorasColabHome.diaSemana}" />
+                              <h:outputText id="outputDiaSemana" 
+                              value="#{tbHorasColabHome.diaSemana}" />
+            </s:decorate>
+            
+                    <s:decorate id="clienteField1" template="layout/edit.xhtml">
+                <ui:define name="label">Cliente</ui:define>
+                
+                              
+                              <h:selectOneMenu id="tbProjeto"
+							value="#{tbHorasColabHome.tbHorasColab.tbClientes}" immediate="true"
+							required="true"
+							>
+							<s:selectItems var="clienteSelect" id="selectCliente"
+								value="#{tbHorasColabHome.listaTbCLientes}"
+								label="#{clienteSelect.nome}" 
+								
+								noSelectionLabel="Selecione o Cliente" />
+		  <a:support event="onchanged" reRender="tbProjeto"
+                          action="#{tbHorasColabHome.addDiaSemana}"
+                          ajaxSingle="true"
+                           
+                           
+                           />
+							
+							<s:convertEntity/>
+							</h:selectOneMenu>
             </s:decorate>
             
                    <s:decorate id="projetoField1" template="layout/edit.xhtml">
@@ -49,58 +74,76 @@
                               
                               <h:selectOneMenu id="tbProjeto"
 							value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
+							required="true"
+							
 							>
 							<s:selectItems var="projetoSelect" id="selectProjecto"
 								value="#{tbHorasColabHome.listaTbProjeto}"
 								label="#{projetoSelect.nome}" 
 								noSelectionLabel="Selecione o Projeto" />
-		  <a:support event="onblur" reRender="projetoField1" bypassUpdates="true" ajaxSingle="true"/>
+		  <a:support event="onchanged" reRender="tbProjeto" ajaxSingle="true"/>
 							
 							<s:convertEntity/>
 							</h:selectOneMenu>
             </s:decorate>
             
-            <s:decorate id="entradaField1" template="layout/edit.xhtml">
+              <s:decorate id="entradaField" template="layout/edit.xhtml">
                 <ui:define name="label">Entrada</ui:define>
                 <h:inputText id="entradaText"
                            size="5"
+                           maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.entrada}">
-                    
-                    <a:support event="onblur" reRender="entradaField1" bypassUpdates="true" ajaxSingle="true"/>
+                    <a:support event="onblur" reRender="entradaText"
+                          
+                          ajaxSingle="true"/>
+                <rich:jQuery selector="#entradaText" query="setMask({mask:'99:99'})" 
+                    timing="onload"/>
                 </h:inputText>
             </s:decorate>
             
-            <s:decorate id="saidaAlmocoField1" template="layout/edit.xhtml">
-                <ui:define name="label">Saida almoco</ui:define>
-                <h:inputText id="saidaAlmocoText"
+                  <s:decorate id="saidaAlmoço" template="layout/edit.xhtml">
+                <ui:define name="label">Saida Almoço</ui:define>
+                <h:inputText id="saidaAlmoco"
                            size="5"
+                           maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.saidaAlmoco}">
-                    
-                    <a:support event="onblur" reRender="saidaAlmocoField" bypassUpdates="true" ajaxSingle="true"/>
+                    <a:support event="onblur" reRender="saidaAlmoco"
+                          
+                          ajaxSingle="true"/>
+                <rich:jQuery selector="#saidaAlmoco" query="setMask({mask:'99:99'})" 
+                    timing="onload"/>
                 </h:inputText>
             </s:decorate>
             
-            <s:decorate id="retornoAlmocoField1" template="layout/edit.xhtml">
-                <ui:define name="label">Retorno almoco</ui:define>
-                <h:inputText id="retornoAlmocoText"
+                   
+              <s:decorate id="retornoAlmoçoField" template="layout/edit.xhtml">
+                <ui:define name="label">Saida Almoço</ui:define>
+                <h:inputText id="retornoAlmoco"
                            size="5"
+                           maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.retornoAlmoco}">
-                    <!-- <s:convertDateTime type="time"/>-->
-                    <a:support event="onblur" reRender="retornoAlmocoField" bypassUpdates="true" ajaxSingle="true"/>
+                    <a:support event="onblur" reRender="retornoAlmoco"
+                          
+                          ajaxSingle="true"/>
+                <rich:jQuery selector="#retornoAlmoco" query="setMask({mask:'99:99'})" 
+                    timing="onload"/>
                 </h:inputText>
             </s:decorate>
-            
             <s:decorate id="saidaField1" template="layout/edit.xhtml">
                 <ui:define name="label">Saida</ui:define>
                 <h:inputText id="saidaText"
                            size="5"
+                           maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.saida}">
-                    
-                    <a:support event="onblur" reRender="saidaField" bypassUpdates="true" ajaxSingle="true"/>
+                    <a:support event="onblur" reRender="saidaText,totalHoras1"
+                          action="#{tbHorasColabHome.calculaTotalHoras}"
+                          ajaxSingle="true"/>
+                <rich:jQuery selector="#saidaText" query="setMask({mask:'99:99'})" 
+                    timing="onload"/>
                 </h:inputText>
             </s:decorate>
             
@@ -112,13 +155,18 @@
                                required="true"
                                
                               value="#{tbHorasColabHome.tbHorasColab.descAtividade}"/>
+                              <a:support event="onclick" reRender="descAtividadeField1" bypassUpdates="true" ajaxSingle="true" immediate="true"/>
+                
             </s:decorate>
             
             <s:decorate id="totalHorasField1" template="layout/edit.xhtml">
                 <ui:define name="label">Total horas</ui:define>
                 <h:inputText id="totalHoras1"
+                disabled="true"
                           value="#{tbHorasColabHome.tbHorasColab.totalHoras}">
-                    <a:support event="onblur" reRender="totalHorasField" bypassUpdates="true" ajaxSingle="true"/>
+                    <a:support event="onchanged" reRender="totalHorasField1" bypassUpdates="true" ajaxSingle="true" immediate="true"/>
+                <rich:jQuery selector="#totalHoras1" query="setMask({mask:'99:99'})" 
+                    timing="onload"/>
                 </h:inputText>
             </s:decorate>
 
@@ -127,7 +175,7 @@
                 <ui:define name="label">Horas adicionais</ui:define>
                 <h:inputText id="horasAdicionaisText"
                           value="#{tbHorasColabHome.tbHorasColab.horasAdicionais}">
-                    <a:support event="onblur" reRender="horasAdicionaisField" bypassUpdates="true" ajaxSingle="true"/>
+                    <a:support event="onblur" reRender="horasAdicionaisField1" bypassUpdates="true" ajaxSingle="true"/>
                 </h:inputText>
             </s:decorate>
                        
@@ -140,13 +188,14 @@
 
         </rich:panel>
 
-        <div class="actionButtons">
+        <div class="actionButtons" id="buttons">
 
             <h:commandButton id="save"
                           value="Save"
                          action="#{tbHorasColabHome.gravarDados()}"
-                       disabled="#{!tbHorasColabHome.wired}"
-                       rendered="#{!tbHorasColabHome.managed}"/>
+                       disabled="#{tbHorasColabHome.wired}"
+                       
+                       />
 
             <h:commandButton id="update"
                           value="Save"
@@ -165,7 +214,7 @@
                     view="/TbHorasColab.xhtml"
                 rendered="#{tbHorasColabHome.managed}"/>
 
-            <s:button id="cancelAdd"
+            <s:button id="cancelAdd1"
                    value="Cancel"
              propagation="end"
                     view="/#{empty tbHorasColabFrom ? 'TbHorasColabList' : tbHorasColabFrom}.xhtml"
