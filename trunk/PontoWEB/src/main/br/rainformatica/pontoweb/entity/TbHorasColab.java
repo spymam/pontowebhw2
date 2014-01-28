@@ -30,12 +30,12 @@ public class TbHorasColab implements java.io.Serializable {
 	private Date data;
 	private String descAtividade;
 	private String diaSemana;
-	private String entrada;
+	private Date entrada;
 	private Integer horasAdicionais;
-	private String retornoAlmoco;
-	private String saida;
-	private String saidaAlmoco;
-	private Integer totalHoras;
+	private Date retornoAlmoco;
+	private Date saida;
+	private Date saidaAlmoco;
+	private Date totalHoras;
 	private TbHorasAdicionais tbHorasAdicionais;
 
 	public TbHorasColab() {
@@ -51,8 +51,8 @@ public class TbHorasColab implements java.io.Serializable {
 
 	public TbHorasColab(TbAnalista tbAnalista, TbClientes tbClientes,
 			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, Date data, String descAtividade,
-			String diaSemana, String entrada, Integer horasAdicionais,
-			String retornoAlmoco, String saida, String saidaAlmoco, Integer totalHoras) {
+			String diaSemana, Date entrada, Integer horasAdicionais,
+			Date retornoAlmoco, Date saida, Date saidaAlmoco, Date totalHoras) {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
 		this.tbProjeto = tbProjeto;
@@ -150,16 +150,16 @@ public class TbHorasColab implements java.io.Serializable {
 		this.diaSemana = diaSemana;
 	}
 
-	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "entrada", length = 8)
-	public String getEntrada() {
+	public Date getEntrada() {
 		return this.entrada;
 	}
 
-	public void setEntrada(String entrada) {
+	public void setEntrada(Date entrada) {
 		this.entrada = entrada;
 	}
-
+		
 	@Column(name = "horas_adicionais")
 	public Integer getHorasAdicionais() {
 		return this.horasAdicionais;
@@ -169,42 +169,43 @@ public class TbHorasColab implements java.io.Serializable {
 		this.horasAdicionais = horasAdicionais;
 	}
 
-	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "retorno_almoco", length = 8)
-	public String getRetornoAlmoco() {
+	public Date getRetornoAlmoco() {
 		return this.retornoAlmoco;
 	}
 
-	public void setRetornoAlmoco(String retornoAlmoco) {
+	public void setRetornoAlmoco(Date retornoAlmoco) {
 		this.retornoAlmoco = retornoAlmoco;
 	}
 
-	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "saida", length = 8)
-	public String getSaida() {
+	public Date getSaida() {
 		return this.saida;
 	}
 
-	public void setSaida(String saida) {
+	public void setSaida(Date saida) {
 		this.saida = saida;
 	}
 
-	
+	@Temporal(TemporalType.TIME)
 	@Column(name = "saida_almoco", length = 8)
-	public String getSaidaAlmoco() {
+	public Date getSaidaAlmoco() {
 		return this.saidaAlmoco;
 	}
 
-	public void setSaidaAlmoco(String saidaAlmoco) {
+	public void setSaidaAlmoco(Date saidaAlmoco) {
 		this.saidaAlmoco = saidaAlmoco;
 	}
 
+	@Temporal(TemporalType.TIME)
 	@Column(name = "total_horas")
-	public Integer getTotalHoras() {
+	public Date getTotalHoras() {
 		return this.totalHoras;
 	}
 
-	public void setTotalHoras(Integer totalHoras) {
+	public void setTotalHoras(Date totalHoras) {
 		this.totalHoras = totalHoras;
 	}
 

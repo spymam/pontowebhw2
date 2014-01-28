@@ -94,11 +94,12 @@
                            maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.entrada}">
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
                     <a:support event="onblur" reRender="entradaText"
                           
                           ajaxSingle="true"/>
-                <rich:jQuery selector="#entradaText" query="setMask({mask:'99:99'})" 
-                    timing="onload"/>
+                
+                    
                 </h:inputText>
             </s:decorate>
             
@@ -109,6 +110,8 @@
                            maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.saidaAlmoco}">
+                          
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
                     <a:support event="onblur" reRender="saidaAlmoco"
                           
                           ajaxSingle="true"/>
@@ -119,12 +122,13 @@
             
                    
               <s:decorate id="retornoAlmoçoField" template="layout/edit.xhtml">
-                <ui:define name="label">Saida Almoço</ui:define>
+                <ui:define name="label">Retorno Almoço</ui:define>
                 <h:inputText id="retornoAlmoco"
                            size="5"
                            maxlength="5"
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.retornoAlmoco}">
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
                     <a:support event="onblur" reRender="retornoAlmoco"
                           
                           ajaxSingle="true"/>
@@ -138,12 +142,14 @@
                            size="5"
                            maxlength="5"
                            required="true"
-                          value="#{tbHorasColabHome.tbHorasColab.saida}">
+                          value="#{tbHorasColabHome.tbHorasColab.saida}">                          
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
                     <a:support event="onblur" reRender="saidaText,totalHoras1"
                           action="#{tbHorasColabHome.calculaTotalHoras}"
                           ajaxSingle="true"/>
                 <rich:jQuery selector="#saidaText" query="setMask({mask:'99:99'})" 
                     timing="onload"/>
+                    
                 </h:inputText>
             </s:decorate>
             
@@ -164,6 +170,7 @@
                 <h:inputText id="totalHoras1"
                 disabled="true"
                           value="#{tbHorasColabHome.tbHorasColab.totalHoras}">
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
                     <a:support event="onchanged" reRender="totalHorasField1" bypassUpdates="true" ajaxSingle="true" immediate="true"/>
                 <rich:jQuery selector="#totalHoras1" query="setMask({mask:'99:99'})" 
                     timing="onload"/>
@@ -214,7 +221,7 @@
                     view="/TbHorasColab.xhtml"
                 rendered="#{tbHorasColabHome.managed}"/>
 
-            <s:button id="cancelAdd1"
+            <s:button id="cancelAdd2"
                    value="Cancel"
              propagation="end"
                     view="/#{empty tbHorasColabFrom ? 'TbHorasColabList' : tbHorasColabFrom}.xhtml"

@@ -11,15 +11,6 @@
 
    <param name="tbHorasColabFrom"/>
    <param name="tbHorasColabIdTbHorasColab" value="#{tbHorasColabHome.tbHorasColabIdTbHorasColab}"/>
-   <param name="tbAnalistaFrom"/>
-   <param name="tbAnalistaIdTbAnalista" value="#{tbAnalistaHome.tbAnalistaIdTbAnalista}"/>
-
-   <param name="tbClientesFrom"/>
-   <param name="tbClientesIdTbClientes" value="#{tbClientesHome.tbClientesIdTbClientes}"/>
-
-   <param name="tbProjetoFrom"/>
-   <param name="tbProjetoIdTbProjeto" value="#{tbProjetoHome.tbProjetoIdTbProjeto}"/>
-
 
 
    <navigation from-action="#{tbHorasColabHome.persist}">
