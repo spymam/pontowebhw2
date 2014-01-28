@@ -66,7 +66,34 @@
 
         <s:decorate id="totalHoras" template="layout/display.xhtml">
             <ui:define name="label">Total horas</ui:define>
-            <h:outputText value="#{tbHorasColabHome.instance.totalHoras}"/>
+            <h:outputText value="#{tbHorasColabHome.instance.totalHoras}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </s:decorate>
+
+        <s:decorate id="idAnalista" template="layout/display.xhtml">
+            <ui:define name="label">Id analista</ui:define>
+            <h:outputText value="#{tbHorasColabHome.instance.idAnalista}"/>
+        </s:decorate>
+
+        <s:decorate id="idCliente" template="layout/display.xhtml">
+            <ui:define name="label">Id cliente</ui:define>
+            <h:outputText value="#{tbHorasColabHome.instance.idCliente}"/>
+        </s:decorate>
+
+        <s:decorate id="idHorasAdicionais" template="layout/display.xhtml">
+            <ui:define name="label">Id horas adicionais</ui:define>
+            <h:outputText value="#{tbHorasColabHome.instance.idHorasAdicionais}"/>
+        </s:decorate>
+
+        <s:decorate id="idProjeto" template="layout/display.xhtml">
+            <ui:define name="label">Id projeto</ui:define>
+            <h:outputText value="#{tbHorasColabHome.instance.idProjeto}"/>
+        </s:decorate>
+
+        <s:decorate id="idTbHorasAdicionais" template="layout/display.xhtml">
+            <ui:define name="label">Id tb horas adicionais</ui:define>
+            <h:outputText value="#{tbHorasColabHome.instance.idTbHorasAdicionais}"/>
         </s:decorate>
 
         <div style="clear:both"/>
@@ -85,136 +112,6 @@
 
     </div>
 
-    <rich:tabPanel switchType="ajax">
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tb analista</h:panelGroup>
-        </f:facet>
-    <div class="association" id="tbAnalistaParent">
-
-        <h:outputText value="There is no tbAnalista associated with this tbHorasColab."
-                   rendered="#{tbHorasColabHome.instance.tbAnalista == null}"/>
-
-        <rich:dataTable var="_tbAnalista"
-                   value="#{tbHorasColabHome.instance.tbAnalista}"
-                rendered="#{tbHorasColabHome.instance.tbAnalista != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tbAnalistaTable">
-            <h:column>
-                <f:facet name="header">Id tb analista</f:facet>
-                <h:outputText value="#{_tbAnalista.idTbAnalista}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cliente</f:facet>
-                <h:outputText value="#{_tbAnalista.cliente}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                <h:outputText value="#{_tbAnalista.email}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Funcao</f:facet>
-                <h:outputText value="#{_tbAnalista.funcao}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_tbAnalista.nome}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Telefone</f:facet>
-                <h:outputText value="#{_tbAnalista.telefone}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewtbAnalista"
-                     value="View"
-                      view="/TbAnalista.xhtml">
-                    <f:param name="tbAnalistaIdTbAnalista"
-                           value="#{_tbAnalista.idTbAnalista}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tb clientes</h:panelGroup>
-        </f:facet>
-    <div class="association" id="tbClientesParent">
-
-        <h:outputText value="There is no tbClientes associated with this tbHorasColab."
-                   rendered="#{tbHorasColabHome.instance.tbClientes == null}"/>
-
-        <rich:dataTable var="_tbClientes"
-                   value="#{tbHorasColabHome.instance.tbClientes}"
-                rendered="#{tbHorasColabHome.instance.tbClientes != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tbClientesTable">
-            <h:column>
-                <f:facet name="header">Id tb clientes</f:facet>
-                <h:outputText value="#{_tbClientes.idTbClientes}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_tbClientes.nome}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewtbClientes"
-                     value="View"
-                      view="/TbClientes.xhtml">
-                    <f:param name="tbClientesIdTbClientes"
-                           value="#{_tbClientes.idTbClientes}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab>
-        <f:facet name="label">
-            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Tb projeto</h:panelGroup>
-        </f:facet>
-    <div class="association" id="tbProjetoParent">
-
-        <h:outputText value="There is no tbProjeto associated with this tbHorasColab."
-                   rendered="#{tbHorasColabHome.instance.tbProjeto == null}"/>
-
-        <rich:dataTable var="_tbProjeto"
-                   value="#{tbHorasColabHome.instance.tbProjeto}"
-                rendered="#{tbHorasColabHome.instance.tbProjeto != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tbProjetoTable">
-            <h:column>
-                <f:facet name="header">Id tb projeto</f:facet>
-                <h:outputText value="#{_tbProjeto.idTbProjeto}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tb clientes id tb clientes</f:facet>
-                <h:outputText value="#{_tbProjeto.tbClientes.idTbClientes}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_tbProjeto.nome}"/>
-            </h:column>
-            <h:column styleClass="action">
-                <f:facet name="header">Action</f:facet>
-                <s:link id="viewtbProjeto"
-                     value="View"
-                      view="/TbProjeto.xhtml">
-                    <f:param name="tbProjetoIdTbProjeto"
-                           value="#{_tbProjeto.idTbProjeto}"/>
-                </s:link>
-            </h:column>
-        </rich:dataTable>
-
-    </div>
-    </rich:tab>
-</rich:tabPanel>
 </ui:define>
 
 </ui:composition>

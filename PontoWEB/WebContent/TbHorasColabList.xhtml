@@ -66,36 +66,6 @@
             <f:facet name="header">
                 <ui:include src="layout/sort.xhtml">
                     <ui:param name="entityList" value="#{tbHorasColabList}"/>
-                    <ui:param name="propertyLabel" value="Tb analista id tb analista"/>
-                    <ui:param name="propertyPath" value="tbHorasColab.tbAnalista.idTbAnalista"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_tbHorasColab.tbAnalista.idTbAnalista}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
-                    <ui:param name="propertyLabel" value="Tb clientes id tb clientes"/>
-                    <ui:param name="propertyPath" value="tbHorasColab.tbClientes.idTbClientes"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_tbHorasColab.tbClientes.idTbClientes}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
-                    <ui:param name="propertyLabel" value="Tb projeto id tb projeto"/>
-                    <ui:param name="propertyPath" value="tbHorasColab.tbProjeto.idTbProjeto"/>
-                </ui:include>
-            </f:facet>
-            <h:outputText value="#{_tbHorasColab.tbProjeto.idTbProjeto}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">
-                <ui:include src="layout/sort.xhtml">
-                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
                     <ui:param name="propertyLabel" value="Data"/>
                     <ui:param name="propertyPath" value="tbHorasColab.data"/>
                 </ui:include>
@@ -190,7 +160,59 @@
                     <ui:param name="propertyPath" value="tbHorasColab.totalHoras"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_tbHorasColab.totalHoras}"/>
+            <h:outputText value="#{_tbHorasColab.totalHoras}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Id analista"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.idAnalista"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.idAnalista}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Id cliente"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.idCliente"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.idCliente}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Id horas adicionais"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.idHorasAdicionais"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.idHorasAdicionais}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Id projeto"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.idProjeto"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.idProjeto}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasColabList}"/>
+                    <ui:param name="propertyLabel" value="Id tb horas adicionais"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.idTbHorasAdicionais"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasColab.idTbHorasAdicionais}"/>
         </h:column>
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
