@@ -19,15 +19,29 @@
       <a:loadScript src="/js/script.js"/>
       <ui:insert name="head"/>
    </head>
+   <style type="text/css">
+  .rich-noBorder
+  {
+    border: none;
+  }
+  </style>
+  
    <body>
       <ui:include src="menu.xhtml">
          <ui:param name="projectName" value=""/>
       </ui:include>
       <h:graphicImage value="/img/logopw.png" alt="Seam logo" height="100"/>
       <div class="body">
-         <h:messages id="messages" globalOnly="true" styleClass="message"
+      
+      
+         <h:messages id="messages" globalOnly="true" styleClass="message, errors"
             errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"
-            rendered="#{showGlobalMessages != 'false'}"/>
+            rendered="#{showGlobalMessages != 'false'}" />
+            
+            
+      
+      
+            
          <ui:insert name="body"/>
       </div>
       
