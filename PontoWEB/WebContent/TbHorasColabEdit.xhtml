@@ -8,16 +8,37 @@
     xmlns:a="http://richfaces.org/a4j"
     xmlns:rich="http://richfaces.org/rich"
     template="layout/template.xhtml">
+    
+    <style type="text/css">
+  .rich-noBorder
+  {
+    border: none;
+  }
+  </style>
 
 <ui:define name="body">
 
+
     <h:form id="tbHorasColabForm" styleClass="edit">
+    <fieldset style=" width : 100%;">
+        <legend>
+        
+        <h:outputLabel value="Lançamento de Horas" style="FONT-STYLE: italic; FONT-SIZE: small;"/>
+        
+        </legend>
+        <span class="error">
+      <s:message styleClass="errors"/>
+      </span>
+<h:panelGrid columns="2" width="100%">
 
-        <rich:panel>
-            <f:facet name="header">#{tbHorasColabHome.managed ? 'Edit' : 'Add'} Tb horas colab</f:facet>
-
+<h:column >
+        <rich:panel style=" width: 100%; text-align: left" styleClass="rich-noBorder">
+        
+<h:panelGrid columns="3" width="100%">
+<h:column id="coluna1">
             <s:decorate id="dataField1" template="layout/edit.xhtml">
                 <ui:define name="label">Data</ui:define>
+                
                 <rich:calendar id="dataRich"
                           value="#{tbHorasColabHome.tbHorasColab.data}" 
                           datePattern="dd/MM/yyyy"
@@ -34,21 +55,13 @@
                            
                            />
                           </rich:calendar>
-            </s:decorate>
-            
-            <s:decorate id="diaSemanaField1" template="layout/edit.xhtml">
-                <ui:define name="label">Dia semana</ui:define>
-                
-                              
-                              <h:outputText id="outputDiaSemana" 
-                              value="#{tbHorasColabHome.diaSemana}" />
-            </s:decorate>
-            
-                    <s:decorate id="clienteField1" template="layout/edit.xhtml">
+                          
+            </s:decorate><rich:spacer style=" height : 25px;"></rich:spacer>
+            <s:decorate id="clienteField1" template="layout/edit.xhtml">
                 <ui:define name="label">Cliente</ui:define>
                 
                               
-                              <h:selectOneMenu id="tbProjeto"
+                              <h:selectOneMenu id="tbCliente"
 							value="#{tbHorasColabHome.tbHorasColab.tbClientes}" immediate="true"
 							required="true"
 							>
@@ -57,21 +70,28 @@
 								label="#{clienteSelect.nome}" 
 								
 								noSelectionLabel="Selecione o Cliente" />
-		  <a:support event="onchanged" reRender="tbProjeto"
+		  <a:support event="onchanged" reRender="tbCliente"
                           action="#{tbHorasColabHome.addDiaSemana}"
-                          ajaxSingle="true"
-                           
-                           
-                           />
+                          ajaxSingle="true" />
 							
 							<s:convertEntity/>
 							</h:selectOneMenu>
             </s:decorate>
             
-                   <s:decorate id="projetoField1" template="layout/edit.xhtml">
+            </h:column>
+                    
+            <h:column id="coluna2">
+            <s:decorate id="diaSemanaField1" template="layout/edit.xhtml">
+                <ui:define name="label">Dia semana</ui:define>
+                              <h:inputText id="outputDiaSemana" 
+                              value="#{tbHorasColabHome.diaSemana}" disabled="true" />
+                             
+            </s:decorate>
+            
+            <s:decorate id="projetoField1" template="layout/edit.xhtml">
                 <ui:define name="label">Projeto</ui:define>
                 
-                              
+                             
                               <h:selectOneMenu id="tbProjeto"
 							value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
 							required="true"
@@ -86,29 +106,52 @@
 							<s:convertEntity/>
 							</h:selectOneMenu>
             </s:decorate>
+              
+              
+            </h:column>
+            <h:column id="coluna3">
+              
             
-              <s:decorate id="entradaField" template="layout/edit.xhtml">
+
+
+            
+</h:column> 
+
+                      
+            
+
+            
+</h:panelGrid>
+<h:panelGrid id="panelHoras" width="50%">
+
+
+<h:column id="colunaHoras1">
+<s:decorate id="entradaField" template="layout/edit.xhtml">
                 <ui:define name="label">Entrada</ui:define>
                 <h:inputText id="entradaText"
-                           size="5"
+                           size="5"                                               
                            maxlength="5"
+                          
                            required="true"
                           value="#{tbHorasColabHome.tbHorasColab.entrada}">
-                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
-                    <a:support event="onblur" reRender="entradaText"
-                          
-                          ajaxSingle="true"/>
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm" 
+                          />
+                          <rich:jQuery selector="#entradaText" query="setMask({mask:'99:99'})" 
+                    timing="onload" />
+                    <a:support event="onblur" reRender="entradaText" ajaxSingle="true" />
                 
                     
                 </h:inputText>
             </s:decorate>
-            
-                  <s:decorate id="saidaAlmoço" template="layout/edit.xhtml">
+            </h:column>
+            <h:column id="colunaHoras2">
+            <s:decorate id="saidaAlmoço" template="layout/edit.xhtml">
                 <ui:define name="label">Saida Almoço</ui:define>
                 <h:inputText id="saidaAlmoco"
                            size="5"
                            maxlength="5"
                            required="true"
+                           autocomplete=""
                           value="#{tbHorasColabHome.tbHorasColab.saidaAlmoco}">
                           
                           <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
@@ -119,9 +162,9 @@
                     timing="onload"/>
                 </h:inputText>
             </s:decorate>
-            
-                   
-              <s:decorate id="retornoAlmoçoField" template="layout/edit.xhtml">
+</h:column>
+<h:column id="colunaHoras3">
+<s:decorate id="retornoAlmoçoField" template="layout/edit.xhtml">
                 <ui:define name="label">Retorno Almoço</ui:define>
                 <h:inputText id="retornoAlmoco"
                            size="5"
@@ -136,7 +179,9 @@
                     timing="onload"/>
                 </h:inputText>
             </s:decorate>
-            <s:decorate id="saidaField1" template="layout/edit.xhtml">
+</h:column>
+<h:column id="colunaHoras4">
+<s:decorate id="saidaField1" template="layout/edit.xhtml">
                 <ui:define name="label">Saida</ui:define>
                 <h:inputText id="saidaText"
                            size="5"
@@ -151,9 +196,44 @@
                     timing="onload"/>
                     
                 </h:inputText>
+                
             </s:decorate>
             
-              <s:decorate id="descAtividadeField1" template="layout/edit.xhtml">
+      </h:column>
+      <h:column id="colunaHoras5" >
+<s:decorate id="totalHorasField1" template="layout/edit.xhtml">
+                <ui:define name="label">Total horas</ui:define>
+                <h:inputText id="totalHoras1"
+                			disabled="true"
+                			size="5"
+                          value="#{tbHorasColabHome.tbHorasColab.totalHoras}">
+                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
+                    <a:support event="onchanged" reRender="totalHorasField1" bypassUpdates="true" ajaxSingle="true" immediate="true"/>
+                <rich:jQuery selector="#totalHoras1" query="setMask({mask:'99:99'})" 
+                    timing="onload"/>
+                </h:inputText>
+            </s:decorate>
+</h:column>
+      
+
+<h:column id="colunaHoras6">
+<s:decorate id="horasAdicionaisField1" template="layout/edit.xhtml">
+                <ui:define name="label">Horas adicionais</ui:define>
+                <h:inputText id="horasAdicionaisText"
+                          value="#{tbHorasColabHome.tbHorasColab.horasAdicionais}">
+                    <a:support event="onblur" reRender="horasAdicionaisField1" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+</h:column>
+
+
+</h:panelGrid>
+<h:panelGrid id="panelAtividades" columns="3" width="50%">
+<h:column>
+
+<s:decorate id="descAtividadeField1" template="layout/edit.xhtml">
                 <ui:define name="label">Desc atividade</ui:define>
                 <h:inputTextarea id="descAtividadeTextArea"
                                cols="80"
@@ -165,39 +245,94 @@
                 
             </s:decorate>
             
-            <s:decorate id="totalHorasField1" template="layout/edit.xhtml">
-                <ui:define name="label">Total horas</ui:define>
-                <h:inputText id="totalHoras1"
-                disabled="true"
-                          value="#{tbHorasColabHome.tbHorasColab.totalHoras}">
-                          <s:convertDateTime type="time" timeStyle="short" pattern="HH:mm"/>
-                    <a:support event="onchanged" reRender="totalHorasField1" bypassUpdates="true" ajaxSingle="true" immediate="true"/>
-                <rich:jQuery selector="#totalHoras1" query="setMask({mask:'99:99'})" 
-                    timing="onload"/>
-                </h:inputText>
-            </s:decorate>
-
-
-            <s:decorate id="horasAdicionaisField1" template="layout/edit.xhtml">
-                <ui:define name="label">Horas adicionais</ui:define>
-                <h:inputText id="horasAdicionaisText"
-                          value="#{tbHorasColabHome.tbHorasColab.horasAdicionais}">
-                    <a:support event="onblur" reRender="horasAdicionaisField1" bypassUpdates="true" ajaxSingle="true"/>
-                </h:inputText>
-            </s:decorate>
-                       
+            </h:column>
+            
+            <h:column>
+            
+            
+            </h:column>
             
 
-            <div style="clear:both">
-                <span class="required">*</span>
-                required fields
-            </div>
 
-        </rich:panel>
+</h:panelGrid>
+
+</rich:panel>
+
+</h:column>
+
+<h:column>
+   
+
+        <rich:dataTable var="_tbHorasColab"
+                   value="#{tbHorasColabHome.getListaTbHorasPorAnalista(tbHorasColabHome.tbUser.nome)}"
+                rendered="#{tbHorasColabHome.tbHorasColab != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="tbHorasColabTable1">
+         
+            <h:column>
+                <f:facet name="header">Data</f:facet>
+                <h:outputText value="#{_tbHorasColab.data}">
+                <s:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Dia Semana</f:facet>
+                <h:outputText value="#{_tbHorasColab.diaSemana}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Entrada</f:facet>
+                <h:outputText value="#{_tbHorasColab.entrada}" >
+                <s:convertDateTime pattern="HH:mm"/>
+                </h:outputText>
+                
+            </h:column>
+            <h:column>
+                <f:facet name="header">Almoço</f:facet>
+                <h:outputText value="#{_tbHorasColab.saidaAlmoco}">
+                <s:convertDateTime pattern="HH:mm"/>
+                </h:outputText>
+            </h:column>
+            <h:column> 
+                <f:facet name="header">Retorno</f:facet>
+                <h:outputText value="#{_tbHorasColab.retornoAlmoco}">
+                
+                <s:convertDateTime pattern="HH:mm"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Saida</f:facet>
+                <h:outputText value="#{_tbHorasColab.saida}">
+                <s:convertDateTime pattern="HH:mm"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Total</f:facet>
+                <h:outputText value="#{_tbHorasColab.totalHoras}">
+                <s:convertDateTime pattern="HH:mm"/>
+                </h:outputText>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Horas Adicionais</f:facet>
+                <h:outputText value="#{_tbHorasColab.tbHorasAdicionais}"/>
+            </h:column>
+        </rich:dataTable>
+
+        <!--<div class="actionButtons">
+            <s:button value="#{tbHorasColabHome.instance.tbAnalista != null ? 'Change' : 'Select'} tbAnalista"
+                       view="/TbAnalistaList.xhtml">
+                <f:param name="from" value="TbHorasColabEdit"/>
+            </s:button>
+        </div>
+
+    
+--></h:column>
+
+</h:panelGrid>
+
 
         <div class="actionButtons" id="buttons">
 
-            <h:commandButton id="save"
+            <h:commandButton id="save1"
                           value="Save"
                          action="#{tbHorasColabHome.gravarDados()}"
                        disabled="#{tbHorasColabHome.wired}"
@@ -228,123 +363,10 @@
                 rendered="#{!tbHorasColabHome.managed}"/>
 
         </div>
+        </fieldset>
     </h:form>
 
-<rich:tabPanel switchType="ajax">
-
-   <!--  <rich:tab label="Tb analista *" labelClass="required">
-    <div class="association" id="tbAnalistaParent1">
-
-        <h:outputText value="There is no tbAnalista associated with this tbHorasColab."
-                   rendered="#{tbHorasColabHome.instance.tbAnalista == null}"/>
-
-        <rich:dataTable var="_tbAnalista"
-                   value="#{tbHorasColabHome.instance.tbAnalista}"
-                rendered="#{tbHorasColabHome.instance.tbAnalista != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tbAnalistaTable1">
-            <h:column>
-                <f:facet name="header">Id tb analista</f:facet>
-                <h:outputText value="#{_tbAnalista.idTbAnalista}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Cliente</f:facet>
-                <h:outputText value="#{_tbAnalista.cliente}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                <h:outputText value="#{_tbAnalista.email}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Funcao</f:facet>
-                <h:outputText value="#{_tbAnalista.funcao}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_tbAnalista.nome}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Telefone</f:facet>
-                <h:outputText value="#{_tbAnalista.telefone}"/>
-            </h:column>
-        </rich:dataTable>
-
-        <div class="actionButtons">
-            <s:button value="#{tbHorasColabHome.instance.tbAnalista != null ? 'Change' : 'Select'} tbAnalista"
-                       view="/TbAnalistaList.xhtml">
-                <f:param name="from" value="TbHorasColabEdit"/>
-            </s:button>
-        </div>
-
-    </div>
-    </rich:tab>-->
-
-    <rich:tab label="Tb clientes *" labelClass="required">
-    <div class="association" id="tbClientesParent1">
-
-        <h:outputText value="There is no tbClientes associated with this tbHorasColab."
-                   rendered="#{tbHorasColabHome.instance.tbClientes == null}"/>
-
-        <rich:dataTable var="_tbClientes"
-                   value="#{tbHorasColabHome.instance.tbClientes}"
-                rendered="#{tbHorasColabHome.instance.tbClientes != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tbClientesTable">
-            <h:column>
-                <f:facet name="header">Id tb clientes</f:facet>
-                <h:outputText value="#{_tbClientes.idTbClientes}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_tbClientes.nome}"/>
-            </h:column>
-        </rich:dataTable>
-
-        <div class="actionButtons">
-            <s:button value="#{tbHorasColabHome.instance.tbClientes != null ? 'Change' : 'Select'} tbClientes"
-                       view="/TbClientesList.xhtml">
-                <f:param name="from" value="TbHorasColabEdit"/>
-            </s:button>
-        </div>
-
-    </div>
-    </rich:tab>
-
-    <rich:tab label="Tb projeto *" labelClass="required">
-    <div class="association" id="tbProjetoParent">
-
-        <h:outputText value="There is no tbProjeto associated with this tbHorasColab."
-                   rendered="#{tbHorasColabHome.instance.tbProjeto == null}"/>
-
-        <rich:dataTable var="_tbProjeto"
-                   value="#{tbHorasColabHome.instance.tbProjeto}"
-                rendered="#{tbHorasColabHome.instance.tbProjeto != null}"
-              rowClasses="rvgRowOne,rvgRowTwo"
-                      id="tbProjetoTable">
-            <h:column>
-                <f:facet name="header">Id tb projeto</f:facet>
-                <h:outputText value="#{_tbProjeto.idTbProjeto}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Tb clientes id tb clientes</f:facet>
-                <h:outputText value="#{_tbProjeto.tbClientes.idTbClientes}"/>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Nome</f:facet>
-                <h:outputText value="#{_tbProjeto.nome}"/>
-            </h:column>
-        </rich:dataTable>
-
-        <div class="actionButtons">
-            <s:button id="#{tbHorasColabHome.instance.tbProjeto != null ? 'changeParent' : 'selectParent'}" value="#{tbHorasColabHome.instance.tbProjeto != null ? 'Change' : 'Select'} tbProjeto"
-                       view="/TbProjetoList.xhtml">
-                <f:param name="from" value="TbHorasColabEdit"/>
-            </s:button>
-        </div>
-
-    </div>
-    </rich:tab>
-</rich:tabPanel>
-</ui:define>
+<!--
+--></ui:define>
 
 </ui:composition>

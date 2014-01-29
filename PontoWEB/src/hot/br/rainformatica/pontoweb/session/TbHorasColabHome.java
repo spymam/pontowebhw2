@@ -1,9 +1,7 @@
 package br.rainformatica.pontoweb.session;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.jboss.seam.annotations.In;
@@ -32,9 +30,14 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	TbClientes tbClientes = new TbClientes();
 	TbProjeto tbProjeto = new TbProjeto();
 	TbHorasColab tbHorasColab = new TbHorasColab();
+	TbUsuarios tbUser = new TbUsuarios();
+	
+	
+	
 
 	String diaSemana;
 	String totalHorasFormatado;
+	
 
 	public void setTbHorasColabIdTbHorasColab(Integer id) {
 		setId(id);
@@ -63,43 +66,86 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		super.persist();
 
 	}
+	
+	/**/
+
 
 	public void calculaTotalHoras() {
-		
-		/*String entrada = tbHorasColab.getEntrada().replace(":", "");
-		String saida = tbHorasColab.getSaida().replace(":", "");
-		String saidaAlmoco = tbHorasColab.getSaidaAlmoco().replace(":", "");
-		String retornoAlmoco = tbHorasColab.getRetornoAlmoco().replace(":", "");
-		
-		int totalGeral = Integer.parseInt(saida)-Integer.parseInt(entrada);
-		int almoco = Integer.parseInt(retornoAlmoco)-Integer.parseInt(saidaAlmoco);
-		
-		int calculaTotaldeHoras = totalGeral-almoco;
-		
-		int total = (calculaTotaldeHoras);
-		
-		tbHorasColab.setTotalHoras(total);*/
-	/*	
-		Calendar horaEntrada = Calendar.getInstance();
-		Calendar horasaida = Calendar.getInstance();
-		
-		horaEntrada.setTime(tbHorasColab.getEntrada());
-		horasaida.setTime(tbHorasColab.getSaida());
-		
-		long milisEntrada = horaEntrada.getTimeInMillis();  
-		
-		long milisSaida = horasaida.getTimeInMillis();  
-		long diferenca =  milisSaida - milisEntrada;  
-		long diferencaHoras = diferenca / 3600000;*/
-		
+				
 		int horaDaEntrada = tbHorasColab.getEntrada().getHours();
 		int minutoDaEntrada = tbHorasColab.getEntrada().getMinutes();
 		int horaDaSaida = tbHorasColab.getSaida().getHours();
 		int minutoDaSaida = tbHorasColab.getSaida().getMinutes();
 		int totalHoras = horaDaSaida - horaDaEntrada;
-		int somaMinutos = 0;
+		int saidaDoAlmoco = 0;
+		int minutoSaidaAlmoco = 0;
+		int retornoDoAlmoco = 0;
+		int minutoDoRetAlmoco = 0;
+		if(tbHorasColab.getSaidaAlmoco() == null){
+			saidaDoAlmoco = 00;
+			minutoSaidaAlmoco = 00;
+		}	else{
+			saidaDoAlmoco = tbHorasColab.getSaidaAlmoco().getHours();
+			minutoSaidaAlmoco = tbHorasColab.getSaidaAlmoco().getMinutes();
+		}
 		
-		int totalMinutos = 0;
+		if(tbHorasColab.getRetornoAlmoco() == null){
+		retornoDoAlmoco = 00;
+		minutoDoRetAlmoco = 00;
+		}else{
+			retornoDoAlmoco = tbHorasColab.getRetornoAlmoco().getHours();
+			minutoDoRetAlmoco = tbHorasColab.getRetornoAlmoco().getMinutes();
+		}
+		
+		if(saidaDoAlmoco == 0 || retornoDoAlmoco == 0){
+			
+			int somaEntrada = horaDaEntrada * 60 + minutoDaEntrada;
+			int somaSaida = horaDaSaida * 60 + minutoDaSaida;
+			int somaTotal = somaSaida - somaEntrada;
+			int divideMinutos = somaTotal / 60;
+			int restoDivisao = somaTotal % 60;
+			
+			Date totalDeHoras = new Date();
+			totalDeHoras.setHours(divideMinutos);
+			totalDeHoras.setMinutes(restoDivisao);
+			totalDeHoras.setSeconds(00);
+			
+			tbHorasColab.setTotalHoras(totalDeHoras);
+			
+			}else {
+				
+				int somaEntrada = horaDaEntrada * 60 + minutoDaEntrada;
+				int somaSaidaAlmoco = saidaDoAlmoco * 60 + minutoSaidaAlmoco;
+				int somaTotal1 = somaSaidaAlmoco - somaEntrada;
+				
+				int somaRetAlmoco = retornoDoAlmoco * 60 + minutoDoRetAlmoco;
+				int somaSaida = horaDaSaida * 60 + minutoDaSaida;
+				int somaTotal2 = somaSaida - somaRetAlmoco;
+				
+				int somaTotal = somaTotal1 + somaTotal2;
+				int divideMinutos = somaTotal / 60;
+				int restoDivisao = somaTotal % 60;
+				
+				Date totalDeHoras = new Date();
+				totalDeHoras.setHours(divideMinutos);
+				totalDeHoras.setMinutes(restoDivisao);
+				totalDeHoras.setSeconds(00);
+				
+				tbHorasColab.setTotalHoras(totalDeHoras);
+				
+				
+			}
+		
+		
+		/*10:30 + 20:15 
+
+		10:30 = 10 * 60 + 30 = 630 
+		20:15 = 20 * 60 + 15 = 1215 
+		630 + 1215 = 1845 
+		1845 / 60 = 30 
+		1845 % 60 = 45*/
+		
+		/*int totalMinutos = 0;
 		
 		if (minutoDaEntrada >= minutoDaSaida) {
 			somaMinutos = minutoDaEntrada - minutoDaSaida;			
@@ -122,21 +168,30 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		}else if(somaMinutos <= 59){
 			totalHoras = totalHoras - 1;
 			
+			if (condition) {
+				
+			}
 			Date totalGeraldeHoras = new Date();
 			
 			totalGeraldeHoras.setHours(totalHoras);
 			totalGeraldeHoras.setMinutes(somaMinutos);
 			totalGeraldeHoras.setSeconds(00);
 			tbHorasColab.setTotalHoras(totalGeraldeHoras);
-		}
+		}*/
+		
 		
 	}
 
 	@Override
 	protected TbHorasColab createInstance() {
 		TbHorasColab tbHorasColab = new TbHorasColab();
+		
+		tbUser = (TbUsuarios) Contexts.getSessionContext().get("usuario");
+		
 		return tbHorasColab;
 	}
+	
+	
 
 	public void load() {
 		if (isIdDefined()) {
@@ -203,6 +258,13 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		return getEntityManager()
 				.createQuery("SELECT e FROM TbDiaSemana e WHERE e.id=:idsemana")
 				.setParameter("idsemana", dia).getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TbHorasColab> getListaTbHorasPorAnalista(String nome) {
+		return getEntityManager()
+				.createQuery("SELECT e FROM TbHorasColab e WHERE e.tbAnalista.nome=:nome")
+				.setParameter("nome", nome).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -295,6 +357,14 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 	public void setTotalHorasFormatado(String totalHorasFormatado) {
 		this.totalHorasFormatado = totalHorasFormatado;
+	}
+
+	public TbUsuarios getTbUser() {
+		return tbUser;
+	}
+
+	public void setTbUser(TbUsuarios tbUser) {
+		this.tbUser = tbUser;
 	}
 
 }
