@@ -1,5 +1,6 @@
 package br.rainformatica.pontoweb.session;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	TbProjeto tbProjeto = new TbProjeto();
 	TbHorasColab tbHorasColab = new TbHorasColab();
 	TbUsuarios tbUser = new TbUsuarios();
+	public List<TbHorasColab> horasColabs = new ArrayList<TbHorasColab>();
 	
 	
 	
@@ -188,6 +190,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		
 		tbUser = (TbUsuarios) Contexts.getSessionContext().get("usuario");
 		
+		
 		return tbHorasColab;
 	}
 	
@@ -226,6 +229,17 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		return resultList;
 
 	}
+	@SuppressWarnings("unchecked")
+	public List<TbProjeto> getListaProjetoPorCliente() {
+		int cliente = tbHorasColab.getTbClientes().getIdTbClientes();
+		
+		List resultList = getEntityManager()
+				.createQuery("SELECT e FROM TbProjeto e WHERE e.tbClientes.idTbClientes=:idCliente")
+				.setParameter("idCliente", cliente).getResultList();
+		
+		return resultList;
+	}
+
 
 	@SuppressWarnings("unchecked")
 	public List<TbClientes> getListaTbCLientes() {
@@ -259,6 +273,8 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 				.createQuery("SELECT e FROM TbDiaSemana e WHERE e.id=:idsemana")
 				.setParameter("idsemana", dia).getResultList();
 	}
+	
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<TbHorasColab> getListaTbHorasPorAnalista(String nome) {
@@ -366,5 +382,30 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	public void setTbUser(TbUsuarios tbUser) {
 		this.tbUser = tbUser;
 	}
+
+	public List<TbHorasColab> getHorasColabs() {
+		
+		if (horasColabs.size() == 0) {
+			horasColabs.add(getInstance());
+			
+			horasColabs.get(0).setData(new Date());
+			
+			
+			
+			
+		}
+		return horasColabs;
+	}
+
+	public Date getDataAtual(){
+		return new Date();
+		
+	}
+	public void setHorasColabs(List<TbHorasColab> horasColabs) {
+		this.horasColabs = horasColabs;
+	}
+
+	
+	
 
 }
