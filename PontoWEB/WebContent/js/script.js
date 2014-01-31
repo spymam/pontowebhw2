@@ -3,6 +3,90 @@ function mascara(o,f){
     v_fun=f;
     setTimeout("execmascara()",1);
 }
+function limitaTextarea(valor) {
+	
+	   quantidade = 250;
+	
+	   total = valor.length;
+	
+	 
+	
+	   if(total <= quantidade) {
+	
+	      resto = quantidade- total;
+	
+	      document.getElementById('contador').innerHTML = resto;
+	
+	   } else {
+	
+	      document.getElementById('texto').value = valor.substr(0, quantidade);
+	
+	   }
+	
+	}
+
+
+var max = 250; /* Total de caracteres */
+var ancho = 300;
+function contaTextarea(valor) {
+	var barrinha = document.getElementById("barrinha");
+
+	if (valor.value.length < max) {
+		barrinha.style.backgroundColor = "#FFFFFF";
+		barrinha.style.backgroundImage = "url(http://www.pedrocaires.com.br/blog/extras/images/barrinha001.jpg)"; /* Aqui fica o outro endereço da barrinha */
+		barrinha.style.color = "#000000";
+		var pos = ancho-parseInt((ancho*parseInt(valor.value.length))/250); /* Total de caracteres */
+		barrinha.style.backgroundPosition = "-"+pos+"px 0px";
+	} else {
+		barrinha.style.backgroundColor = "#BB0000";
+		barrinha.style.backgroundImage = "url()";
+		barrinha.style.color = "#FFFFFF";
+	}
+	barrinha.innerHTML = "("+valor.value.length+" / "+max+")";
+}
+
+
+
+
+
+function limitaTextarea2(valor) {
+	quant = 250; /* Total de caracteres */
+	total = valor.length;
+
+	if(total <= quant) {
+		resto = quant - total;
+		document.getElementById('cont').innerHTML = resto;
+	} else {
+		document.getElementById('texto').value = valor.substr(0,quant);
+	}
+}
+
+conteudo_textarea = ""; 
+num_caracteres_permitidos = 10;
+
+function valida_longitude(){ 
+	
+
+   num_caracteres = document.forms[0].texto.value.length; 
+
+   if (num_caracteres > num_caracteres_permitidos){ 
+      document.forms[0].texto.value = conteudo_textarea;
+   }else{ 
+      conteudo_textarea = document.forms[0].texto.value;	
+   } 
+
+   if (num_caracteres >= num_caracteres_permitidos){ 
+      document.forms[0].caracteres.style.color="#ff0000"; 
+   }else{ 
+      document.forms[0].caracteres.style.color="#000000"; 
+   } 
+
+   conta(); 
+} 
+function conta(){ 
+   document.forms[0].caracteres.value=document.forms[0].texto.value.length; 
+} 
+
 
 
 function mascara_data(data){
