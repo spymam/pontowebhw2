@@ -112,7 +112,7 @@ public class TbHorasColab implements java.io.Serializable {
 		this.tbProjeto = tbProjeto;
 	}
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_tb_horas_adicionais", nullable = true)
+	@JoinColumn(name = "id_horas_adicionais", nullable = true)
 	
 	public TbHorasAdicionais getTbHorasAdicionais() {
 		return this.tbHorasAdicionais;

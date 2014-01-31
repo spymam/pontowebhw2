@@ -4,6 +4,7 @@ import br.rainformatica.pontoweb.entity.*;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityQuery;
 import java.util.Arrays;
+import java.util.List;
 
 @Name("tbUsuariosList")
 public class TbUsuariosList extends EntityQuery<TbUsuarios> {
@@ -24,8 +25,10 @@ public class TbUsuariosList extends EntityQuery<TbUsuarios> {
 	}
 	
 	public TbUsuarios login(String login, String senha) {
+		
+		
 	     TbUsuarios usuario = (TbUsuarios) this.getEntityManager().createQuery("select u from TbUsuarios as u where u.login = :login").setParameter("login", login).getSingleResult();
-	 
+	     
 	     if (usuario.getSenha().equals(senha))
 	       return usuario;
 	     else

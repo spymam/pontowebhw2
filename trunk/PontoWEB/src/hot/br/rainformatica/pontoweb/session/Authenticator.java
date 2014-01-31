@@ -53,6 +53,8 @@ public class Authenticator extends EntityHome<TbUsuarios>
     	 
         TbUsuarios usuario = new TbUsuariosList().login(identity.getUsername(), identity.getPassword());
         setInstance(usuario);
+        String nome = getInstance().getTbAnalista().getNome();
+        getInstance().setTbAnalista(usuario.getTbAnalista());
         if (usuario != null) {
           Contexts.getSessionContext().set("usuario", usuario);
           identity.addRole("admin");
