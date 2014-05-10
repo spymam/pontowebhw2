@@ -77,6 +77,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		clear();
 		
 		
+		
 
 	}
 	public void cancelar(){
