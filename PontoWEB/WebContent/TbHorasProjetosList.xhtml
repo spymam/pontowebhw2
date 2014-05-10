@@ -1,0 +1,415 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbHorasProjetosSearch" styleClass="edit">
+
+        <rich:simpleTogglePanel label="TbHorasProjetos Search Filter" switchType="ajax">
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto1</ui:define>
+                <h:inputText id="projeto1" value="#{tbHorasProjetosList.tbHorasProjetos.projeto1}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto2</ui:define>
+                <h:inputText id="projeto2" value="#{tbHorasProjetosList.tbHorasProjetos.projeto2}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto3</ui:define>
+                <h:inputText id="projeto3" value="#{tbHorasProjetosList.tbHorasProjetos.projeto3}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto4</ui:define>
+                <h:inputText id="projeto4" value="#{tbHorasProjetosList.tbHorasProjetos.projeto4}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto5</ui:define>
+                <h:inputText id="projeto5" value="#{tbHorasProjetosList.tbHorasProjetos.projeto5}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto6</ui:define>
+                <h:inputText id="projeto6" value="#{tbHorasProjetosList.tbHorasProjetos.projeto6}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto7</ui:define>
+                <h:inputText id="projeto7" value="#{tbHorasProjetosList.tbHorasProjetos.projeto7}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto8</ui:define>
+                <h:inputText id="projeto8" value="#{tbHorasProjetosList.tbHorasProjetos.projeto8}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto9</ui:define>
+                <h:inputText id="projeto9" value="#{tbHorasProjetosList.tbHorasProjetos.projeto9}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Projeto10</ui:define>
+                <h:inputText id="projeto10" value="#{tbHorasProjetosList.tbHorasProjetos.projeto10}"/>
+            </s:decorate>
+
+            <s:decorate template="layout/display.xhtml">
+                <ui:define name="label">Match</ui:define>
+                <h:selectOneRadio id="logic" value="#{tbHorasProjetosList.restrictionLogicOperator}" styleClass="radio">
+                    <f:selectItem itemLabel="All" itemValue="and"/>
+                    <f:selectItem itemLabel="Any" itemValue="or"/>
+                </h:selectOneRadio>
+            </s:decorate>
+
+        </rich:simpleTogglePanel>
+
+        <div class="actionButtons">
+            <h:commandButton id="search" value="Search" action="/TbHorasProjetosList.xhtml"/>
+            <s:button id="reset" value="Reset" includePageParams="false"/>
+        </div>
+
+    </h:form>
+
+    <rich:panel>
+        <f:facet name="header">TbHorasProjetos Search Results (#{empty tbHorasProjetosList.resultList ? 0 : (tbHorasProjetosList.paginated ? tbHorasProjetosList.resultCount : tbHorasProjetosList.resultList.size)})</f:facet>
+    <div class="results" id="tbHorasProjetosList">
+
+    <h:outputText value="The tbHorasProjetos search returned no results."
+               rendered="#{empty tbHorasProjetosList.resultList}"/>
+
+    <rich:dataTable id="tbHorasProjetosList"
+                var="_tbHorasProjetos"
+              value="#{tbHorasProjetosList.resultList}"
+           rendered="#{not empty tbHorasProjetosList.resultList}">
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Id horas projeto"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.idHorasProjeto"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.idHorasProjeto}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto1"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto1"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto1}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto1"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto1"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto1}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto2"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto2"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto2}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto2"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto2"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto2}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto3"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto3"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto3}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto3"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto3"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto3}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto4"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto4"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto4}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto4"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto4"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto4}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto5"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto5"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto5}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto5"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto5"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto5}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto6"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto6"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto6}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto6"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto6"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto6}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto7"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto7"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto7}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto7"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto7"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto7}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto8"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto8"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto8}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto8"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto8"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto8}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto9"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto9"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto9}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto9"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto9"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto9}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Projeto10"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.projeto10"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.projeto10}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Horas projeto10"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.horasProjeto10"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.horasProjeto10}">
+                <s:convertDateTime type="time"/>
+            </h:outputText>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Id analista"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.idAnalista"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.idAnalista}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">
+                <ui:include src="layout/sort.xhtml">
+                    <ui:param name="entityList" value="#{tbHorasProjetosList}"/>
+                    <ui:param name="propertyLabel" value="Id cliente"/>
+                    <ui:param name="propertyPath" value="tbHorasProjetos.idCliente"/>
+                </ui:include>
+            </f:facet>
+            <h:outputText value="#{_tbHorasProjetos.idCliente}"/>
+        </h:column>
+        <rich:column styleClass="action">
+            <f:facet name="header">Action</f:facet>
+            <s:link view="/#{empty from ? 'TbHorasProjetos' : from}.xhtml"
+                   value="#{empty from ? 'View' : 'Select'}"
+             propagation="#{empty from ? 'none' : 'default'}"
+                      id="tbHorasProjetosViewId">
+                <f:param name="tbHorasProjetosIdHorasProjeto"
+                        value="#{_tbHorasProjetos.idHorasProjeto}"/>
+            </s:link>
+            #{' '}
+            <s:link view="/TbHorasProjetosEdit.xhtml"
+                   value="Edit"
+             propagation="none"
+                      id="tbHorasProjetosEdit"
+                rendered="#{empty from}">
+                <f:param name="tbHorasProjetosIdHorasProjeto"
+                        value="#{_tbHorasProjetos.idHorasProjeto}"/>
+            </s:link>
+        </rich:column>
+    </rich:dataTable>
+
+    </div>
+    </rich:panel>
+
+    <div class="tableControl">
+
+        <s:link view="/TbHorasProjetosList.xhtml"
+            rendered="#{tbHorasProjetosList.previousExists}"
+               value="#{messages.left}#{messages.left} First Page"
+                  id="firstPage">
+          <f:param name="firstResult" value="0"/>
+        </s:link>
+
+        <s:link view="/TbHorasProjetosList.xhtml"
+            rendered="#{tbHorasProjetosList.previousExists}"
+               value="#{messages.left} Previous Page"
+                  id="previousPage">
+            <f:param name="firstResult"
+                    value="#{tbHorasProjetosList.previousFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TbHorasProjetosList.xhtml"
+            rendered="#{tbHorasProjetosList.nextExists}"
+               value="Next Page #{messages.right}"
+                  id="nextPage">
+            <f:param name="firstResult"
+                    value="#{tbHorasProjetosList.nextFirstResult}"/>
+        </s:link>
+
+        <s:link view="/TbHorasProjetosList.xhtml"
+            rendered="#{tbHorasProjetosList.nextExists}"
+               value="Last Page #{messages.right}#{messages.right}"
+                  id="lastPage">
+            <f:param name="firstResult"
+                    value="#{tbHorasProjetosList.lastFirstResult}"/>
+        </s:link>
+
+    </div>
+
+    <s:div styleClass="actionButtons" rendered="#{empty from}">
+        <s:button view="/TbHorasProjetosEdit.xhtml"
+                    id="create"
+           propagation="none"
+                 value="Create tbHorasProjetos">
+            <f:param name="tbHorasProjetosIdHorasProjeto"/>
+        </s:button>
+    </s:div>
+
+</ui:define>
+
+</ui:composition>

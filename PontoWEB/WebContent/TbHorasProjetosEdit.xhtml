@@ -1,0 +1,285 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbHorasProjetos" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tbHorasProjetosHome.managed ? 'Edit' : 'Add'} Tb horas projetos</f:facet>
+
+
+
+            <s:decorate id="projeto1Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto1</ui:define>
+                <h:inputTextarea id="projeto1"
+                               cols="80"
+                               rows="3"
+                           required="true"
+                              value="#{tbHorasProjetosHome.instance.projeto1}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto1Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto1</ui:define>
+                <h:inputText id="horasProjeto1"
+                           size="5"
+                       required="true"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto1}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto1Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto2Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto2</ui:define>
+                <h:inputTextarea id="projeto2"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto2}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto2Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto2</ui:define>
+                <h:inputText id="horasProjeto2"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto2}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto2Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto3Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto3</ui:define>
+                <h:inputTextarea id="projeto3"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto3}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto3Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto3</ui:define>
+                <h:inputText id="horasProjeto3"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto3}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto3Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto4Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto4</ui:define>
+                <h:inputTextarea id="projeto4"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto4}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto4Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto4</ui:define>
+                <h:inputText id="horasProjeto4"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto4}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto4Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto5Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto5</ui:define>
+                <h:inputTextarea id="projeto5"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto5}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto5Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto5</ui:define>
+                <h:inputText id="horasProjeto5"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto5}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto5Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto6Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto6</ui:define>
+                <h:inputTextarea id="projeto6"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto6}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto6Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto6</ui:define>
+                <h:inputText id="horasProjeto6"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto6}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto6Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto7Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto7</ui:define>
+                <h:inputTextarea id="projeto7"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto7}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto7Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto7</ui:define>
+                <h:inputText id="horasProjeto7"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto7}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto7Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto8Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto8</ui:define>
+                <h:inputTextarea id="projeto8"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto8}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto8Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto8</ui:define>
+                <h:inputText id="horasProjeto8"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto8}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto8Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto9Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto9</ui:define>
+                <h:inputTextarea id="projeto9"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto9}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto9Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto9</ui:define>
+                <h:inputText id="horasProjeto9"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto9}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto9Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="projeto10Field" template="layout/edit.xhtml">
+                <ui:define name="label">Projeto10</ui:define>
+                <h:inputTextarea id="projeto10"
+                               cols="80"
+                               rows="3"
+                              value="#{tbHorasProjetosHome.instance.projeto10}"/>
+            </s:decorate>
+
+
+            <s:decorate id="horasProjeto10Field" template="layout/edit.xhtml">
+                <ui:define name="label">Horas projeto10</ui:define>
+                <h:inputText id="horasProjeto10"
+                           size="5"
+                          value="#{tbHorasProjetosHome.instance.horasProjeto10}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasProjeto10Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="idAnalistaField" template="layout/edit.xhtml">
+                <ui:define name="label">Id analista</ui:define>
+                <h:inputText id="idAnalista"
+                       required="true"
+                          value="#{tbHorasProjetosHome.instance.idAnalista}">
+                    <a:support event="onblur" reRender="idAnalistaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="idClienteField" template="layout/edit.xhtml">
+                <ui:define name="label">Id cliente</ui:define>
+                <h:inputText id="idCliente"
+                       required="true"
+                          value="#{tbHorasProjetosHome.instance.idCliente}">
+                    <a:support event="onblur" reRender="idClienteField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tbHorasProjetosHome.persist}"
+                       disabled="#{!tbHorasProjetosHome.wired}"
+                       rendered="#{!tbHorasProjetosHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tbHorasProjetosHome.update}"
+                       rendered="#{tbHorasProjetosHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tbHorasProjetosHome.remove}"
+                      immediate="true"
+                       rendered="#{tbHorasProjetosHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/TbHorasProjetos.xhtml"
+                rendered="#{tbHorasProjetosHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tbHorasProjetosFrom ? 'TbHorasProjetosList' : tbHorasProjetosFrom}.xhtml"
+                rendered="#{!tbHorasProjetosHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

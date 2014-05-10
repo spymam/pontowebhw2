@@ -8,12 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.NotNull;
 
 /**
@@ -37,26 +41,30 @@ public class TbHorasColab implements java.io.Serializable {
 	private Date saidaAlmoco;
 	private Date totalHoras;
 	private TbHorasAdicionais tbHorasAdicionais;
+	private TbHorasProjetos tbHorasProjetos;
 
 	public TbHorasColab() {
 	}
 
 	public TbHorasColab(TbAnalista tbAnalista, TbClientes tbClientes,
-			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais) {
+			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, TbHorasProjetos tbHorasProjetos) {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
 		this.tbProjeto = tbProjeto;
 		this.tbHorasAdicionais = tbHorasAdicionais;
+		this.tbHorasProjetos = tbHorasProjetos;
+		
 	}
 
 	public TbHorasColab(TbAnalista tbAnalista, TbClientes tbClientes,
-			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, Date data, String descAtividade,
+			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, TbHorasProjetos tbHorasProjetos, Date data, String descAtividade,
 			String diaSemana, Date entrada, Integer horasAdicionais,
 			Date retornoAlmoco, Date saida, Date saidaAlmoco, Date totalHoras) {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
 		this.tbProjeto = tbProjeto;
 		this.tbHorasAdicionais = tbHorasAdicionais;
+		this.tbHorasProjetos = tbHorasProjetos;
 		this.data = data;
 		this.descAtividade = descAtividade;
 		this.diaSemana = diaSemana;
@@ -120,6 +128,16 @@ public class TbHorasColab implements java.io.Serializable {
 
 	public void setTbHorasAdicionais(TbHorasAdicionais tbHorasAdicionais) {
 		this.tbHorasAdicionais = tbHorasAdicionais;
+	}
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_horas_projetos", nullable = true)
+	
+	public TbHorasProjetos getTbHorasProjetos() {
+		return this.tbHorasProjetos;
+	}
+
+	public void setTbHorasProjetos(TbHorasProjetos tbHorasProjetos) {
+		this.tbHorasProjetos = tbHorasProjetos;
 	}
 
 	@Temporal(TemporalType.DATE)
