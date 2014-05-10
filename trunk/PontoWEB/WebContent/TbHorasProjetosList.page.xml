@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
+
+   <param name="firstResult" value="#{tbHorasProjetosList.firstResult}"/>
+   <param name="sort" value="#{tbHorasProjetosList.orderColumn}"/>
+   <param name="dir" value="#{tbHorasProjetosList.orderDirection}"/>
+   <param name="logic" value="#{tbHorasProjetosList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="projeto1" value="#{tbHorasProjetosList.tbHorasProjetos.projeto1}"/>
+   <param name="projeto2" value="#{tbHorasProjetosList.tbHorasProjetos.projeto2}"/>
+   <param name="projeto3" value="#{tbHorasProjetosList.tbHorasProjetos.projeto3}"/>
+   <param name="projeto4" value="#{tbHorasProjetosList.tbHorasProjetos.projeto4}"/>
+   <param name="projeto5" value="#{tbHorasProjetosList.tbHorasProjetos.projeto5}"/>
+   <param name="projeto6" value="#{tbHorasProjetosList.tbHorasProjetos.projeto6}"/>
+   <param name="projeto7" value="#{tbHorasProjetosList.tbHorasProjetos.projeto7}"/>
+   <param name="projeto8" value="#{tbHorasProjetosList.tbHorasProjetos.projeto8}"/>
+   <param name="projeto9" value="#{tbHorasProjetosList.tbHorasProjetos.projeto9}"/>
+   <param name="projeto10" value="#{tbHorasProjetosList.tbHorasProjetos.projeto10}"/>
+
+</page>

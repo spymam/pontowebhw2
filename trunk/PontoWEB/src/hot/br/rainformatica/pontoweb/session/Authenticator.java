@@ -1,6 +1,7 @@
 package br.rainformatica.pontoweb.session;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Logger;
@@ -12,10 +13,10 @@ import org.jboss.seam.log.Log;
 import org.jboss.seam.security.Credentials;
 import org.jboss.seam.security.Identity;
 
-import com.sun.xml.internal.ws.util.UtilException;
-
+import br.rainformatica.pontoweb.entity.TbClientes;
 import br.rainformatica.pontoweb.entity.TbUsuarios;
-import br.rainformatica.pontoweb.session.TbUsuariosHome;;
+
+import com.sun.xml.internal.ws.util.UtilException;
 
 @Name("authenticator")
 public class Authenticator extends EntityHome<TbUsuarios>
@@ -48,6 +49,30 @@ public class Authenticator extends EntityHome<TbUsuarios>
 //                    		
 //        return false;
 //    }
+    
+    public void verificaDadosExistentes(){
+    	
+    	TbClientes tbClientes = listarClientes.get(0);
+    	
+    	if (tbClientes == null) {
+    
+    		tbClientes.setNome("Projeto Administrador");
+    		
+    		
+			
+		}
+    	
+    }
+        
+    public List<TbClientes> listarClientes;
+
+	public List<TbClientes> getListaTbClientes() {
+		List resultList = getEntityManager().createQuery(
+				"SELECT e FROM TbClientes e").getResultList();
+
+		return resultList;
+
+	}
     
     public boolean authenticate() throws NoSuchAlgorithmException, UtilException {
     	 

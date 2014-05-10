@@ -2,5 +2,5 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-<table-filter match-name="tb_horas_colab" match-schema=".*" match-catalog="db_ponto"></table-filter>
+<table-filter match-name="tb_horas_projetos" match-schema=".*" match-catalog="db_ponto"></table-filter>
 </hibernate-reverse-engineering>

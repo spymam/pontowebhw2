@@ -1,10 +1,11 @@
 package br.rainformatica.pontoweb.session;
 
-import br.rainformatica.pontoweb.entity.*;
+import java.util.Arrays;
+
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityQuery;
-import java.util.Arrays;
-import java.util.List;
+
+import br.rainformatica.pontoweb.entity.TbUsuarios;
 
 @Name("tbUsuariosList")
 public class TbUsuariosList extends EntityQuery<TbUsuarios> {

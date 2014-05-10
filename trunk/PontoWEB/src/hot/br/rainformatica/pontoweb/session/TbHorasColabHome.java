@@ -14,6 +14,7 @@ import br.rainformatica.pontoweb.entity.TbAnalista;
 import br.rainformatica.pontoweb.entity.TbClientes;
 import br.rainformatica.pontoweb.entity.TbDiaSemana;
 import br.rainformatica.pontoweb.entity.TbHorasColab;
+import br.rainformatica.pontoweb.entity.TbHorasProjetos;
 import br.rainformatica.pontoweb.entity.TbProjeto;
 import br.rainformatica.pontoweb.entity.TbUsuarios;
 
@@ -33,6 +34,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	TbHorasColab tbHorasColab = new TbHorasColab();
 	TbUsuarios tbUser = new TbUsuarios();
 	public List<TbHorasColab> horasColabs = new ArrayList<TbHorasColab>();
+	TbHorasProjetos tbHorasProjetos = new TbHorasProjetos();
 	
 	
 	
@@ -61,13 +63,32 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 		tbHorasColab.setDiaSemana(diaSemana);
 		tbHorasColab.setTbAnalista(result.get(0));
+		tbHorasColab.setTbHorasProjetos(tbHorasProjetos);
+		tbHorasColab.getTbHorasProjetos().setTbAnalista(tbHorasColab.getTbAnalista());
+		tbHorasColab.getTbHorasProjetos().setTbClientes(tbHorasColab.getTbClientes());
+		tbHorasColab.getTbHorasProjetos().setProjeto1(tbHorasColab.getTbProjeto().getNome());
+		
+		
 		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
 
 		setInstance(tbHorasColab);
 
 		super.persist();
+		clear();
+		
+		
 
 	}
+	public void cancelar(){
+		clear();
+	}
+	public void clear() {
+		setInstance(null);		
+		setId(null);
+		createInstance();	
+		tbHorasColab = new TbHorasColab();
+	}
+
 	
 	/**/
 
@@ -276,11 +297,16 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	
 	
 	
+	
 	@SuppressWarnings("unchecked")
 	public List<TbHorasColab> getListaTbHorasPorAnalista(String nome) {
+		
 		return getEntityManager()
 				.createQuery("SELECT e FROM TbHorasColab e WHERE e.tbAnalista.nome=:nome")
 				.setParameter("nome", nome).getResultList();
+		
+		
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -403,6 +429,14 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	}
 	public void setHorasColabs(List<TbHorasColab> horasColabs) {
 		this.horasColabs = horasColabs;
+	}
+
+	public TbHorasProjetos getTbHorasProjetos() {
+		return tbHorasProjetos;
+	}
+
+	public void setTbHorasProjetos(TbHorasProjetos tbHorasProjetos) {
+		this.tbHorasProjetos = tbHorasProjetos;
 	}
 
 	
