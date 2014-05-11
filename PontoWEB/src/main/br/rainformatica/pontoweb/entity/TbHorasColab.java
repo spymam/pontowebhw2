@@ -35,7 +35,7 @@ public class TbHorasColab implements java.io.Serializable {
 	private String descAtividade;
 	private String diaSemana;
 	private Date entrada;
-	private Integer horasAdicionais;
+	private Date horasAdicionais;
 	private Date retornoAlmoco;
 	private Date saida;
 	private Date saidaAlmoco;
@@ -58,7 +58,7 @@ public class TbHorasColab implements java.io.Serializable {
 
 	public TbHorasColab(TbAnalista tbAnalista, TbClientes tbClientes,
 			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, TbHorasProjetos tbHorasProjetos, Date data, String descAtividade,
-			String diaSemana, Date entrada, Integer horasAdicionais,
+			String diaSemana, Date entrada, Date horasAdicionais,
 			Date retornoAlmoco, Date saida, Date saidaAlmoco, Date totalHoras) {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
@@ -178,12 +178,14 @@ public class TbHorasColab implements java.io.Serializable {
 		this.entrada = entrada;
 	}
 		
-	@Column(name = "horas_adicionais")
-	public Integer getHorasAdicionais() {
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "horas_adicionais", length = 8)
+	public Date getHorasAdicionais() {
 		return this.horasAdicionais;
 	}
 
-	public void setHorasAdicionais(Integer horasAdicionais) {
+	public void setHorasAdicionais(Date horasAdicionais) {
 		this.horasAdicionais = horasAdicionais;
 	}
 

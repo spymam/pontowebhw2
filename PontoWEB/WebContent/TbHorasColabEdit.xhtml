@@ -85,7 +85,7 @@ textarea {
 
 							</h:inputText>
 						</s:decorate>
-						<s:decorate id="projetoPrinc" template="layout/edit.xhtml">
+						<!--<s:decorate id="projetoPrinc" template="layout/edit.xhtml">
 							<ui:define name="label">Projeto Principal</ui:define>
 
 
@@ -93,7 +93,7 @@ textarea {
 						</s:decorate>
 
 
-						<s:decorate id="telefoneField" template="layout/edit.xhtml">
+						--><s:decorate id="telefoneField" template="layout/edit.xhtml">
 							<ui:define name="label">Telefone</ui:define>
 							<h:inputText id="telefoneText" size="15" disabled="true"
 								value="#{tbHorasColabHome.tbUser.tbAnalista.telefone}">
@@ -199,7 +199,7 @@ textarea {
 									required="true" value="#{tbHorasColabHome.tbHorasColab.saida}">
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
-									<a:support event="onblur" reRender="saidaText,totalHoras1"
+									<a:support event="onblur" reRender="saidaText,totalHoras1,horasProjeto1Field,horasAdicionaisText"
 										action="#{tbHorasColabHome.calculaTotalHoras}"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#saidaText"
@@ -228,8 +228,10 @@ textarea {
 						<h:column>
 							<rich:panel>
 								<f:facet name="header">Horas Adicionais</f:facet>
-								<h:inputText id="horasAdicionaisText"
+								<h:inputText id="horasAdicionaisText" disabled="true"
 									value="#{tbHorasColabHome.tbHorasColab.horasAdicionais}">
+									<s:convertDateTime type="time" timeStyle="short"
+										pattern="HH:mm" />
 									<a:support event="onchange"
 										reRender="horasAdicionaisField1,projetoHorasAdd,tbProjetoHorasAdd"
 										ajaxSingle="true" />
@@ -251,7 +253,7 @@ textarea {
 						style="text-align : center">
 						<h:column>
 							<rich:panel>
-								<f:facet name="header">Projeto 1</f:facet>
+								<f:facet name="header">Projeto 1 (principal)</f:facet>
 								<h:selectOneMenu id="tbHorasProjeto1"
 									value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
 									required="false"
@@ -269,6 +271,7 @@ textarea {
 								<h:outputLabel value="Horas" />
 								<br />
 								<h:inputText id="horasProjeto1Field" required="false"
+								disabled="false"
 									value="#{tbHorasColabHome.tbHorasProjetos.horasProjeto1}">
 
 									<s:convertDateTime type="time" timeStyle="short"
@@ -555,7 +558,7 @@ textarea {
 					<h:column>
 						<f:facet name="header">Projeto</f:facet>
 						<h:outputText
-							value="#{_tbHorasColabGet.tbHorasAdicionais.tbProjeto.nome}">
+							value="#{_tbHorasColabGet.tbHorasProjetos.projeto1}">
 
 						</h:outputText>
 
