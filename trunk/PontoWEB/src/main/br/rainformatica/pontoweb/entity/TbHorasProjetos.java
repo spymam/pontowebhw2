@@ -53,6 +53,7 @@ public class TbHorasProjetos implements java.io.Serializable {
 	private TbAnalista tbAnalista;
 	private TbClientes tbClientes;
 	private Set<TbHorasColab> tbHorasColab = new HashSet<TbHorasColab>(0);
+	private Date dataLancamento;
 	
 	
 
@@ -76,7 +77,7 @@ public class TbHorasProjetos implements java.io.Serializable {
 			Date horasProjeto6, String projeto7, Date horasProjeto7,
 			String projeto8, Date horasProjeto8, String projeto9,
 			Date horasProjeto9, String projeto10, Date horasProjeto10,
-			TbAnalista tbAnalista, TbClientes tbClientes, TbHorasColab tbHorasColab) {
+			TbAnalista tbAnalista, TbClientes tbClientes, TbHorasColab tbHorasColab, Date dataLancamento) {
 		this.projeto1 = projeto1;
 		this.horasProjeto1 = horasProjeto1;
 		this.projeto2 = projeto2;
@@ -100,6 +101,7 @@ public class TbHorasProjetos implements java.io.Serializable {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
 		this.tbHorasColab = this.tbHorasColab;
+		this.dataLancamento = dataLancamento;
 	}
 
 	@Id
@@ -338,6 +340,18 @@ public class TbHorasProjetos implements java.io.Serializable {
 	public void setTbHorasColab(Set<TbHorasColab> tbHorasColab) {
 		this.tbHorasColab = tbHorasColab;
 	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_lancamento", length = 10)
+	public Date getDataLancamento() {
+		return dataLancamento;
+	}
+
+
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+	
 	
 	
 

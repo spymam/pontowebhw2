@@ -67,8 +67,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		tbHorasColab.getTbHorasProjetos().setTbAnalista(tbHorasColab.getTbAnalista());
 		tbHorasColab.getTbHorasProjetos().setTbClientes(tbHorasColab.getTbClientes());
 		tbHorasColab.getTbHorasProjetos().setProjeto1(tbHorasColab.getTbProjeto().getNome());
-		
-		
+		tbHorasColab.getTbHorasProjetos().setDataLancamento(tbHorasColab.getData());		
 		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
 
 		setInstance(tbHorasColab);
@@ -88,6 +87,9 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		setId(null);
 		createInstance();	
 		tbHorasColab = new TbHorasColab();
+		this.setDiaSemana(null);
+		tbHorasColab.setDiaSemana(null);
+		tbUser = new TbUsuarios();
 	}
 
 	
@@ -135,6 +137,26 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 			totalDeHoras.setSeconds(00);
 			
 			tbHorasColab.setTotalHoras(totalDeHoras);
+			tbHorasProjetos.setHorasProjeto1(totalDeHoras);
+			
+			Date horasAdicionais = new Date();
+			if (totalDeHoras.getHours() >= 8) {
+				int hora = totalDeHoras.getHours();
+				int minuto = totalDeHoras.getMinutes();
+				
+				int subtraeHora = hora - 8; // recebe o total de horas e retira 8(horas diarias)
+				int horaSubtraida = hora - subtraeHora; //variavel que força a ter 8 horas.
+				
+				
+				if (horaSubtraida <= 8) {
+					horasAdicionais.setHours(0);
+					horasAdicionais.setMinutes(minuto);
+				}
+					horasAdicionais.setHours(subtraeHora);
+					horasAdicionais.setMinutes(minuto);
+					tbHorasColab.setHorasAdicionais(horasAdicionais);
+								
+			}
 			
 			}else {
 				
@@ -154,54 +176,31 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 				totalDeHoras.setHours(divideMinutos);
 				totalDeHoras.setMinutes(restoDivisao);
 				totalDeHoras.setSeconds(00);
+				Date horasAdicionais = new Date();
+				if (totalDeHoras.getHours() >= 8) {
+					int hora = totalDeHoras.getHours();
+					int minuto = totalDeHoras.getMinutes();
+					
+					int subtraeHora = hora - 8;
+					int horaSubtraida = hora - subtraeHora;
+					
+					if (horaSubtraida <= 8) {
+						horasAdicionais.setHours(0);
+						horasAdicionais.setMinutes(minuto);
+					}
+						horasAdicionais.setHours(subtraeHora);
+						horasAdicionais.setMinutes(minuto);					
+						tbHorasColab.setHorasAdicionais(horasAdicionais);
+									
+				}
 				
 				tbHorasColab.setTotalHoras(totalDeHoras);
-				
-				
-			}
-		
-		
-		/*10:30 + 20:15 
-
-		10:30 = 10 * 60 + 30 = 630 
-		20:15 = 20 * 60 + 15 = 1215 
-		630 + 1215 = 1845 
-		1845 / 60 = 30 
-		1845 % 60 = 45*/
-		
-		/*int totalMinutos = 0;
-		
-		if (minutoDaEntrada >= minutoDaSaida) {
-			somaMinutos = minutoDaEntrada - minutoDaSaida;			
-		}else{
-			somaMinutos = minutoDaSaida - minutoDaEntrada;
-		}				
-		if (somaMinutos >= 60) {
-			
-			int sobra = somaMinutos - 60;
-			totalHoras = totalHoras + 1;
-			totalMinutos = sobra;
-			Date totalGeraldeHoras = new Date();
-			
-			totalGeraldeHoras.setHours(totalHoras);
-			totalGeraldeHoras.setMinutes(totalMinutos);
-			totalGeraldeHoras.setSeconds(00);
-			
-			tbHorasColab.setTotalHoras(totalGeraldeHoras);
-			
-		}else if(somaMinutos <= 59){
-			totalHoras = totalHoras - 1;
-			
-			if (condition) {
+				tbHorasProjetos.setHorasProjeto1(totalDeHoras);
+						
 				
 			}
-			Date totalGeraldeHoras = new Date();
-			
-			totalGeraldeHoras.setHours(totalHoras);
-			totalGeraldeHoras.setMinutes(somaMinutos);
-			totalGeraldeHoras.setSeconds(00);
-			tbHorasColab.setTotalHoras(totalGeraldeHoras);
-		}*/
+		
+		
 		
 		
 	}
