@@ -48,6 +48,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	String totalHorasFormatado;
 	Date horaTemporaria = new Date();
 	Boolean desativaBotao = false;
+	public List<TbProjeto> tbProjetos = new ArrayList<TbProjeto>();
 	
 
 	public void setTbHorasColabIdTbHorasColab(Integer id) {
@@ -74,6 +75,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		tbHorasColab.getTbHorasProjetos().setTbAnalista(tbHorasColab.getTbAnalista());
 		tbHorasColab.getTbHorasProjetos().setTbClientes(tbHorasColab.getTbClientes());
 		tbHorasColab.getTbHorasProjetos().setProjeto1(tbHorasColab.getTbProjeto().getNome());
+		
 		tbHorasColab.getTbHorasProjetos().setDataLancamento(tbHorasColab.getData());		
 		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
 
@@ -161,6 +163,8 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 					System.out.println("hora recebida :" + formato.format(horaProjeto));
 					setDesativaBotao(true);
 					
+					
+					
 
 				}
 			
@@ -203,6 +207,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 					tbHorasProjetos.setHorasProjeto1(horasProjetoPrincipal.getTime());
 					System.out.println("horas : " + formato.format(tbHorasProjetos.getHorasProjeto1().getTime()) );
 					setDesativaBotao(true);
+					
 				}
 				
 				
@@ -211,6 +216,11 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 			}
 			
 			
+	}
+	
+	public void addProjetoLista(int posicao){
+		
+		tbProjetos.add(posicao, tbProjeto);
 	}
 	
 	public void limpaCamposProjetos(){
@@ -615,6 +625,14 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 	public void setDesativaBotao(Boolean desativaBotao) {
 		this.desativaBotao = desativaBotao;
+	}
+
+	public List<TbProjeto> getTbProjetos() {
+		return tbProjetos;
+	}
+
+	public void setTbProjetos(List<TbProjeto> tbProjetos) {
+		this.tbProjetos = tbProjetos;
 	}
 
 	
