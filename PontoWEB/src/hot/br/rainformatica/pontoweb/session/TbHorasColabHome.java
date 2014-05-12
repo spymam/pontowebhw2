@@ -1,19 +1,19 @@
 package br.rainformatica.pontoweb.session;
 
-import java.sql.Timestamp;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
+import java.lang.Object;
 
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.framework.EntityHome;
+import org.jboss.seam.ui.taglib.ConvertDateTimeTag;
 
 import br.rainformatica.pontoweb.entity.TbAnalista;
 import br.rainformatica.pontoweb.entity.TbClientes;
@@ -103,8 +103,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	/**/
 	
 
-	public void calcHorasProjeto(Date horaProjeto) throws Throwable {
-		
+	public void calcHorasProjeto(Date horaProjeto, int posicaoCampo) throws Throwable {		
 		
 		Calendar horasProjetoPrincipal = Calendar.getInstance();
 		Calendar horasProjetoAdicional = Calendar.getInstance();
@@ -112,18 +111,63 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		Format formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 		horasProjetoPrincipal.setTime(tbHorasColab.getTotalHoras());
 		/*horasProjetoPrincipal.setTime(tbHorasProjetos.getHorasProjeto1());*/
-		
-		/*horasProjetoAdicional.setTime(horaProjeto);*/
-		
-		
-		
+					
 		if (horaProjeto == null) {
 			
-			tbHorasProjetos.setHorasProjeto1(tbHorasColab.getTotalHoras());
-				
-		}else{			
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");  
+		    String hora = "00:00";  
+		    Date d = sdf.parse(hora);  
+		    System.out.println(formato.format(d));  
+		    
+			horaProjeto = new Date();
+			horaProjeto.setHours(0);
+			horaProjeto.setMinutes(0);
+			horaProjeto.setSeconds(0);
+									
+			/*tbHorasProjetos.setHorasProjeto1(tbHorasColab.getTotalHoras());*/
+			List<Date> tbHoras = new ArrayList<Date>();
 			
-			Date dta = getDataAtual();
+			
+			//tbHoras.add(tbHorasProjetos.getHorasProjeto1());
+			tbHoras.add(0, tbHorasProjetos.getHorasProjeto2());
+			tbHoras.add(1, tbHorasProjetos.getHorasProjeto3());
+			tbHoras.add(2, tbHorasProjetos.getHorasProjeto4());
+			tbHoras.add(3, tbHorasProjetos.getHorasProjeto5());
+			tbHoras.add(4, tbHorasProjetos.getHorasProjeto6());
+								
+			tbHoras.set(posicaoCampo, d);
+
+			
+			for (int i = 0; i < tbHoras.size(); i++) {
+				
+				if (tbHoras.get(i) == null) {
+					finalize();
+				}else{
+					horasProjetoAdicional.setTime(tbHoras.get(i));
+					
+					System.out.println("Horas Projeto Principal: " + formato.format(horasProjetoPrincipal.getTime()));				
+					
+					// Subtrae hora e minuto(projeto adicional) do projeto principal
+					horasProjetoPrincipal.add(Calendar.MINUTE,  -horasProjetoAdicional.getTime().getMinutes());
+					
+					horasProjetoPrincipal.add(Calendar.HOUR, -horasProjetoAdicional.getTime().getHours());
+					
+					System.out.println("Total de HOras: " + formato.format(horasProjetoPrincipal.getTime()));
+					// formata e exibe o resultado
+					formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+					System.out.println("Daqui a 60 minutos será: " + formato.format(horasProjetoPrincipal.getTime()));
+					tbHorasProjetos.setHorasProjeto1(horasProjetoPrincipal.getTime());
+					System.out.println("horas : " + formato.format(tbHorasProjetos.getHorasProjeto1().getTime()) );
+					System.out.println("hora recebida :" + formato.format(horaProjeto));
+					setDesativaBotao(true);
+					
+
+				}
+			
+			}
+		}else{			
+			 
+			Date dta = getDataAtual(); //aqui
 			dta.setTime(horaProjeto.getTime());
 			if (dta.getHours() > tbHorasColab.getTotalHoras().getHours()) {  
 				
@@ -144,7 +188,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 					finalize();
 				}else{
 					horasProjetoAdicional.setTime(tbHoras.get(i));
-					
+					 
 					System.out.println("Horas Projeto Principal: " + formato.format(horasProjetoPrincipal.getTime()));				
 					
 					// Subtrae hora e minuto(projeto adicional) do projeto principal
