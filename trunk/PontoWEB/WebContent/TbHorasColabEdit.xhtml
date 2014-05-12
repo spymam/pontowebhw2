@@ -153,13 +153,15 @@ textarea {
 								<f:facet name="header">Entrada</f:facet>
 								<h:inputText id="entradaText" size="5" maxlength="5"
 									required="true"
-									value="#{tbHorasColabHome.tbHorasColab.entrada}">
+									value="#{tbHorasColabHome.tbHorasColab.entrada}"
+									>
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#entradaText"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload"/>
+										
 									<a:support event="onblur" reRender="entradaText"
-										ajaxSingle="true" />
+										ajaxSingle="true"/>
 
 
 								</h:inputText>
@@ -178,7 +180,7 @@ textarea {
 									<a:support event="onblur" reRender="saidaAlmoco"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#saidaAlmoco"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 								</h:inputText>
 								<h:inputText id="retornoAlmoco" size="5" maxlength="5"
 									required="true"
@@ -188,7 +190,7 @@ textarea {
 									<a:support event="onblur" reRender="retornoAlmoco"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#retornoAlmoco"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 								</h:inputText>
 							</rich:panel>
 						</h:column>
@@ -203,7 +205,7 @@ textarea {
 										action="#{tbHorasColabHome.calculaTotalHoras}"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#saidaText"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 
 								</h:inputText>
 							</rich:panel>
@@ -219,7 +221,7 @@ textarea {
 									<a:support event="onchanged" reRender="totalHorasField1"
 										bypassUpdates="true" ajaxSingle="true" immediate="true" />
 									<rich:jQuery selector="#totalHoras1"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 								</h:inputText>
 							</rich:panel>
 
@@ -276,7 +278,7 @@ textarea {
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto1Field"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 									<a:support event="onchanged" reRender="panelHorasProjetos"
 										ajaxSingle="true" />
 								</h:inputText>
@@ -306,15 +308,16 @@ textarea {
 								<br />
 								<h:outputLabel value="Horas" />
 								<br />
-								<h:inputText id="horasProjeto2Field" size="3"
+								
+								<h:inputText id="horasProjeto2Field" size="3" 
 									value="#{tbHorasColabHome.tbHorasProjetos.horasProjeto2}" >
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto2Field"
-										query="setMask({mask:'23:59'})" timing="onload" />
-									<a:support event="onblur" reRender="panelHorasProjetos,panelHorasProjetoPrincipal"
-									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto2)}"
-										ajaxSingle="true" />
+										query="setMask({mask:'99:99'})" timing="onload" />
+									<a:support event="onblur" reRender="panelHorasProjetos,panelHorasProjetoPrincipal" 
+									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto2, 0)}"
+										ajaxSingle="true" /> 
 									</h:inputText>
 							</rich:panel>
 
@@ -343,9 +346,9 @@ textarea {
 							<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto3Field"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 										<a:support event="onblur" reRender="panelHorasProjetos,panelHorasProjetoPrincipal"
-									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto3)}"
+									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto3, 1)}"
 										ajaxSingle="true" />
 									
 							</h:inputText><br/>
@@ -377,7 +380,7 @@ textarea {
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto4Field"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 									<a:support event="onchanged" reRender="panelHorasProjetos"
 										ajaxSingle="true" />
 									</h:inputText>
@@ -409,7 +412,7 @@ textarea {
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto5Field"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 									<a:support event="onchanged" reRender="panelHorasProjetos"
 										ajaxSingle="true" />
 									</h:inputText>
@@ -440,7 +443,7 @@ textarea {
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto6Field"
-										query="setMask({mask:'23:59'})" timing="onload" />
+										query="setMask({mask:'99:99'})" timing="onload" />
 									<a:support event="onchanged" reRender="panelHorasProjetos"
 										ajaxSingle="true" />
 									</h:inputText>
