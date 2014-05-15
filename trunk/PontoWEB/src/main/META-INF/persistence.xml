@@ -9,6 +9,16 @@
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
       <jta-data-source>java:/PontoWEBDatasource</jta-data-source>
       <class>br.rainformatica.pontoweb.entity.TbHorasColab</class>
+      <class>br.rainformatica.pontoweb.entity.TbAnalista</class>
+      <class>br.rainformatica.pontoweb.entity.TbClientes</class>
+      <class>br.rainformatica.pontoweb.entity.TbDiaSemana</class>
+      <class>br.rainformatica.pontoweb.entity.TbFuncao</class>
+      <class>br.rainformatica.pontoweb.entity.TbHorasAdicionais</class>
+      <class>br.rainformatica.pontoweb.entity.TbHorasProjetos</class>
+      <class>br.rainformatica.pontoweb.entity.TbPermissao</class>
+      <class>br.rainformatica.pontoweb.entity.TbProjeto</class>
+      <class>br.rainformatica.pontoweb.entity.TbUsuarios</class>
+      
       
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>

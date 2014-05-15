@@ -256,15 +256,13 @@ textarea {
 							<rich:panel>
 								<f:facet name="header">Projeto 1 (principal)</f:facet>
 								<h:selectOneMenu id="tbHorasProjeto1"
-									value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
-									required="false"
-									>
+									
+									value="#{tbHorasColabHome.tbProjeto}">
 									<s:selectItems var="projetoSelectPrinc" id="selectProj1"
 										value="#{tbHorasColabHome.listaTbProjeto}"
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
-									<a:support event="onchanged" reRender="selectProj1"
-										ajaxSingle="true" />
+									<a:support event="onchange" reRender="selectProj1" ajaxSingle="true" />
 
 									<s:convertEntity />
 								</h:selectOneMenu>
@@ -300,7 +298,7 @@ textarea {
 										value="#{tbHorasColabHome.listaTbProjeto}"
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
-									<a:support event="onchange" reRender="selectProj2" action="#{tbHorasColabHome.addProjetoLista(0)}"
+									<a:support event="onchange" reRender="panelProjeto2" action="#{tbHorasColabHome.addProjetoLista(0)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -310,19 +308,21 @@ textarea {
 								<br />
 								
 								<h:inputText id="horasProjeto2Field" size="3" 
+									disabled="#{tbHorasColabHome.tbProjetos.size() == 0}"
 									value="#{tbHorasColabHome.tbHorasProjetos.horasProjeto2}" >
+									
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto2Field"
 										query="setMask({mask:'99:99'})" timing="onload" />
-									<a:support event="onblur" reRender="horasProjeto2Field,horasProjeto1Field" 
+									<a:support event="onblur" reRender="panelHorasProjetos,horasProjeto2Field,horasProjeto1Field,panelProjeto3" 
 									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto2, 0)}"
 										ajaxSingle="true" /> 
 									</h:inputText>
 							</rich:panel>
 
 						</h:column>
-						<rich:panel>
+						<rich:panel id="panelProjeto3" rendered="#{tbHorasColabHome.tbProjetos.size() == 1}">
 							<f:facet name="header">Projeto 3</f:facet>
 							<h:selectOneMenu id="tbHorasProjeto3"
 								value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
@@ -333,7 +333,7 @@ textarea {
 									label="#{projetoSelectPrinc.nome}"
 									noSelectionLabel="Selecione o Projeto" />
 								
-								<a:support event="onchange" reRender="selectProj3" action="#{tbHorasColabHome.addProjetoLista(1)}"
+								<a:support event="onchange" reRender="selectProj3,horasProjeto3Field" action="#{tbHorasColabHome.addProjetoLista(1)}"
 									ajaxSingle="true" />
 
 								<s:convertEntity />
@@ -343,12 +343,13 @@ textarea {
 							<br />
 							<h:inputText id="horasProjeto3Field" 
 								value="#{tbHorasColabHome.tbHorasProjetos.horasProjeto3}"
+								disabled="#{tbHorasColabHome.tbProjetos.size() == 1}"
 								 >
 							<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto3Field"
 										query="setMask({mask:'99:99'})" timing="onload" />
-										<a:support event="onblur" reRender="horasProjeto1Field,horasProjeto3Field"
+										<a:support event="onblur" reRender="horasProjeto1Field,horasProjeto3Field,panelHorasProjetos"
 									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto3, 1)}"
 										ajaxSingle="true" />
 									
@@ -358,7 +359,7 @@ textarea {
 							
 						--></rich:panel>
 						<h:column>
-							<rich:panel>
+							<rich:panel id="panelProjeto4" rendered="#{tbHorasColabHome.tbProjetos.size() == 2}">
 								<f:facet name="header">Projeto 4</f:facet>
 								<h:selectOneMenu id="tbHorasProjeto4"
 									value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
@@ -369,7 +370,7 @@ textarea {
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
 									
-									<a:support event="onchange" reRender="selectProj4" action="#{tbHorasColabHome.addProjetoLista(2)}"
+									<a:support event="onchange" reRender="selectProj4,horasProjeto4Field" action="#{tbHorasColabHome.addProjetoLista(2)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -383,7 +384,7 @@ textarea {
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto4Field"
 										query="setMask({mask:'99:99'})" timing="onload" />
-									<a:support event="onblur" reRender="horasProjeto1Field,horasProjeto4Field"
+									<a:support event="onblur" reRender="horasProjeto1Field,horasProjeto4Field,panelHorasProjetos"
 									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto4, 2)}"
 										ajaxSingle="true" />
 									</h:inputText>
@@ -391,7 +392,7 @@ textarea {
 
 						</h:column>
 						<h:column>
-							<rich:panel>
+							<rich:panel id="panelProjeto5" rendered="#{tbHorasColabHome.tbProjetos.size() == 3}">
 								<f:facet name="header">Projeto 5</f:facet>
 								<h:selectOneMenu id="tbHorasProjeto5"
 									value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
@@ -402,7 +403,7 @@ textarea {
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
 									
-									<a:support event="onchange" reRender="selectProj5" action="#{tbHorasColabHome.addProjetoLista(3)}"
+									<a:support event="onchange" reRender="selectProj5,horasProjeto5Field" action="#{tbHorasColabHome.addProjetoLista(3)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -417,14 +418,14 @@ textarea {
 										pattern="HH:mm" />
 									<rich:jQuery selector="#horasProjeto5Field"
 										query="setMask({mask:'99:99'})" timing="onload" />
-									<a:support event="onblur" reRender="horasProjeto1Field,horasProjeto5Field"
+									<a:support event="onblur" reRender="horasProjeto1Field,horasProjeto5Field,panelHorasProjetos"
 									action="#{tbHorasColabHome.calcHorasProjeto(tbHorasColabHome.tbHorasProjetos.horasProjeto5, 3)}"
 										ajaxSingle="true" />
 									</h:inputText>
 							</rich:panel>
 						</h:column>
 						<h:column>
-							<rich:panel>
+							<rich:panel id="panelProjeto6" rendered="#{tbHorasColabHome.tbProjetos.size() == 4}">
 								<f:facet name="header">Projeto 6</f:facet>
 								<h:selectOneMenu id="tbHorasProjeto6"
 									value="#{tbHorasColabHome.tbHorasColab.tbProjeto}"
@@ -435,7 +436,7 @@ textarea {
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
 									
-									<a:support event="onchange" reRender="selectProj6" action="#{tbHorasColabHome.addProjetoLista(4)}"
+									<a:support event="onchange" reRender="selectProj6,horasProjeto6Field" action="#{tbHorasColabHome.addProjetoLista(4)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -576,7 +577,7 @@ textarea {
 						</h:outputText>
 					</h:column>
 					<h:column>
-						<f:facet name="header">Projeto</f:facet>
+						<f:facet name="header">Projeto Principal</f:facet>
 						<h:outputText
 							value="#{_tbHorasColabGet.tbHorasProjetos.projeto1}">
 
