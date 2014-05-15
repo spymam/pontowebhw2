@@ -62,6 +62,8 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	public void gravarDados() {
 
 		TbUsuarios tbUser = new TbUsuarios();
+		TbProjeto tbProj = new TbProjeto();
+		tbProj = getTbProjeto();
 		tbUser = (TbUsuarios) Contexts.getSessionContext().get("usuario");
 
 		List<TbAnalista> result = getEntityManager()
@@ -74,7 +76,8 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		tbHorasColab.setTbHorasProjetos(tbHorasProjetos);
 		tbHorasColab.getTbHorasProjetos().setTbAnalista(tbHorasColab.getTbAnalista());
 		tbHorasColab.getTbHorasProjetos().setTbClientes(tbHorasColab.getTbClientes());
-		tbHorasColab.getTbHorasProjetos().setProjeto1(tbHorasColab.getTbProjeto().getNome());
+		tbHorasColab.setTbProjeto(tbProj);
+		tbHorasColab.getTbHorasProjetos().setProjeto1(tbProj.getNome());
 		
 		tbHorasColab.getTbHorasProjetos().setDataLancamento(tbHorasColab.getData());		
 		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
