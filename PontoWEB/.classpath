@@ -14,54 +14,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/Eclipse Helios/Eclipse Helios/plugins/org.hibernate.eclipse_3.4.1.v20111025-0625-H210-Final/lib/annotations/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/Eclipse Helios/Eclipse Helios/plugins/org.hibernate.eclipse_3.4.1.v20111025-0625-H210-Final/lib/annotations/hibernate-validator.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/hibernate-annotations.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/hibernate-commons-annotations.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/hibernate-core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/hibernate-entitymanager.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/hibernate-search.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/hibernate-validator.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-debug.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-excel.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-flex.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-ioc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-jul.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-pdf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-remoting.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-resteasy.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-rss.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-ui.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-wicket.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/jboss-seam-2.2.2.Final/lib/jboss-seam-wicket-ant.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/antlr-runtime.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/commons-beanutils.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/commons-digester.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/drools-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/drools-compiler.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/drools-core.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/itext.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/itext-rtf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-el.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-debug.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-excel.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-ioc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-mail.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-pdf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-remoting.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jboss-seam-ui.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jbpm-jpdl.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jcommon.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jfreechart.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jsf-facelets.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/jxl.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/mvel2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/richfaces-api.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/richfaces-impl.jar"/>
-	<classpathentry kind="lib" path="C:/Users/ANDRE/Desktop/PROJETOS/PontoEletronico5/PontoWEB/WebContent/WEB-INF/lib/richfaces-ui.jar"/>
+	<classpathentry kind="lib" path="lib"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
