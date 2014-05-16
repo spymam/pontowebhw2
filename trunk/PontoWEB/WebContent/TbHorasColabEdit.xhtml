@@ -333,7 +333,7 @@ textarea {
 									label="#{projetoSelectPrinc.nome}"
 									noSelectionLabel="Selecione o Projeto" />
 								
-								<a:support event="onchange" reRender="selectProj3,horasProjeto3Field" action="#{tbHorasColabHome.addProjetoLista(1)}"
+								<a:support event="onchange" reRender="selectProj3,panelProjeto3" action="#{tbHorasColabHome.addProjetoLista(1)}"
 									ajaxSingle="true" />
 
 								<s:convertEntity />
@@ -343,7 +343,7 @@ textarea {
 							<br />
 							<h:inputText id="horasProjeto3Field" 
 								value="#{tbHorasColabHome.tbHorasProjetos.horasProjeto3}"
-								disabled="#{tbHorasColabHome.tbProjetos.size() == 1}"
+								disabled="#{tbHorasColabHome.tbProjetos.size() == 0}"
 								 >
 							<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
@@ -370,7 +370,7 @@ textarea {
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
 									
-									<a:support event="onchange" reRender="selectProj4,horasProjeto4Field" action="#{tbHorasColabHome.addProjetoLista(2)}"
+									<a:support event="onchange" reRender="selectProj4,panelProjeto4" action="#{tbHorasColabHome.addProjetoLista(2)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -403,7 +403,7 @@ textarea {
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
 									
-									<a:support event="onchange" reRender="selectProj5,horasProjeto5Field" action="#{tbHorasColabHome.addProjetoLista(3)}"
+									<a:support event="onchange" reRender="selectProj5,panelProjeto5" action="#{tbHorasColabHome.addProjetoLista(3)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -436,7 +436,7 @@ textarea {
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
 									
-									<a:support event="onchange" reRender="selectProj6,horasProjeto6Field" action="#{tbHorasColabHome.addProjetoLista(4)}"
+									<a:support event="onchange" reRender="selectProj6,panelProjeto6" action="#{tbHorasColabHome.addProjetoLista(4)}"
 										ajaxSingle="true" />
 
 									<s:convertEntity />
@@ -568,11 +568,11 @@ textarea {
 					<h:column>
 						<f:facet name="header">Horas Adicionais</f:facet>
 						<h:outputText
-							value="#{_tbHorasColabGet.tbHorasAdicionais.totalHoras}">
+							value="#{_tbHorasColabGet.horasAdicionais}">
 							<s:convertDateTime pattern="HH:mm" />
 						</h:outputText>
 						<h:outputText value="00:00"
-							rendered="#{_tbHorasColabGet.tbHorasAdicionais.tbAnalista.idTbAnalista == null}">
+							rendered="#{_tbHorasColabGet.horasAdicionais == null}">
 
 						</h:outputText>
 					</h:column>

@@ -1,4 +1,4 @@
-#Tue Mar 18 21:28:29 BRT 2014
+#Fri May 16 13:58:15 BRT 2014
 action.package=br.rainformatica.pontoweb.session
 action.sources=/PontoWEB/src/hot
 eclipse.preferences.version=1
@@ -11,7 +11,7 @@ seam.project.settings.version=1.1
 seam.project.web.root.folder=/PontoWEB/WebContent
 seam.runtime.name=jboss-seam-2.2.2.Final
 seam.settings.changed.by.user=true
-seam.test.creating=true
+seam.test.creating=false
 seam.test.project=PontoWEB-test
 test.package=br.rainformatica.pontoweb.test
 test.sources=/PontoWEB-test/test-src
