@@ -2,22 +2,25 @@ package br.rainformatica.pontoweb.entity;
 
 // Generated 23/01/2014 17:41:24 by Hibernate Tools 3.4.0.CR1
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.NotNull;
 
 /**
@@ -40,31 +43,33 @@ public class TbHorasColab implements java.io.Serializable {
 	private Date saida;
 	private Date saidaAlmoco;
 	private Date totalHoras;
+	private Date horasProjetoPrincipal;
 	private TbHorasAdicionais tbHorasAdicionais;
-	private TbHorasProjetos tbHorasProjetos;
+	
+	private Set<TbHorasProjAnalista> tbHorasProjAnalista = new HashSet<TbHorasProjAnalista>(0);
 
 	public TbHorasColab() {
 	}
 
 	public TbHorasColab(TbAnalista tbAnalista, TbClientes tbClientes,
-			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, TbHorasProjetos tbHorasProjetos) {
+			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais) {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
 		this.tbProjeto = tbProjeto;
 		this.tbHorasAdicionais = tbHorasAdicionais;
-		this.tbHorasProjetos = tbHorasProjetos;
+		
 		
 	}
 
 	public TbHorasColab(TbAnalista tbAnalista, TbClientes tbClientes,
-			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, TbHorasProjetos tbHorasProjetos, Date data, String descAtividade,
+			TbProjeto tbProjeto, TbHorasAdicionais tbHorasAdicionais, Date data, String descAtividade,
 			String diaSemana, Date entrada, Date horasAdicionais,
-			Date retornoAlmoco, Date saida, Date saidaAlmoco, Date totalHoras) {
+			Date retornoAlmoco, Date saida, Date saidaAlmoco, Date totalHoras, Set<TbHorasProjAnalista> tbHorasProjAnalista, Date horasProjetoPrincipal) {
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
 		this.tbProjeto = tbProjeto;
 		this.tbHorasAdicionais = tbHorasAdicionais;
-		this.tbHorasProjetos = tbHorasProjetos;
+		
 		this.data = data;
 		this.descAtividade = descAtividade;
 		this.diaSemana = diaSemana;
@@ -74,6 +79,8 @@ public class TbHorasColab implements java.io.Serializable {
 		this.saida = saida;
 		this.saidaAlmoco = saidaAlmoco;
 		this.totalHoras = totalHoras;
+		this.tbHorasProjAnalista = tbHorasProjAnalista;
+		this.horasProjetoPrincipal = horasProjetoPrincipal;
 	}
 
 	@Id
@@ -129,17 +136,7 @@ public class TbHorasColab implements java.io.Serializable {
 	public void setTbHorasAdicionais(TbHorasAdicionais tbHorasAdicionais) {
 		this.tbHorasAdicionais = tbHorasAdicionais;
 	}
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "id_horas_projetos", nullable = true)
 	
-	public TbHorasProjetos getTbHorasProjetos() {
-		return this.tbHorasProjetos;
-	}
-
-	public void setTbHorasProjetos(TbHorasProjetos tbHorasProjetos) {
-		this.tbHorasProjetos = tbHorasProjetos;
-	}
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data", length = 10)
 	public Date getData() {
@@ -228,5 +225,27 @@ public class TbHorasColab implements java.io.Serializable {
 	public void setTotalHoras(Date totalHoras) {
 		this.totalHoras = totalHoras;
 	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbHorasColab", cascade=CascadeType.ALL)
+	public Set<TbHorasProjAnalista> getTbHorasProjAnalista() {
+		return tbHorasProjAnalista;
+	}
+
+	public void setTbHorasProjAnalista(Set<TbHorasProjAnalista> tbHorasProjAnalista) {
+		this.tbHorasProjAnalista = tbHorasProjAnalista;
+	}
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "horas_projeto_principal")
+	public Date getHorasProjetoPrincipal() {
+		return horasProjetoPrincipal;
+	}
+
+	public void setHorasProjetoPrincipal(Date horasProjetoPrincipal) {
+		this.horasProjetoPrincipal = horasProjetoPrincipal;
+	}
+	
+	
+	
 
 }

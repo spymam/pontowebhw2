@@ -1,0 +1,101 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="tbHorasProjAnalista" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{tbHorasProjAnalistaHome.managed ? 'Edit' : 'Add'} Tb horas proj analista</f:facet>
+
+
+
+            <s:decorate id="idAnalistaField" template="layout/edit.xhtml">
+                <ui:define name="label">Id analista</ui:define>
+                <h:inputText id="idAnalista"
+                       required="true"
+                          value="#{tbHorasProjAnalistaHome.instance.idAnalista}">
+                    <a:support event="onblur" reRender="idAnalistaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="idProjetoField" template="layout/edit.xhtml">
+                <ui:define name="label">Id projeto</ui:define>
+                <h:inputText id="idProjeto"
+                       required="true"
+                          value="#{tbHorasProjAnalistaHome.instance.idProjeto}">
+                    <a:support event="onblur" reRender="idProjetoField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="horasField" template="layout/edit.xhtml">
+                <ui:define name="label">Horas</ui:define>
+                <h:inputText id="horas"
+                           size="5"
+                          value="#{tbHorasProjAnalistaHome.instance.horas}">
+                    <s:convertDateTime type="time"/>
+                    <a:support event="onblur" reRender="horasField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="dataLancamentoField" template="layout/edit.xhtml">
+                <ui:define name="label">Data lancamento</ui:define>
+                <rich:calendar id="dataLancamento"
+                          value="#{tbHorasProjAnalistaHome.instance.dataLancamento}" datePattern="MM/dd/yyyy" />
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{tbHorasProjAnalistaHome.persist}"
+                       disabled="#{!tbHorasProjAnalistaHome.wired}"
+                       rendered="#{!tbHorasProjAnalistaHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{tbHorasProjAnalistaHome.update}"
+                       rendered="#{tbHorasProjAnalistaHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{tbHorasProjAnalistaHome.remove}"
+                      immediate="true"
+                       rendered="#{tbHorasProjAnalistaHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/TbHorasProjAnalista.xhtml"
+                rendered="#{tbHorasProjAnalistaHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty tbHorasProjAnalistaFrom ? 'TbHorasProjAnalistaList' : tbHorasProjAnalistaFrom}.xhtml"
+                rendered="#{!tbHorasProjAnalistaHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

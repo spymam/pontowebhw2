@@ -12,7 +12,7 @@
     
     <!-- @newMenuItem@ -->
     <rich:toolBarGroup location="right">
-        <h:outputText id="menuWelcomeId" value="Logado como : #{credentials.username}" rendered="#{identity.loggedIn}"/>
+        <h:outputText id="menuWelcomeId" value="Bem vindo : #{credentials.username}" rendered="#{identity.loggedIn}"/>
         <s:link id="menuLoginId" view="/login.xhtml" value="Entrar" rendered="#{not identity.loggedIn}" propagation="none"/>
         <s:link id="menuLogoutId" view="/home.xhtml" action="#{identity.logout}" value="Sair" rendered="#{identity.loggedIn}" propagation="none"/>
     </rich:toolBarGroup>
