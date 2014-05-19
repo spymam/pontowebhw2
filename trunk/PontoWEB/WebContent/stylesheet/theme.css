@@ -53,6 +53,7 @@ select {
 	width: 100%;
 }
 
+
 .body {
 	padding: 30px;
 }
@@ -173,13 +174,28 @@ img.errors {
 }
 
 .rich-datalist {
-	list-style: square;
+	list-style: none;
 	margin: 6px 0 1px 0;
-	padding-left: 18px;
+	padding-left: 1px;
 }
+.rich-dataGrid gri{
+	border: 0;
+	border-collapse: none;
+	border-spacing: none;
+	
+}	
 
 .rich-list-item {
-	padding-bottom: 4px;
+	padding-bottom: 0px;
+	border: 0;
+}
+.rf-dg-c {
+border-bottom: none;
+border-right :none;
+}
+.rf-dg{
+border-left:none;
+border-top:none;
 }
 
 div.info {
@@ -216,3 +232,9 @@ table.radio td {
 table.radio input[type=radio] {
    vertical-align: bottom;
 }
+table.rich rc {
+	border-bottom: none;
+border-right :none;
+border-left:none;
+border-top:none;
+}	

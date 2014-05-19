@@ -52,7 +52,7 @@ public class TbHorasProjetos implements java.io.Serializable {
 	private Date horasProjeto10;
 	private TbAnalista tbAnalista;
 	private TbClientes tbClientes;
-	private Set<TbHorasColab> tbHorasColab = new HashSet<TbHorasColab>(0);
+	
 	private Date dataLancamento;
 	
 	
@@ -62,12 +62,12 @@ public class TbHorasProjetos implements java.io.Serializable {
 	
 
 	public TbHorasProjetos(String projeto1, Date horasProjeto1, TbAnalista tbAnalista,
-			TbClientes tbClientes, TbHorasColab tbHorasColab) {
+			TbClientes tbClientes) {
 		this.projeto1 = projeto1;
 		this.horasProjeto1 = horasProjeto1;
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
-		this.tbHorasColab = this.tbHorasColab;
+		
 	}
 
 	public TbHorasProjetos(String projeto1, Date horasProjeto1,
@@ -77,7 +77,7 @@ public class TbHorasProjetos implements java.io.Serializable {
 			Date horasProjeto6, String projeto7, Date horasProjeto7,
 			String projeto8, Date horasProjeto8, String projeto9,
 			Date horasProjeto9, String projeto10, Date horasProjeto10,
-			TbAnalista tbAnalista, TbClientes tbClientes, TbHorasColab tbHorasColab, Date dataLancamento) {
+			TbAnalista tbAnalista, TbClientes tbClientes, Date dataLancamento) {
 		this.projeto1 = projeto1;
 		this.horasProjeto1 = horasProjeto1;
 		this.projeto2 = projeto2;
@@ -100,7 +100,6 @@ public class TbHorasProjetos implements java.io.Serializable {
 		this.horasProjeto10 = horasProjeto10;
 		this.tbAnalista = tbAnalista;
 		this.tbClientes = tbClientes;
-		this.tbHorasColab = this.tbHorasColab;
 		this.dataLancamento = dataLancamento;
 	}
 
@@ -331,16 +330,7 @@ public class TbHorasProjetos implements java.io.Serializable {
 	public void setTbClientes(TbClientes tbClientes) {
 		this.tbClientes = tbClientes;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbHorasProjetos")
-	public Set<TbHorasColab> getTbHorasColab() {
-		return tbHorasColab;
-	}
-
-	public void setTbHorasColab(Set<TbHorasColab> tbHorasColab) {
-		this.tbHorasColab = tbHorasColab;
-	}
-
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "data_lancamento", length = 10)
 	public Date getDataLancamento() {

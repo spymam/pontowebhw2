@@ -155,13 +155,14 @@ public class TbAnalista implements java.io.Serializable {
 	private Set<TbHorasColab> tbHorasColabs = new HashSet<TbHorasColab>(0);
 	private Set<TbHorasAdicionais> tbHorasAdicionaises = new HashSet<TbHorasAdicionais>(0);
 	private Set<TbHorasProjetos> tbHorasProjetos = new HashSet<TbHorasProjetos>(0);
+	private Set<TbHorasProjAnalista> tbHorasProjAnalistas = new HashSet<TbHorasProjAnalista>(0);
 
 	public TbAnalista() {
 	}
 
 	public TbAnalista(String cliente, String email, String funcao, String nome,
 			String telefone, Set<TbUsuarios> tbUsuarioses, Set<TbHorasAdicionais> tbHorasAdicionaises,
-			Set<TbHorasColab> tbHorasColabs, Set<TbHorasProjetos> tbHorasProjetos) {
+			Set<TbHorasColab> tbHorasColabs, Set<TbHorasProjetos> tbHorasProjetos, Set<TbHorasProjAnalista> tbHorasProjAnalistas) {
 		this.cliente = cliente;
 		this.email = email;
 		this.funcao = funcao;
@@ -171,6 +172,7 @@ public class TbAnalista implements java.io.Serializable {
 		this.tbHorasColabs = tbHorasColabs;
 		this.tbHorasAdicionaises = tbHorasAdicionaises;
 		this.tbHorasProjetos = tbHorasProjetos;
+		this.tbHorasProjAnalistas = tbHorasProjAnalistas;
 	}
 
 	@Id
@@ -263,4 +265,16 @@ public class TbAnalista implements java.io.Serializable {
 	public void setTbHorasProjetos(Set<TbHorasProjetos> tbHorasProjetos) {
 		this.tbHorasProjetos = tbHorasProjetos;
 	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tbAnalista")
+	public Set<TbHorasProjAnalista> getTbHorasProjAnalistas() {
+		return tbHorasProjAnalistas;
+	}
+
+	public void setTbHorasProjAnalistas(
+			Set<TbHorasProjAnalista> tbHorasProjAnalistas) {
+		this.tbHorasProjAnalistas = tbHorasProjAnalistas;
+	}
+	
+	
 }

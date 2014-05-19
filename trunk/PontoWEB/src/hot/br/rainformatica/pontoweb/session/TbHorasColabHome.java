@@ -7,18 +7,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.lang.Object;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.contexts.Contexts;
 import org.jboss.seam.framework.EntityHome;
-import org.jboss.seam.ui.taglib.ConvertDateTimeTag;
 
 import br.rainformatica.pontoweb.entity.TbAnalista;
 import br.rainformatica.pontoweb.entity.TbClientes;
 import br.rainformatica.pontoweb.entity.TbDiaSemana;
 import br.rainformatica.pontoweb.entity.TbHorasColab;
+import br.rainformatica.pontoweb.entity.TbHorasProjAnalista;
 import br.rainformatica.pontoweb.entity.TbHorasProjetos;
 import br.rainformatica.pontoweb.entity.TbProjeto;
 import br.rainformatica.pontoweb.entity.TbUsuarios;
@@ -40,25 +42,70 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	TbUsuarios tbUser = new TbUsuarios();
 	public List<TbHorasColab> horasColabs = new ArrayList<TbHorasColab>();
 	TbHorasProjetos tbHorasProjetos = new TbHorasProjetos();
+	private List<TbHorasProjAnalista> tbHorasProjAnalista = new ArrayList<TbHorasProjAnalista>();
+	private List<TbProjeto> listaDeProjetos = new ArrayList<TbProjeto>();
 	
-	
-	
-
 	String diaSemana;
 	String totalHorasFormatado;
 	Date horaTemporaria = new Date();
 	Boolean desativaBotao = false;
+	Integer posicaoLista = null;
 	public List<TbProjeto> tbProjetos = new ArrayList<TbProjeto>();
+	List<Date> tbHoras = new ArrayList<Date>();
+	private Date hora = new Date();
 	
 
 	public void setTbHorasColabIdTbHorasColab(Integer id) {
 		setId(id);
 	}
+	
+	
 
 	public Integer getTbHorasColabIdTbHorasColab() {
 		return (Integer) getId();
 	}
 
+	public void addProjetoNaLista(){
+		if (tbHorasProjAnalista.size() >= 6) {
+			
+			FacesMessage fm = new FacesMessage("Senha inválida!"); 
+			FacesContext.getCurrentInstance().addMessage("senha", fm);
+			
+			
+			
+		}else{
+		
+		List <TbHorasProjAnalista> listaProjHoras = new ArrayList<TbHorasProjAnalista>();
+		
+		
+		tbHorasProjAnalista.add(new TbHorasProjAnalista());
+		
+	}
+	}
+	
+	public void removerProjetoDaLista(int posicao){
+		tbHorasProjAnalista.remove(posicao);
+	}
+	
+	public void addPosicaoProjetoLista(){
+		
+		
+	}
+	public int geraNomeProjeto(){
+		
+		int numero = 0;
+		
+		for (int i = 0; i < tbHorasProjAnalista.size(); i++) {
+			
+			numero++;
+		}
+		
+		
+		
+		return numero;
+		
+		
+	}
 	public void gravarDados() {
 
 		TbUsuarios tbUser = new TbUsuarios();
@@ -73,13 +120,13 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 		tbHorasColab.setDiaSemana(diaSemana);
 		tbHorasColab.setTbAnalista(result.get(0));
-		tbHorasColab.setTbHorasProjetos(tbHorasProjetos);
+		/*tbHorasColab.setTbHorasProjetos(tbHorasProjetos);
 		tbHorasColab.getTbHorasProjetos().setTbAnalista(tbHorasColab.getTbAnalista());
 		tbHorasColab.getTbHorasProjetos().setTbClientes(tbHorasColab.getTbClientes());
 		tbHorasColab.setTbProjeto(tbProj);
 		tbHorasColab.getTbHorasProjetos().setProjeto1(tbProj.getNome());
 		
-		tbHorasColab.getTbHorasProjetos().setDataLancamento(tbHorasColab.getData());		
+		tbHorasColab.getTbHorasProjetos().setDataLancamento(tbHorasColab.getData());	*/	
 		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
 
 		setInstance(tbHorasColab);
@@ -106,16 +153,126 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 	
 	/**/
-	
+	 
 
-	public void calcHorasProjeto(Date horaProjeto, int posicaoCampo) throws Throwable {		
+	public void calcHorasProjeto2(Date horaProjeto, int posicaoCampo) throws Throwable {		
+		
+		Calendar horasProjetoPrincipal = Calendar.getInstance();
+		Calendar horasProjetoAdicional = Calendar.getInstance();
+		Calendar tst = Calendar.getInstance();
+		// formata e exibe a data e hora atual
+		Format formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+		horasProjetoPrincipal.setTime(tbHorasColab.getTotalHoras());
+		tst.setTime(tbHorasColab.getTotalHoras());
+		
+		//Se a data digitada for em branco, este metodo seta um formato de hora "00:00" para prosseguir o calculo.			
+		if (horaProjeto == null) {
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");  
+		    String hora = "00:00";  
+		    Date horaFormatada = sdf.parse(hora);  
+		    System.out.println(formato.format(horaFormatada));  
+		    
+			horaProjeto = new Date();
+			horaProjeto.setHours(0);
+			horaProjeto.setMinutes(0);
+			horaProjeto.setSeconds(0);
+			/*List<Date> tbHoras = new ArrayList<Date>();*/
+			tbHorasProjAnalista.get(posicaoCampo).setHoras(horaFormatada);
+				for (int i = 0; i < tbHorasProjAnalista.size(); i++) {
+				
+				
+				tst.add(Calendar.MINUTE, -tbHorasProjAnalista.get(i).getHoras().getMinutes());
+				tst.add(Calendar.HOUR, -tbHorasProjAnalista.get(i).getHoras().getHours());
+				tbHorasColab.setHorasProjetoPrincipal(tst.getTime());
+				System.out.println("HORA PROJETO PRINCIPAL : " + formato.format(tst.getTime()));
+				System.out.println("HORA PROJETO PRINCIPAL2 : " + formato.format(tbHorasColab.getHorasProjetoPrincipal()));
+			
+			}
+			/*tbHoras.add(posicaoCampo, tbHorasProjAnalista.get(posicaoCampo).getHoras());
+			tbHoras.set(posicaoCampo, d);*/
+					horasProjetoAdicional.setTime(getHora());
+					System.out.println("Horas Projeto Principal: " + formato.format(horasProjetoPrincipal.getTime()));				
+					// Subtrae hora e minuto(projeto adicional) do projeto principal
+					horasProjetoPrincipal.add(Calendar.MINUTE,  -horasProjetoAdicional.getTime().getMinutes());
+					horasProjetoPrincipal.add(Calendar.HOUR, -horasProjetoAdicional.getTime().getHours());
+					System.out.println("Total de HOras: " + formato.format(horasProjetoPrincipal.getTime()));
+					// formata e exibe o resultado
+					formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+					System.out.println("Daqui a 60 minutos será: " + formato.format(horasProjetoPrincipal.getTime()));
+					tbHorasProjetos.setHorasProjeto1(horasProjetoPrincipal.getTime());
+					System.out.println("horas : " + formato.format(tbHorasColab.getHorasProjetoPrincipal().getTime()) );
+					System.out.println("hora recebida :" + formato.format(horaProjeto));
+					setDesativaBotao(true);
+					/*setTbHoras(new ArrayList<Date>());*/
+			
+		}else{			
+			 
+			Date dta = getDataAtual(); //aqui
+			dta.setTime(horaProjeto.getTime());
+			
+			for (int i = 0; i < tbHorasProjAnalista.size(); i++) {
+				
+				tst.add(Calendar.MINUTE, -tbHorasProjAnalista.get(i).getHoras().getMinutes());
+				tst.add(Calendar.HOUR, -tbHorasProjAnalista.get(i).getHoras().getHours());
+				
+				
+				tbHorasColab.setHorasProjetoPrincipal(tst.getTime());
+				System.out.println("HORA PROJETO PRINCIPAL : " + formato.format(tst.getTime()));
+				System.out.println("HORA PROJETO PRINCIPAL2 : " + formato.format(tbHorasColab.getHorasProjetoPrincipal()));
+			}
+			
+			if (dta.getHours() > tbHorasColab.getTotalHoras().getHours()) {  
+				
+				tbHorasColab.setHorasProjetoPrincipal(null);
+				
+				
+			}
+			/*List<Date> tbHoras = new ArrayList<Date>();*/
+			//tbHoras.add(tbHorasProjetos.getHorasProjeto1());
+			
+			
+			/*tbHoras.add(posicaoCampo, tbHorasProjAnalista.get(posicaoCampo).getHoras());
+			setHora(tbHorasProjAnalista.get(posicaoCampo).getHoras());
+			
+				horasProjetoAdicional.setTime(getHora());
+					 
+					System.out.println("Horas Projeto Principal: " + formato.format(horasProjetoPrincipal.getTime()));				
+					
+					// Subtrae hora e minuto(projeto adicional) do projeto principal
+					horasProjetoPrincipal.add(Calendar.MINUTE,  -horasProjetoAdicional.getTime().getMinutes());
+					
+					horasProjetoPrincipal.add(Calendar.HOUR, -horasProjetoAdicional.getTime().getHours());
+					
+					System.out.println("Total de HOras: " + formato.format(horasProjetoPrincipal.getTime()));
+					// formata e exibe o resultado
+					formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+					System.out.println("Daqui a 60 minutos será: " + formato.format(horasProjetoPrincipal.getTime()));
+					tbHorasProjetos.setHorasProjeto1(horasProjetoPrincipal.getTime());
+					tbHorasColab.setHorasProjetoPrincipal(horasProjetoPrincipal.getTime());
+					*/
+					System.out.println("horas : " + formato.format(tbHorasColab.getHorasProjetoPrincipal().getTime()) );
+					setDesativaBotao(true);
+			/*setTbHoras(new ArrayList<Date>());*/
+					
+				}
+				
+				
+			}
+				
+			
+			
+			
+	
+	
+/*public void calcHorasProjeto(Date horaProjeto, int posicaoCampo) throws Throwable {		
 		
 		Calendar horasProjetoPrincipal = Calendar.getInstance();
 		Calendar horasProjetoAdicional = Calendar.getInstance();
 		// formata e exibe a data e hora atual
 		Format formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
 		horasProjetoPrincipal.setTime(tbHorasColab.getTotalHoras());
-		/*horasProjetoPrincipal.setTime(tbHorasProjetos.getHorasProjeto1());*/
+		horasProjetoPrincipal.setTime(tbHorasProjetos.getHorasProjeto1());
 					
 		if (horaProjeto == null) {
 			
@@ -129,7 +286,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 			horaProjeto.setMinutes(0);
 			horaProjeto.setSeconds(0);
 									
-			/*tbHorasProjetos.setHorasProjeto1(tbHorasColab.getTotalHoras());*/
+			tbHorasProjetos.setHorasProjeto1(tbHorasColab.getTotalHoras());
 			List<Date> tbHoras = new ArrayList<Date>();
 			
 			
@@ -219,7 +376,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 			}
 			
 			
-	}
+	}*/
 	
 	public void addProjetoLista(int posicao){
 		
@@ -312,7 +469,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 			totalDeHoras.setSeconds(00);
 			
 			tbHorasColab.setTotalHoras(totalDeHoras);
-			tbHorasProjetos.setHorasProjeto1(totalDeHoras);
+			tbHorasColab.setHorasProjetoPrincipal(totalDeHoras);
 			
 			Date horasAdicionais = new Date();
 			if (totalDeHoras.getHours() >= 8) {
@@ -370,7 +527,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 				}
 				
 				tbHorasColab.setTotalHoras(totalDeHoras);
-				tbHorasProjetos.setHorasProjeto1(totalDeHoras);
+				tbHorasColab.setHorasProjetoPrincipal(totalDeHoras);
 						
 				
 			}
@@ -399,6 +556,16 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	}
 
 	public List<TbDiaSemana> listarDiaSemana;
+	
+	public List getListaProjAnalista(){
+		
+		List toReturn = new ArrayList<List>();
+		
+		List<TbProjeto>listaTbProjeto = new ArrayList<TbProjeto>();
+		
+		return horasColabs;
+		
+	}
 
 	public List<TbDiaSemana> getListaTbDiaSemana() {
 		List resultList = getEntityManager().createQuery(
@@ -638,6 +805,51 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		this.tbProjetos = tbProjetos;
 	}
 
+	public List<TbHorasProjAnalista> getTbHorasProjAnalista() {
+		return tbHorasProjAnalista;
+	}
+
+	public void setTbHorasProjAnalista(List<TbHorasProjAnalista> tbHorasProjAnalista) {
+		this.tbHorasProjAnalista = tbHorasProjAnalista;
+	}
+
+
+
+	public Integer getPosicaoLista() {
+		return posicaoLista;
+	}
+
+
+
+	public void setPosicaoLista(Integer posicaoLista) {
+		this.posicaoLista = posicaoLista;
+	}
+
+
+
+	public List<Date> getTbHoras() {
+		return tbHoras;
+	}
+
+
+
+	public void setTbHoras(List<Date> tbHoras) {
+		this.tbHoras = tbHoras;
+	}
+
+
+
+	public Date getHora() {
+		return hora;
+	}
+
+
+
+	public void setHora(Date hora) {
+		this.hora = hora;
+	}
+
+	
 	
 	
 
