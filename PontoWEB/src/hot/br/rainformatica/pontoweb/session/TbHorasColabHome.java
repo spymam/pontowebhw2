@@ -75,10 +75,21 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 			
 		}else{
 		
+			TbUsuarios tbUserr = new TbUsuarios();
+			tbUserr = (TbUsuarios) Contexts.getSessionContext().get("usuario");
+
+			List<TbAnalista> result = getEntityManager()
+					.createQuery(
+							"SELECT e FROM TbAnalista e WHERE e.nome=:idAnalista")
+					.setParameter("idAnalista", tbUser.getNome()).getResultList();
+			
 		List <TbHorasProjAnalista> listaProjHoras = new ArrayList<TbHorasProjAnalista>();
 		
+		TbHorasProjAnalista tbProj = new TbHorasProjAnalista();
+		tbProj.setDataLancamento(tbHorasColab.getData());
+		tbProj.setTbAnalista(result.get(0));
 		
-		tbHorasProjAnalista.add(new TbHorasProjAnalista());
+		tbHorasProjAnalista.add(tbProj);
 		
 	}
 	}
@@ -127,11 +138,20 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		tbHorasColab.getTbHorasProjetos().setProjeto1(tbProj.getNome());
 		
 		tbHorasColab.getTbHorasProjetos().setDataLancamento(tbHorasColab.getData());	*/	
-		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());		
-
+		//tbHorasColab.setTbClientes(tbHorasColab.getTbProjeto().getTbClientes());
+		tbHorasColab.setTbProjeto(getTbProjeto());
+		tbHorasColab.getTbHorasProjAnalista().addAll(tbHorasProjAnalista);
+		
+		for (int i = 0; i < tbHorasProjAnalista.size(); i++) {
+			
+			tbHorasProjAnalista.get(i).setTbHorasColab(tbHorasColab);
+			
+		}
 		setInstance(tbHorasColab);
 
+		
 		super.persist();
+		
 		clear();
 		
 		

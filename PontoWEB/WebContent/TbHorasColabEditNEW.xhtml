@@ -262,7 +262,7 @@ textarea {
 										value="#{tbHorasColabHome.listaTbProjeto}"
 										label="#{projetoSelectPrinc.nome}"
 										noSelectionLabel="Selecione o Projeto" />
-									<a:support event="onchange" reRender="selectProj1" ajaxSingle="true" />
+									<a:support event="onchange" reRender="panelHorasProjetoPrincipal" ajaxSingle="true" />
 
 									<s:convertEntity />
 								</h:selectOneMenu>
@@ -287,7 +287,7 @@ textarea {
 			
 				<s:button value="INCLUIR">
 				
-				<a:support event="onclick" action="#{tbHorasColabHome.addProjetoNaLista()}" ajaxSingle="true" reRender="panelTeste"/>
+				<a:support event="onclick" action="#{tbHorasColabHome.addProjetoNaLista()}" ajaxSingle="true" bypassUpdates="true" reRender="panelTeste"/>
 				</s:button>
 				<div align="center">
 					<h:panelGrid id="panelTeste" style="text-align : center" columns="3" >
@@ -462,7 +462,10 @@ textarea {
 
 
 					</h:column>
+					
 				</rich:dataTable>
+				 <rich:datascroller align="left" for="tbHorasColabTable1" maxPages="20"
+            id="sc2" reRender="tbHorasColabTable1" />
 				<br />
 			</fieldset>
 
