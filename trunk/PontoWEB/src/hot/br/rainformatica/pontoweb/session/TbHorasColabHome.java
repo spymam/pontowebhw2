@@ -28,12 +28,18 @@ import br.rainformatica.pontoweb.entity.TbUsuarios;
 @Name("tbHorasColabHome")
 public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@In(create = true)
 	TbAnalistaHome tbAnalistaHome;
 	@In(create = true)
 	TbClientesHome tbClientesHome;
 	@In(create = true)
 	TbProjetoHome tbProjetoHome;
+	@In(create = true)
+	TbHorasColabList tbHorasColabList;
 
 	TbAnalista tbAnalista = new TbAnalista();
 	TbClientes tbClientes = new TbClientes();
@@ -57,6 +63,17 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 	public void setTbHorasColabIdTbHorasColab(Integer id) {
 		setId(id);
+		tbUser = (TbUsuarios) Contexts.getSessionContext().get("usuario");
+		setTbHorasColab(getInstance());
+		setDiaSemana(tbHorasColab.getDiaSemana());
+		setTbProjeto(getInstance().getTbProjeto());
+		
+		if (getInstance().getTbHorasProjAnalista().size() > 0) {
+			
+			setTbHorasProjAnalista(new ArrayList<TbHorasProjAnalista>());
+		tbHorasProjAnalista.addAll(getInstance().getTbHorasProjAnalista());
+		} 
+		
 	}
 	
 	
@@ -117,6 +134,27 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		
 		
 	}
+	@Override
+	public String update(){
+		
+		if (tbHorasProjAnalista.size() > 0) {
+			
+			
+				for (int i = 0; i < tbHorasProjAnalista.size(); i++) {
+				
+				tbHorasProjAnalista.get(i).setTbHorasColab(tbHorasColab);
+				
+			}
+			getInstance().getTbHorasProjAnalista().addAll(tbHorasProjAnalista);
+			
+			
+		}super.update();
+		return "updated";
+		
+	}
+	
+	
+	
 	public void gravarDados() {
 
 		TbUsuarios tbUser = new TbUsuarios();
@@ -153,7 +191,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		super.persist();
 		
 		clear();
-		
+		tbHorasColabList.refresh();
 		
 		
 
@@ -169,6 +207,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		this.setDiaSemana(null);
 		tbHorasColab.setDiaSemana(null);
 		tbUser = new TbUsuarios();
+		
 	}
 
 	
@@ -448,6 +487,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	
 	
 
+	@SuppressWarnings("deprecation")
 	public void calculaTotalHoras() {
 				
 		int horaDaEntrada = tbHorasColab.getEntrada().getHours();

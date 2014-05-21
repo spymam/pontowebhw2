@@ -131,7 +131,8 @@ textarea {
 									monthLabelsShort="Jan, Fev, Mar, Abr, Maio, Jun, Jul, Ago, Set, Out, Nov, Dez"
 									monthLabels="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
 									weekDayLabels="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
-									weekDayLabelsShort="Dom, Seg, Ter, Qua, Qui, Sex, Sab">
+									weekDayLabelsShort="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
+									>
 
 									<a:support event="onchanged" reRender="outputDiaSemana"
 										action="#{tbHorasColabHome.addDiaSemana}" ajaxSingle="true" />
@@ -285,11 +286,8 @@ textarea {
 				
 				</h:panelGrid>
 			
-				<s:button value="INCLUIR">
 				
-				<a:support event="onclick" action="#{tbHorasColabHome.addProjetoNaLista()}" ajaxSingle="true" bypassUpdates="true" reRender="panelTeste"/>
-				</s:button>
-				<div align="center">
+				<div align="center" id="divProjetos">
 					<h:panelGrid id="panelTeste" style="text-align : center" columns="3" >
 					<h:column>
 						<rich:dataGrid  value="#{tbHorasColabHome.tbHorasProjAnalista}" var="lista" columns="#{tbHorasColabHome.tbHorasProjAnalista.size()}">
@@ -332,6 +330,10 @@ textarea {
 								
 						
 						</rich:dataGrid>
+						<s:button value="Adicionar Projetos" action="#{tbHorasColabHome.addProjetoNaLista()}" immediate="true">
+				
+				<a:support event="onclick" ajaxSingle="true" reRender="divProjetos" />
+				</s:button>
 					</h:column>
 					
 					</h:panelGrid>
@@ -358,18 +360,22 @@ textarea {
 
 					<h:commandButton id="save1" value="Salvar"
 						action="#{tbHorasColabHome.gravarDados()}"
-						disabled="#{tbHorasColabHome.tbHorasColab.descAtividade == null}" />
+						rendered="#{!tbHorasColabHome.managed}" 
+						disabled="#{tbHorasColabHome.tbHorasColab.descAtividade == null}" >
+						
+						<a:support event="onchange" reRender="tbHorasColabForm,tbHorasColabTable1" ajaxSingle="true"/>
+						</h:commandButton>
 
-					<h:commandButton id="update" value="Save"
+					<h:commandButton id="update" value="Alterar"
 						action="#{tbHorasColabHome.update}"
 						rendered="#{tbHorasColabHome.managed}" />
 
-					<h:commandButton id="delete" value="Delete"
+					<h:commandButton id="delete" value="Apagar"
 						action="#{tbHorasColabHome.remove}" immediate="true"
 						rendered="#{tbHorasColabHome.managed}" />
 
 
-					<s:button id="cancelEdit" value="Cancel"
+					<s:button id="cancelEdit" value="Cancelar"
 						action="#{tbHorasColabHome.clear()}"
 						view="/TbHorasColabEdit.xhtml" />
 					<!-- rendered="#{tbHorasColabHome.managed}"-->
@@ -387,17 +393,14 @@ textarea {
 			<br />
 			<fieldset style="width: 100%;">
 				<legend>
-
 					<h:outputLabel value="Horas Lançadas"
 						style="FONT-STYLE: italic; FONT-SIZE: small;" />
-
 				</legend>
-
-
 				<rich:dataTable var="_tbHorasColabGet" style="text-align : center"
-					value="#{tbHorasColabHome.getListaTbHorasPorAnalista(tbHorasColabHome.tbUser.nome)}"
-					rendered="#{tbHorasColabHome.tbHorasColab != null}"
+					value="#{tbHorasColabList.resultList}" rows="5" 
+					
 					rowClasses="rvgRowOne,rvgRowTwo" id="tbHorasColabTable1">
+
 
 					<h:column>
 						<f:facet name="header">Data</f:facet>
@@ -441,6 +444,12 @@ textarea {
 							<s:convertDateTime pattern="HH:mm" />
 						</h:outputText>
 					</h:column>
+						<h:column>
+						<f:facet name="header">Projeto Principal</f:facet>
+						<h:outputText
+							value="#{_tbHorasColabGet.tbProjeto.nome}">
+						</h:outputText>
+					</h:column>
 					<h:column>
 						<f:facet name="header">Horas Adicionais</f:facet>
 						<h:outputText
@@ -452,21 +461,32 @@ textarea {
 
 						</h:outputText>
 					</h:column>
-					<h:column>
-						<f:facet name="header">Projeto Principal</f:facet>
+						<h:column>
+						<f:facet name="header">Projetos Adicionais</f:facet>
 						<h:outputText
-							value="#{_tbHorasColabGet.tbProjeto.nome}">
-
+							value="#{_tbHorasColabGet.tbHorasProjAnalista.size()}">
 						</h:outputText>
-
-
-
 					</h:column>
+				
+					   <rich:column styleClass="action">
+            <f:facet name="header">Ação</f:facet>
+          
+            <s:link view="/TbHorasColabEditNEW.xhtml"
+                   value="Editar"
+             propagation="none"
+                      id="tbHorasColabEdit"
+                rendered="#{empty from}">
+                <f:param name="tbHorasColabIdTbHorasColab"
+                        value="#{_tbHorasColabGet.idTbHorasColab}"/>
+            </s:link>
+        </rich:column>
 					
 				</rich:dataTable>
-				 <rich:datascroller align="left" for="tbHorasColabTable1" maxPages="20"
-            id="sc2" reRender="tbHorasColabTable1" />
+				<br/>
+				 <rich:datascroller align="center" for="tbHorasColabTable1" maxPages="1" />
 				<br />
+				
+				 
 			</fieldset>
 
 

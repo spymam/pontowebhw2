@@ -30,6 +30,10 @@ import org.hibernate.validator.NotNull;
 @Table(name = "tb_horas_colab", catalog = "db_ponto")
 public class TbHorasColab implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idTbHorasColab;
 	private TbAnalista tbAnalista;
 	private TbClientes tbClientes;
