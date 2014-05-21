@@ -172,7 +172,7 @@
                     <ui:param name="propertyPath" value="tbHorasColab.idAnalista"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_tbHorasColab.idAnalista}"/>
+            <h:outputText value="#{_tbHorasColab.tbAnalista.nome}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
@@ -182,7 +182,7 @@
                     <ui:param name="propertyPath" value="tbHorasColab.idCliente"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_tbHorasColab.idCliente}"/>
+            <h:outputText value="#{_tbHorasColab.tbClientes.nome}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
@@ -192,17 +192,17 @@
                     <ui:param name="propertyPath" value="tbHorasColab.idHorasAdicionais"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_tbHorasColab.idHorasAdicionais}"/>
+            <h:outputText value="#{_tbHorasColab.tbHorasAdicionais.totalHoras}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
                 <ui:include src="layout/sort.xhtml">
                     <ui:param name="entityList" value="#{tbHorasColabList}"/>
                     <ui:param name="propertyLabel" value="Id projeto"/>
-                    <ui:param name="propertyPath" value="tbHorasColab.idProjeto"/>
+                    <ui:param name="propertyPath" value="tbHorasColab.tbProjeto.idTbProjeto"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_tbHorasColab.idProjeto}"/>
+            <h:outputText value="#{_tbHorasColab.tbProjeto.nome}"/>
         </h:column>
         <h:column>
             <f:facet name="header">
@@ -212,7 +212,7 @@
                     <ui:param name="propertyPath" value="tbHorasColab.idTbHorasAdicionais"/>
                 </ui:include>
             </f:facet>
-            <h:outputText value="#{_tbHorasColab.idTbHorasAdicionais}"/>
+            <h:outputText value="#{_tbHorasColab.tbHorasAdicionais.totalHoras}"/>
         </h:column>
         <rich:column styleClass="action">
             <f:facet name="header">Action</f:facet>
@@ -224,7 +224,7 @@
                         value="#{_tbHorasColab.idTbHorasColab}"/>
             </s:link>
             #{' '}
-            <s:link view="/TbHorasColabEdit.xhtml"
+            <s:link view="/TbHorasColabEditNEW.xhtml"
                    value="Edit"
              propagation="none"
                       id="tbHorasColabEdit"

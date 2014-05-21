@@ -16,14 +16,14 @@
    <navigation from-action="#{tbHorasColabHome.persist}">
       <rule if-outcome="persisted">
          <end-conversation/>
-         <redirect view-id="/TbHorasColab.xhtml"/>
+         <redirect view-id="/TbHorasColabEditNEW.xhtml"/>
       </rule>
    </navigation>
 
    <navigation from-action="#{tbHorasColabHome.update}">
       <rule if-outcome="updated">
          <end-conversation/>
-         <redirect view-id="/TbHorasColab.xhtml"/>
+         <redirect view-id="/TbHorasColabEditNEW.xhtml"/>
       </rule>
    </navigation>
 

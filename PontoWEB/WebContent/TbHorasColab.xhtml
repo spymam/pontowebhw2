@@ -73,27 +73,27 @@
 
         <s:decorate id="idAnalista" template="layout/display.xhtml">
             <ui:define name="label">Id analista</ui:define>
-            <h:outputText value="#{tbHorasColabHome.instance.idAnalista}"/>
+            <h:outputText value="#{tbHorasColabHome.instance.tbAnalista.idTbAnalista}"/>
         </s:decorate>
 
         <s:decorate id="idCliente" template="layout/display.xhtml">
             <ui:define name="label">Id cliente</ui:define>
-            <h:outputText value="#{tbHorasColabHome.instance.idCliente}"/>
+            <h:outputText value="#{tbHorasColabHome.instance.tbClientes.idTbClientes}"/>
         </s:decorate>
 
         <s:decorate id="idHorasAdicionais" template="layout/display.xhtml">
             <ui:define name="label">Id horas adicionais</ui:define>
-            <h:outputText value="#{tbHorasColabHome.instance.idHorasAdicionais}"/>
+            <h:outputText value="#{tbHorasColabHome.instance.tbHorasAdicionais.idTbHorasAdicionais}"/>
         </s:decorate>
 
         <s:decorate id="idProjeto" template="layout/display.xhtml">
             <ui:define name="label">Id projeto</ui:define>
-            <h:outputText value="#{tbHorasColabHome.instance.idProjeto}"/>
+            <h:outputText value="#{tbHorasColabHome.instance.tbProjeto.idTbProjeto}"/>
         </s:decorate>
 
         <s:decorate id="idTbHorasAdicionais" template="layout/display.xhtml">
             <ui:define name="label">Id tb horas adicionais</ui:define>
-            <h:outputText value="#{tbHorasColabHome.instance.idTbHorasAdicionais}"/>
+            <h:outputText value="#{tbHorasColabHome.instance.tbHorasAdicionais.idTbHorasAdicionais}"/>
         </s:decorate>
 
         <div style="clear:both"/>
@@ -102,7 +102,7 @@
 
     <div class="actionButtons">
 
-        <s:button view="/TbHorasColabEdit.xhtml"
+        <s:button view="/TbHorasColabEditNEW.xhtml"
                     id="edit"
                  value="Edit"/>
 
