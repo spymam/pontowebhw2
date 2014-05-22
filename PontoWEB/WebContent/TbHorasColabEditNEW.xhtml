@@ -6,6 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://richfaces.org/a4j"
+	xmlns:t="http://rodrigouchoa.com/jsf"
 	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
 
 	<style type="text/css">
@@ -37,7 +38,7 @@ textarea {
 
 
 	<ui:define name="body">
-
+	
 
 		<h:form id="tbHorasColabForm" styleClass="edit">
 			<fieldset style="width: 100%;">
@@ -56,13 +57,13 @@ textarea {
 								disabled="true" />
 
 						</s:decorate>
-						<s:decorate id="clienteField1" template="layout/edit.xhtml">
-							<ui:define name="label">Cliente</ui:define>
+						<s:decorate id="clienteField1" template="layout/display.xhtml">
+							<ui:define name="label">* Cliente</ui:define>
 
 
 							<h:selectOneMenu id="tbCliente"
 								value="#{tbHorasColabHome.tbHorasColab.tbClientes}"
-								required="true">
+								required="true" requiredMessage="* Campo Obrigatório">
 								<s:selectItems var="clienteSelect" id="selectCliente"
 									value="#{tbHorasColabHome.listaTbCLientes}"
 									label="#{clienteSelect.nome}"
@@ -71,7 +72,8 @@ textarea {
 									reRender="tbCliente,panelInfo,panelGridHoras" ajaxSingle="true" />
 
 								<s:convertEntity />
-							</h:selectOneMenu>
+							</h:selectOneMenu><br/>
+							<h:message for="tbCliente" styleClass="errors"/>
 						</s:decorate>
 					</h:column>
 					<h:column>
@@ -122,11 +124,11 @@ textarea {
 						style="text-align : center">
 
 						<h:column>
-							<rich:panel>
-								<f:facet name="header">Data</f:facet>
+							<rich:panel id="panelHora">
+								<f:facet name="header">* Data </f:facet>
 
-								<rich:calendar id="dataRich"
-									value="#{tbHorasColabHome.tbHorasColab.data}"
+								<rich:calendar id="dataRich" required="true" requiredMessage="* Campo Obrigatório"
+									value="#{tbHorasColabHome.tbHorasColab.data}" 
 									datePattern="dd/MM/yyyy"
 									monthLabelsShort="Jan, Fev, Mar, Abr, Maio, Jun, Jul, Ago, Set, Out, Nov, Dez"
 									monthLabels="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
@@ -134,9 +136,10 @@ textarea {
 									weekDayLabelsShort="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
 									>
 
-									<a:support event="onchanged" reRender="outputDiaSemana"
+									<a:support event="onchanged" reRender="outputDiaSemana,panelHora"
 										action="#{tbHorasColabHome.addDiaSemana}" ajaxSingle="true" />
-								</rich:calendar>
+								</rich:calendar><br/>
+								<h:message for="dataRich" styleClass="errors"/>
 							</rich:panel>
 						</h:column>
 
@@ -144,71 +147,84 @@ textarea {
 						<h:column>
 							<rich:panel>
 								<f:facet name="header">Dia da Semana</f:facet>
-								<h:inputText id="outputDiaSemana"
-									value="#{tbHorasColabHome.diaSemana}" disabled="true" />
+								<h:inputText id="outputDiaSemana" required="true" requiredMessage="* Campo Obrigatório"
+									value="#{tbHorasColabHome.diaSemana}" disabled="true" >
+									
+									</h:inputText><br/>
+									
 							</rich:panel>
+							
 						</h:column>
 
 						<h:column>
-							<rich:panel>
-								<f:facet name="header">Entrada</f:facet>
-								<h:inputText id="entradaText" size="5" maxlength="5"
-									required="true"
+							<rich:panel id="test">
+								<f:facet name="header">* Entrada </f:facet>
+								
+								
+								<h:inputText id="entradaText" size="5" maxlength="5" 
+									required="true" requiredMessage="* Campo Obrigatorio" 
 									value="#{tbHorasColabHome.tbHorasColab.entrada}"
 									>
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
 									<rich:jQuery selector="#entradaText"
-										query="setMask({mask:'99:99'})" timing="onload"/>
+										query="setMask({mask:'29:59'})" timing="onload" />
 										
-									<a:support event="onblur" reRender="entradaText"
+									<a:support event="onblur" reRender="test"
 										ajaxSingle="true"/>
 
-
-								</h:inputText>
+							
+								</h:inputText><br/>
+								<h:message for="entradaText" styleClass="errors"/>
+								
+								
 
 							</rich:panel>
 						</h:column>
-						<h:column>
-							<rich:panel>
+						<h:column id="columAlmoco">
+						
+							<rich:panel id="panelAmoco">
+							
 								<f:facet name="header">Almoço</f:facet>
 								<h:inputText id="saidaAlmoco" size="5" maxlength="5"
-									required="true" autocomplete=""
+									
 									value="#{tbHorasColabHome.tbHorasColab.saidaAlmoco}">
 
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
-									<a:support event="onblur" reRender="saidaAlmoco"
+									<a:support event="onblur" reRender="panelAmoco,columAlmoco"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#saidaAlmoco"
 										query="setMask({mask:'99:99'})" timing="onload" />
 								</h:inputText>
 								<h:inputText id="retornoAlmoco" size="5" maxlength="5"
-									required="true"
+									
 									value="#{tbHorasColabHome.tbHorasColab.retornoAlmoco}">
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
-									<a:support event="onblur" reRender="retornoAlmoco"
+									<a:support event="onblur" reRender="panelAmoco"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#retornoAlmoco"
 										query="setMask({mask:'99:99'})" timing="onload" />
-								</h:inputText>
+								</h:inputText><br/>
+								
 							</rich:panel>
 						</h:column>
 						<h:column>
-							<rich:panel>
-								<f:facet name="header">Saida</f:facet>
-								<h:inputText id="saidaText" size="5" maxlength="5"
+							<rich:panel id="panelSaida">
+								<f:facet name="header">* Saida </f:facet>
+								<h:inputText id="saidaText" size="5" maxlength="5" requiredMessage="* Campo Obrigatório"
 									required="true" value="#{tbHorasColabHome.tbHorasColab.saida}">
 									<s:convertDateTime type="time" timeStyle="short"
 										pattern="HH:mm" />
-									<a:support event="onblur" reRender="saidaText,totalHoras1,horasProjeto1Field,horasAdicionaisText"
+									<a:support event="onblur" reRender="saidaText,totalHoras1,horasProjeto1Field,panelSaida,horasAdicionaisText"
 										action="#{tbHorasColabHome.calculaTotalHoras}"
 										ajaxSingle="true" />
 									<rich:jQuery selector="#saidaText"
 										query="setMask({mask:'99:99'})" timing="onload" />
 
-								</h:inputText>
+								</h:inputText><br/>
+								<h:message for="saidaText" styleClass="errors"/>
 							</rich:panel>
 						</h:column>
 
@@ -254,10 +270,10 @@ textarea {
 				<div align="center">
 				<h:panelGrid id="panelHorasProjetoPrincipal" columns="1" style="text-align : center">
 				<h:column>
-							<rich:panel>
-								<f:facet name="header">Projeto 1 (principal)</f:facet>
+							<rich:panel id="panelProjPrincipal">
+								<f:facet name="header">* Projeto 1 (principal)</f:facet>
 								<h:selectOneMenu id="tbHorasProjeto1"
-									
+									required="true" requiredMessage="* Campo Obrigatório"
 									value="#{tbHorasColabHome.tbProjeto}">
 									<s:selectItems var="projetoSelectPrinc" id="selectProj1"
 										value="#{tbHorasColabHome.listaTbProjeto}"
@@ -280,7 +296,8 @@ textarea {
 										query="setMask({mask:'99:99'})" timing="onload" />
 									<a:support event="onchanged" reRender="panelHorasProjetos"
 										ajaxSingle="true" />
-								</h:inputText>
+								</h:inputText><br/>
+								<h:message for="tbHorasProjeto1" styleClass="errors"/>
 							</rich:panel>
 						</h:column>
 				
@@ -497,6 +514,9 @@ textarea {
 
 		<!--
 -->
+
+
 	</ui:define>
+	
 
 </ui:composition>
