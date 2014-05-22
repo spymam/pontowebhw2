@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.contexts.Contexts;
+import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.framework.EntityHome;
 
 import br.rainformatica.pontoweb.entity.TbAnalista;
@@ -224,6 +225,52 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 		horasProjetoPrincipal.setTime(tbHorasColab.getTotalHoras());
 		tst.setTime(tbHorasColab.getTotalHoras());
 		
+		String hora1 = String.valueOf(horaProjeto.getHours()+ String.valueOf(horaProjeto.getMinutes()));
+		String hora2 = String.valueOf(tbHorasColab.getTotalHoras().getHours() + String.valueOf(tbHorasColab.getTotalHoras().getMinutes()));
+		int horaProj = Integer.valueOf(hora1);
+		int totalHor = Integer.valueOf(hora2);
+		if (horaProjeto.getTime() > tbHorasColab.getTotalHoras().getTime()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");  
+		    String hora = "00:00";  
+		    Date horaFormatada = sdf.parse(hora);  
+		    System.out.println(formato.format(horaFormatada));  
+		    
+			horaProjeto = new Date();
+			horaProjeto.setHours(0);
+			horaProjeto.setMinutes(0);
+			horaProjeto.setSeconds(0);
+			/*List<Date> tbHoras = new ArrayList<Date>();*/
+			tbHorasProjAnalista.get(posicaoCampo).setHoras(horaFormatada);
+				for (int i = 0; i < tbHorasProjAnalista.size(); i++) {
+				
+				
+				tst.add(Calendar.MINUTE, -tbHorasProjAnalista.get(i).getHoras().getMinutes());
+				tst.add(Calendar.HOUR, -tbHorasProjAnalista.get(i).getHoras().getHours());
+				tbHorasColab.setHorasProjetoPrincipal(tst.getTime());
+				System.out.println("HORA PROJETO PRINCIPAL : " + formato.format(tst.getTime()));
+				System.out.println("HORA PROJETO PRINCIPAL2 : " + formato.format(tbHorasColab.getHorasProjetoPrincipal()));
+			
+			}
+			/*tbHoras.add(posicaoCampo, tbHorasProjAnalista.get(posicaoCampo).getHoras());
+			tbHoras.set(posicaoCampo, d);*/
+					horasProjetoAdicional.setTime(getHora());
+					System.out.println("Horas Projeto Principal: " + formato.format(horasProjetoPrincipal.getTime()));				
+					// Subtrae hora e minuto(projeto adicional) do projeto principal
+					horasProjetoPrincipal.add(Calendar.MINUTE,  -horasProjetoAdicional.getTime().getMinutes());
+					horasProjetoPrincipal.add(Calendar.HOUR, -horasProjetoAdicional.getTime().getHours());
+					System.out.println("Total de HOras: " + formato.format(horasProjetoPrincipal.getTime()));
+					// formata e exibe o resultado
+					formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+					System.out.println("Daqui a 60 minutos será: " + formato.format(horasProjetoPrincipal.getTime()));
+					tbHorasProjetos.setHorasProjeto1(horasProjetoPrincipal.getTime());
+					System.out.println("horas : " + formato.format(tbHorasColab.getHorasProjetoPrincipal().getTime()) );
+					System.out.println("hora recebida :" + formato.format(horaProjeto));
+					setDesativaBotao(true);
+					/*setTbHoras(new ArrayList<Date>());*/
+			 
+			
+		}else{
+		
 		//Se a data digitada for em branco, este metodo seta um formato de hora "00:00" para prosseguir o calculo.			
 		if (horaProjeto == null) {
 			
@@ -316,7 +363,7 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 					
 				}
 				
-				
+		}
 			}
 				
 			
