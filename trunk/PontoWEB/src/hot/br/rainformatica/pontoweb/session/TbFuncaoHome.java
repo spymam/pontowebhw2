@@ -1,8 +1,9 @@
 package br.rainformatica.pontoweb.session;
 
-import br.rainformatica.pontoweb.entity.*;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityHome;
+
+import br.rainformatica.pontoweb.entity.TbFuncao;
 
 @Name("tbFuncaoHome")
 public class TbFuncaoHome extends EntityHome<TbFuncao> {

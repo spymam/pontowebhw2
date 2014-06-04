@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8a1a48c0-fcd6-4d38-9a7f-d5121a9a1a4a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="60"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fill="Solid" fontName="Arial" fontSize="12" isBold="true">
+		<paragraph firstLineIndent="5" leftIndent="5" rightIndent="5"/>
+	</style>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#73B0E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="60a6e46b-7a2e-4f4c-a645-d796e01d9a6c"/>
+	<subDataset name="dataset1" uuid="28b64de5-ade4-4361-95b1-daf0067d8f76"/>
+	<queryString>
+		<![CDATA[select
+
+tb_Horas_colab.data,
+tb_horas_colab.dia_semana,
+tb_horas_colab.entrada,
+tb_horas_colab.saida_almoco,
+tb_horas_colab.retorno_almoco,
+tb_horas_colab.saida,
+tb_horas_colab.total_horas,
+tb_horas_colab.horas_adicionais,
+tb_horas_colab.horas_projeto_principal,
+tb_analista.nome as id_analista,
+tb_analista.funcao as funcao,
+tb_analista.telefone as telefone,
+tb_clientes.nome as id_clientes,
+tb_projeto.nome as id_projeto
+
+
+from tb_horas_colab, tb_analista, tb_clientes, tb_projeto
+
+where tb_horas_colab.id_analista = tb_analista.id_tb_analista]]>
+	</queryString>
+	<field name="data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dia_semana" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="entrada" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saida_almoco" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="retorno_almoco" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saida" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_horas" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horas_adicionais" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horas_projeto_principal" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_analista" class="java.lang.String"/>
+	<field name="funcao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_clientes" class="java.lang.String"/>
+	<field name="id_projeto" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="165" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="268" y="0" width="262" height="25" uuid="a5419e7b-6784-4139-b9f1-9b09dd6c629e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Apontamento de Horas
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="-12" width="171" height="84" uuid="0e605211-7780-4209-ac57-2e50af808e11"/>
+				<imageExpression><![CDATA["C:\\Users\\adm\\Downloads\\logohw2.gif"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="249" y="24" width="306" height="25" forecolor="#000099" uuid="95befd4c-e8eb-4dc2-b2bb-c47dff198984"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Headway Consultoria e Tecnologia
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Title" x="268" y="47" width="262" height="25" uuid="834802bd-48db-4879-ab7b-e1f3e6e26893"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true" pdfFontName="Times-Roman"/>
+				</textElement>
+				<text><![CDATA[Controle de Projetos
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="90" width="48" height="20" uuid="5e626ac4-4dff-442f-bf10-2b2a955acbfc"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="110" width="48" height="20" uuid="fe0552c9-090b-45f5-b261-b89f69beca96"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="110" width="59" height="20" uuid="36e0e232-0546-4109-a60c-7379026ae101"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="90" width="59" height="20" uuid="31418326-43d4-4d0b-8673-f7a47b6a0b97"/>
+				<textElement>
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Função:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="1" y="145" width="476" height="20" uuid="a56eae3d-aa19-434f-abdc-28a66872cfa3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="218" y="145" width="100" height="20" uuid="a5bc4c6d-0e5c-4824-847e-4fa5ed31eebf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HORÁRIO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="477" y="145" width="324" height="20" uuid="bd1787cf-2dd6-49bd-8fff-45a6d1caa6f4"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="494" y="145" width="290" height="20" uuid="da0599f5-8496-42ce-b3a9-f25702fa9c7f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DISTRIBUIÇÃO DE HORAS POR PROJETO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="90" width="100" height="20" uuid="18775202-c937-4b77-ab23-785f7e1921f7"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_analista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="110" width="100" height="20" uuid="94afd932-4439-4832-8971-431b2173a82e"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_clientes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="(99)99999-9999">
+				<reportElement x="389" y="110" width="100" height="20" uuid="bdabb609-6543-4bec-807f-c7e9b8837c3f"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="90" width="100" height="20" uuid="d9fd3a65-c324-4b1d-a748-79b76d2c7f87"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{funcao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="530" y="110" width="134" height="15" uuid="2e9bb599-5097-4a2d-b7d8-d426c30e6efa"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_projeto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="1" y="0" width="43" height="15" forecolor="#736343" uuid="aef25703-17b9-4397-8c33-2edd7ab21a0a"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" markup="none">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="44" y="0" width="64" height="15" isRemoveLineWhenBlank="true" forecolor="#736343" uuid="7ed51177-96c4-4dbf-8e3d-ccd222f0ade7"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[Semana	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="108" y="0" width="64" height="15" isRemoveLineWhenBlank="true" forecolor="#736343" uuid="dc6ecc8f-6ac1-4470-be4b-1cd113f1943b"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[Entrada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="172" y="0" width="90" height="15" isRemoveLineWhenBlank="true" forecolor="#736343" backcolor="#000000" uuid="6fbc644f-5971-4c67-8e98-e44970890184"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[Almoço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="262" y="0" width="60" height="15" isRemoveLineWhenBlank="true" forecolor="#736343" uuid="eaec9ec2-a64a-4da0-b811-bde1cc9df990"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[Saída]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="322" y="0" width="75" height="15" isRemoveLineWhenBlank="true" forecolor="#736343" uuid="2cb6e29a-77a7-416e-a092-9fa37cbacbef"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[Total Horas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Transparent" x="397" y="0" width="80" height="15" isRemoveLineWhenBlank="true" forecolor="#736343" uuid="bfec4375-5d24-4447-a497-7924df8a0d1a"/>
+				<box>
+					<pen lineWidth="1.25"/>
+					<topPen lineWidth="1.25"/>
+					<leftPen lineWidth="1.25"/>
+					<bottomPen lineWidth="1.25"/>
+					<rightPen lineWidth="1.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<paragraph lineSpacing="Proportional"/>
+				</textElement>
+				<text><![CDATA[Horas Adic.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="1" y="0" width="476" height="15" uuid="d6b2bccc-ee6b-4166-992c-81d5a66455f6"/>
+				<box>
+					<pen lineWidth="0.75"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" x="43" y="0" width="64" height="15" uuid="57511be2-b775-4dd9-915e-cd21be5ebe52"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{dia_semana}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="HH:mm">
+					<reportElement style="Detail" x="107" y="0" width="64" height="15" uuid="d142d7d1-1fab-440a-b899-54e97e2a9b92"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{entrada}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="HH:mm">
+					<reportElement style="Detail" x="171" y="0" width="45" height="15" uuid="3a998353-bb49-4b25-8877-677af42e5844"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{saida_almoco}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="HH:mm">
+					<reportElement style="Detail" x="216" y="0" width="45" height="15" uuid="24d3a221-33a5-413f-abbd-b8d153c3af7f"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{retorno_almoco}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="HH:mm">
+					<reportElement style="Detail" x="321" y="0" width="75" height="15" uuid="9a574a30-be04-480c-9a21-512e5eae2b57"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{total_horas}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="HH:mm">
+					<reportElement style="Detail" x="396" y="0" width="80" height="15" forecolor="#000000" backcolor="#FFFFFF" uuid="b9860db3-6aa8-4510-9b50-a032ee4dde0f"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{horas_adicionais}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" pattern="dd/MMM">
+				<reportElement style="Detail" x="1" y="0" width="43" height="15" uuid="e4854e1a-8327-4692-a19f-ed2daa4aeace"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="HH:mm">
+				<reportElement style="Detail" x="262" y="0" width="60" height="15" uuid="46cc6a0d-22d1-4105-b8de-6ffc7fd592b1"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{saida}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="801" height="24" forecolor="#D0B48E" backcolor="#F2EBDF" uuid="74aac6c7-9864-4bab-ae87-1c0c73798012"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="754" y="0" width="40" height="20" forecolor="#736343" uuid="51249122-4caa-4419-9dd1-dfc7e88b830f"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="674" y="0" width="80" height="20" forecolor="#736343" uuid="48340c52-c065-464d-b1f5-68c57495fbb3"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="22" y="1" width="197" height="20" forecolor="#736343" uuid="01971195-15b4-493a-926a-b51c6aa17821"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
