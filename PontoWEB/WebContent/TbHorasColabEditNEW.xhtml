@@ -408,6 +408,35 @@ textarea {
 
 			</fieldset>
 			<br />
+			<rich:calendar id="dataInicio" required="true" requiredMessage="* Campo Obrigatório"
+									value="#{tbHorasColabHome.dataInicio}" 
+									datePattern="dd/MM/yyyy"
+									monthLabelsShort="Jan, Fev, Mar, Abr, Maio, Jun, Jul, Ago, Set, Out, Nov, Dez"
+									monthLabels="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+									weekDayLabels="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
+									weekDayLabelsShort="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
+									>
+
+									<a:support event="onchanged" reRender="dataInicio"
+										ajaxSingle="true" />
+								</rich:calendar>
+								
+								<rich:calendar id="dataFim" required="true" requiredMessage="* Campo Obrigatório"
+									value="#{tbHorasColabHome.dataFim}" 
+									datePattern="dd/MM/yyyy"
+									monthLabelsShort="Jan, Fev, Mar, Abr, Maio, Jun, Jul, Ago, Set, Out, Nov, Dez"
+									monthLabels="Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro"
+									weekDayLabels="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
+									weekDayLabelsShort="Dom, Seg, Ter, Qua, Qui, Sex, Sab"
+									>
+
+									<a:support event="onchanged" reRender="dataFim"
+										ajaxSingle="true" />
+								</rich:calendar>
+								
+								<s:button value="GERAR" action="#{tbHorasColabHome.gerarPlanilhaPorPeriodo()}" />
+								<br/>
+			
 			<fieldset style="width: 100%;">
 				<legend>
 					<h:outputLabel value="Horas Lançadas"

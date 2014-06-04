@@ -1,11 +1,15 @@
 package br.rainformatica.pontoweb.session;
 
-import br.rainformatica.pontoweb.entity.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.framework.EntityHome;
+
+import br.rainformatica.pontoweb.entity.TbClientes;
+import br.rainformatica.pontoweb.entity.TbHorasColab;
+import br.rainformatica.pontoweb.entity.TbProjeto;
 
 @Name("tbProjetoHome")
 public class TbProjetoHome extends EntityHome<TbProjeto> {

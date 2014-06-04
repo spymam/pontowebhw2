@@ -1,5 +1,6 @@
 package br.rainformatica.pontoweb.session;
 
+import java.sql.SQLException;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,10 +12,17 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 import org.jboss.seam.annotations.In;
 import org.jboss.seam.annotations.Name;
 import org.jboss.seam.contexts.Contexts;
-import org.jboss.seam.faces.FacesMessages;
 import org.jboss.seam.framework.EntityHome;
 
 import br.rainformatica.pontoweb.entity.TbAnalista;
@@ -41,6 +49,8 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	TbProjetoHome tbProjetoHome;
 	@In(create = true)
 	TbHorasColabList tbHorasColabList;
+	
+	
 
 	TbAnalista tbAnalista = new TbAnalista();
 	TbClientes tbClientes = new TbClientes();
@@ -51,6 +61,9 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	TbHorasProjetos tbHorasProjetos = new TbHorasProjetos();
 	private List<TbHorasProjAnalista> tbHorasProjAnalista = new ArrayList<TbHorasProjAnalista>();
 	private List<TbProjeto> listaDeProjetos = new ArrayList<TbProjeto>();
+	public Date dataInicio = new Date();
+	public Date dataFim = new Date();
+	
 	
 	String diaSemana;
 	String totalHorasFormatado;
@@ -60,6 +73,38 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 	public List<TbProjeto> tbProjetos = new ArrayList<TbProjeto>();
 	List<Date> tbHoras = new ArrayList<Date>();
 	private Date hora = new Date();
+	
+public static void gerar(List<TbHorasColab> tbHorasColab)throws JRException, SQLException{
+		
+		
+		
+		// compilacao do JRXML 
+		JasperReport report = JasperCompileManager .compileReport("PDF/RelatorioClientes.jrxml");
+		JasperPrint print = JasperFillManager.fillReport(report, null, new JRBeanCollectionDataSource(tbHorasColab));
+		// exportacao do relatorio para outro formato, no caso PDF 
+		JasperExportManager.exportReportToPdfFile(print, "PDF/RelatorioClientes.pdf"); 
+	}
+	
+
+	public void gerarPlanilhaPorPeriodo()  {
+		if (dataInicio == null) {
+						//= " +"'"+nome+"'"+
+		}else {
+			
+		List<TbHorasColab> result = getEntityManager()
+			.createQuery(
+					"SELECT e FROM TbHorasColab e WHERE e.data between"
+					+"'"+getDataInicio()
+					+"'"+"and"+"'"+
+					getDataFim()+"'").getResultList();
+		List<TbHorasColab> tbHorasColab = new ArrayList<TbHorasColab>();
+		tbHorasColab.addAll(result);
+		
+		
+	
+		
+		}
+	}
 	
 
 	public void setTbHorasColabIdTbHorasColab(Integer id) {
@@ -954,6 +999,30 @@ public class TbHorasColabHome extends EntityHome<TbHorasColab> {
 
 	public void setHora(Date hora) {
 		this.hora = hora;
+	}
+
+
+
+	public Date getDataInicio() {
+		return dataInicio;
+	}
+
+
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
 	}
 
 	
